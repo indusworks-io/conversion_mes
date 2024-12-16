@@ -1,0 +1,160 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "field:site",
+ "creation": "2024-12-16 17:00:44.348529",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "site",
+  "holiday_automation",
+  "enable_downtime_creation_for_holidays",
+  "downtime_reason_for_holidays",
+  "holiday_list",
+  "non_working_period_automation_section",
+  "auto_create_downtime_for_non_working_period",
+  "downtime_reason_for_non_working_days",
+  "downtime_reason_for_non_working_hours",
+  "working_time",
+  "break_time_automation",
+  "auto_create_downtime_for_breaks",
+  "breaks",
+  "minor_stop_automation_section",
+  "enable_auto_update_of_minor_downtime",
+  "reason_for_minor_downtime",
+  "threshold_for_minor_downtime"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Site",
+   "link_filters": "[[\"Site\",\"is_active\",\"=\",1]]",
+   "options": "Site",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_downtime_creation_for_holidays",
+   "fieldtype": "Check",
+   "label": "Enable Downtime Creation For Holidays?"
+  },
+  {
+   "fieldname": "downtime_reason_for_holidays",
+   "fieldtype": "Link",
+   "label": "Downtime Reason for Holidays",
+   "options": "Downtime Reason"
+  },
+  {
+   "fieldname": "holiday_list",
+   "fieldtype": "Link",
+   "label": "Holiday List",
+   "options": "Holiday List"
+  },
+  {
+   "default": "0",
+   "fieldname": "auto_create_downtime_for_non_working_period",
+   "fieldtype": "Check",
+   "label": "Auto Create Downtime For Non Working Period?"
+  },
+  {
+   "fieldname": "downtime_reason_for_non_working_days",
+   "fieldtype": "Link",
+   "label": "Downtime Reason for Non Working Days",
+   "options": "Downtime Reason"
+  },
+  {
+   "fieldname": "downtime_reason_for_non_working_hours",
+   "fieldtype": "Link",
+   "label": "Downtime Reason for Non Working Hours",
+   "options": "Downtime Reason"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "working_time",
+   "fieldtype": "Table",
+   "label": "Working Time",
+   "options": "Working Time"
+  },
+  {
+   "fieldname": "holiday_automation",
+   "fieldtype": "Section Break",
+   "label": "Holiday Automation"
+  },
+  {
+   "fieldname": "non_working_period_automation_section",
+   "fieldtype": "Section Break",
+   "label": "Non Working Period Automation"
+  },
+  {
+   "fieldname": "break_time_automation",
+   "fieldtype": "Section Break",
+   "label": "Break Time Automation"
+  },
+  {
+   "default": "0",
+   "fieldname": "auto_create_downtime_for_breaks",
+   "fieldtype": "Check",
+   "label": "Auto Create Downtime For Breaks?"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "breaks",
+   "fieldtype": "Table",
+   "label": "Breaks",
+   "options": "Break Time"
+  },
+  {
+   "fieldname": "minor_stop_automation_section",
+   "fieldtype": "Section Break",
+   "label": "Minor Stop Automation"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_auto_update_of_minor_downtime",
+   "fieldtype": "Check",
+   "label": "Enable Auto Update of Minor Downtime?"
+  },
+  {
+   "fieldname": "reason_for_minor_downtime",
+   "fieldtype": "Link",
+   "label": "Downtime Reason for Minor Downtime",
+   "options": "Downtime Reason"
+  },
+  {
+   "fieldname": "threshold_for_minor_downtime",
+   "fieldtype": "Duration",
+   "hide_days": 1,
+   "label": "Threshold For Minor Downtime"
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-12-16 17:20:39.716514",
+ "modified_by": "Administrator",
+ "module": "Conversion Mes",
+ "name": "Downtime Automation",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

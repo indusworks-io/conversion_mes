@@ -2,22 +2,22 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "field:operation_name",
- "creation": "2024-12-14 17:33:03.607090",
+ "autoname": "field:downtime_reason",
+ "creation": "2024-12-16 16:04:47.168307",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "operation_name",
+  "downtime_reason",
   "is_active",
-  "setup_time",
-  "ideal_run_rate"
+  "category",
+  "show_to_operator"
  ],
  "fields": [
   {
    "allow_in_quick_entry": 1,
-   "fieldname": "operation_name",
+   "fieldname": "downtime_reason",
    "fieldtype": "Data",
-   "label": "Operation Name",
+   "label": "Downtime Reason",
    "reqd": 1,
    "unique": 1
   },
@@ -31,30 +31,29 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "fieldname": "setup_time",
-   "fieldtype": "Duration",
+   "fieldname": "category",
+   "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Setup Time",
+   "label": "Category",
+   "options": "\nUnplanned Downtime\nPlanned Downtime\nSchedule Loss",
    "reqd": 1
   },
   {
    "allow_in_quick_entry": 1,
-   "description": "Maximum Output The Workstation Process Per Minute.",
-   "fieldname": "ideal_run_rate",
-   "fieldtype": "Int",
+   "default": "0",
+   "fieldname": "show_to_operator",
+   "fieldtype": "Check",
    "in_list_view": 1,
-   "label": "Ideal Run Rate",
-   "non_negative": 1,
-   "reqd": 1
+   "label": "Show To Operator"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-16 15:25:53.187636",
+ "modified": "2024-12-16 16:08:16.003518",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
- "name": "Operation",
+ "name": "Downtime Reason",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
@@ -72,6 +71,7 @@
   }
  ],
  "quick_entry": 1,
+ "search_fields": "category",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

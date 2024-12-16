@@ -1,0 +1,88 @@
+{
+ "actions": [],
+ "autoname": "format:device_type-{###}",
+ "creation": "2024-12-16 17:24:46.195586",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "device_type",
+  "current_sensitivity",
+  "heartbeat_threshold",
+  "workstation",
+  "supervisor"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "device_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Device Type",
+   "options": "\nDowntime Monitor",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "60",
+   "fieldname": "current_sensitivity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Current Sensitivity",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "3600",
+   "fieldname": "heartbeat_threshold",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Heartbeat Threshold",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "workstation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Workstation",
+   "options": "Workstation",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "supervisor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supervisor",
+   "options": "User",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-12-16 17:28:56.467927",
+ "modified_by": "Administrator",
+ "module": "Conversion Mes",
+ "name": "Device",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

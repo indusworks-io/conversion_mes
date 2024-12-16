@@ -1,60 +1,60 @@
 {
  "actions": [],
+ "allow_copy": 1,
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "field:operation_name",
- "creation": "2024-12-14 17:33:03.607090",
+ "autoname": "field:holiday_list_name",
+ "creation": "2024-12-16 16:52:00.697720",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "operation_name",
-  "is_active",
-  "setup_time",
-  "ideal_run_rate"
+  "holiday_list_name",
+  "from_date",
+  "to_date",
+  "holidays"
  ],
  "fields": [
   {
    "allow_in_quick_entry": 1,
-   "fieldname": "operation_name",
+   "fieldname": "holiday_list_name",
    "fieldtype": "Data",
-   "label": "Operation Name",
+   "label": "Holiday List Name",
    "reqd": 1,
    "unique": 1
   },
   {
    "allow_in_quick_entry": 1,
-   "default": "1",
-   "fieldname": "is_active",
-   "fieldtype": "Check",
+   "fieldname": "from_date",
+   "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Is Active?"
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "fieldname": "setup_time",
-   "fieldtype": "Duration",
-   "in_list_view": 1,
-   "label": "Setup Time",
+   "label": "From Date",
    "reqd": 1
   },
   {
    "allow_in_quick_entry": 1,
-   "description": "Maximum Output The Workstation Process Per Minute.",
-   "fieldname": "ideal_run_rate",
-   "fieldtype": "Int",
+   "fieldname": "to_date",
+   "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Ideal Run Rate",
-   "non_negative": 1,
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "allow_bulk_edit": 1,
+   "allow_in_quick_entry": 1,
+   "fieldname": "holidays",
+   "fieldtype": "Table",
+   "label": "Holidays",
+   "options": "Holiday",
    "reqd": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-16 15:25:53.187636",
+ "modified": "2024-12-16 16:59:37.172081",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
- "name": "Operation",
+ "name": "Holiday List",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

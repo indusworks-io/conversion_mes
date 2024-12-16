@@ -1,0 +1,296 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:MO-{YYMMDD}-{###}",
+ "creation": "2024-12-16 14:29:12.576841",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "plan",
+  "manufacturing_plan",
+  "posting_date",
+  "status",
+  "workstation",
+  "site",
+  "operation",
+  "instructions",
+  "planned_input",
+  "planned_output",
+  "planned_metrics",
+  "planned_setup_time",
+  "planned_run_rate",
+  "total_planned_input_quantity_in_default_uom",
+  "total_planned_input_quantity_in_alternate_uom",
+  "total_planned_output_quantity_in_default_uom",
+  "total_planned_output_quantity_in_alternate_uom",
+  "planned_duration",
+  "actual",
+  "manufacturing_actual",
+  "actual_start_date_time",
+  "actual_end_date_time",
+  "actual_duration",
+  "actual_run_rate",
+  "column_break_vgkx",
+  "total_actual_input_quantity_in_alternate_uom",
+  "total_actual_output_quantity_in_alternate_uom",
+  "section_break_rbef",
+  "actual_input_table",
+  "actual_output_table",
+  "logs",
+  "time_logs",
+  "input_logs",
+  "output_logs"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Posting Date",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nOpen\nIn Progress\nStopped\nCompleted\nCancelled\nClosed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "workstation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Workstation",
+   "link_filters": "[[\"Workstation\",\"is_active\",\"=\",1]]",
+   "options": "Workstation",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "workstation.site",
+   "fetch_if_empty": 1,
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Site",
+   "options": "Site",
+   "read_only": 1
+  },
+  {
+   "fieldname": "operation",
+   "fieldtype": "Link",
+   "label": "Operation",
+   "link_filters": "[[\"Operation\",\"is_active\",\"=\",1]]",
+   "options": "Operation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "instructions",
+   "fieldtype": "Small Text",
+   "label": "Instructions",
+   "reqd": 1
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "planned_input",
+   "fieldtype": "Table",
+   "label": "Planned Input",
+   "options": "MO Item Plan",
+   "reqd": 1
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "planned_output",
+   "fieldtype": "Table",
+   "label": "Planned Output",
+   "options": "MO Item Plan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "manufacturing_plan",
+   "fieldtype": "Section Break",
+   "label": "Manufacturing Plan "
+  },
+  {
+   "fieldname": "planned_metrics",
+   "fieldtype": "Section Break",
+   "label": "Planned Metrics"
+  },
+  {
+   "fetch_from": "operation.ideal_run_rate",
+   "fieldname": "planned_run_rate",
+   "fieldtype": "Int",
+   "label": "Planned Run Rate",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "planned_duration",
+   "fieldtype": "Duration",
+   "label": "Planned Duration",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "operation.setup_time",
+   "fieldname": "planned_setup_time",
+   "fieldtype": "Duration",
+   "hide_days": 1,
+   "hide_seconds": 1,
+   "label": "Planned Setup Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "plan",
+   "fieldtype": "Tab Break",
+   "label": "Plan"
+  },
+  {
+   "fieldname": "actual",
+   "fieldtype": "Tab Break",
+   "label": "Actual"
+  },
+  {
+   "fieldname": "manufacturing_actual",
+   "fieldtype": "Section Break",
+   "label": "Manufacturing Actual"
+  },
+  {
+   "fieldname": "actual_start_date_time",
+   "fieldtype": "Datetime",
+   "label": "Actual Start Date Time"
+  },
+  {
+   "fieldname": "actual_end_date_time",
+   "fieldtype": "Datetime",
+   "label": "Actual End Date Time"
+  },
+  {
+   "fieldname": "actual_duration",
+   "fieldtype": "Duration",
+   "hide_days": 1,
+   "hide_seconds": 1,
+   "label": "Actual Duration"
+  },
+  {
+   "fieldname": "actual_run_rate",
+   "fieldtype": "Int",
+   "label": "Actual Run Rate",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_vgkx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_actual_input_quantity_in_alternate_uom",
+   "fieldtype": "Float",
+   "label": "Total Actual Input Quantity In Alternate UOM",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "total_actual_output_quantity_in_alternate_uom",
+   "fieldtype": "Float",
+   "label": "Total Actual Output Quantity In Alternate UOM",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_break_rbef",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "actual_input_table",
+   "fieldtype": "Table",
+   "label": "Actual Input",
+   "options": "MO Item Actual"
+  },
+  {
+   "fieldname": "actual_output_table",
+   "fieldtype": "Table",
+   "label": "Actual Output",
+   "options": "MO Item Actual"
+  },
+  {
+   "fieldname": "logs",
+   "fieldtype": "Tab Break",
+   "label": "Logs"
+  },
+  {
+   "fieldname": "time_logs",
+   "fieldtype": "Table",
+   "label": "Time Logs",
+   "options": "MO Time Log"
+  },
+  {
+   "fieldname": "input_logs",
+   "fieldtype": "Table",
+   "label": "Input Logs",
+   "options": "MO Item Log"
+  },
+  {
+   "fieldname": "output_logs",
+   "fieldtype": "Table",
+   "label": "Output Logs",
+   "options": "MO Item Log"
+  },
+  {
+   "fieldname": "total_planned_input_quantity_in_default_uom",
+   "fieldtype": "Int",
+   "label": "Total Planned Input Quantity in Default UOM",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "total_planned_input_quantity_in_alternate_uom",
+   "fieldtype": "Float",
+   "label": "Total Planned Input Quantity in Alternate UOM",
+   "non_negative": 1,
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_planned_output_quantity_in_default_uom",
+   "fieldtype": "Int",
+   "label": "Total Planned Output Quantity in Default UOM",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "total_planned_output_quantity_in_alternate_uom",
+   "fieldtype": "Float",
+   "label": "Total Planned Output Quantity in Alternate UOM",
+   "non_negative": 1,
+   "precision": "2",
+   "read_only": 1
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-12-16 15:56:38.606952",
+ "modified_by": "Administrator",
+ "module": "Conversion Mes",
+ "name": "Manufacturing Order",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "workstation",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
