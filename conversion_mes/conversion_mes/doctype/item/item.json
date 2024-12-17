@@ -28,7 +28,6 @@
    "default": "0",
    "fieldname": "is_active",
    "fieldtype": "Check",
-   "in_list_view": 1,
    "label": "Is Active?"
   },
   {
@@ -63,7 +62,6 @@
    "description": "Value needed to convert 1 unit of default UOM into alternate UOM.",
    "fieldname": "conversion_factor",
    "fieldtype": "Float",
-   "in_list_view": 1,
    "label": "Conversion Factor",
    "non_negative": 1,
    "precision": "2",
@@ -73,7 +71,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-14 17:52:56.965198",
+ "modified": "2024-12-17 14:59:16.958383",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Item",

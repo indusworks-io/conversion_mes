@@ -9,8 +9,7 @@
  "field_order": [
   "operation_name",
   "is_active",
-  "setup_time",
-  "ideal_run_rate"
+  "setup_time"
  ],
  "fields": [
   {
@@ -33,25 +32,17 @@
    "allow_in_quick_entry": 1,
    "fieldname": "setup_time",
    "fieldtype": "Duration",
+   "hide_days": 1,
+   "hide_seconds": 1,
    "in_list_view": 1,
    "label": "Setup Time",
-   "reqd": 1
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "description": "Maximum Output The Workstation Process Per Minute.",
-   "fieldname": "ideal_run_rate",
-   "fieldtype": "Int",
-   "in_list_view": 1,
-   "label": "Ideal Run Rate",
-   "non_negative": 1,
    "reqd": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-16 15:25:53.187636",
+ "modified": "2024-12-17 15:09:23.071428",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Operation",

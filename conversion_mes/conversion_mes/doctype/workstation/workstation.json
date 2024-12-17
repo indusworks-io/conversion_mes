@@ -11,9 +11,10 @@
   "worksation_name",
   "is_active",
   "site",
-  "ideal_run_rate",
   "operators",
+  "ideal_run_rate",
   "workstation_operating_cost",
+  "currency",
   "land_cost",
   "labor_cost",
   "energy_cost",
@@ -40,18 +41,9 @@
   {
    "fieldname": "site",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Site",
    "options": "Site",
-   "reqd": 1
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "description": "Maximum Output The Workstation Process Per Minute.",
-   "fieldname": "ideal_run_rate",
-   "fieldtype": "Int",
-   "in_list_view": 1,
-   "label": "Ideal Run Rate",
-   "non_negative": 1,
    "reqd": 1
   },
   {
@@ -69,59 +61,87 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "default": "0",
    "description": "Hourly Basis",
    "fieldname": "land_cost",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Land Cost",
    "non_negative": 1,
-   "precision": "2"
+   "options": "currency"
   },
   {
    "allow_in_quick_entry": 1,
+   "default": "0",
    "description": "Hourly Basis",
    "fieldname": "labor_cost",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Labor Cost",
    "non_negative": 1,
-   "precision": "2"
+   "options": "currency"
   },
   {
    "allow_in_quick_entry": 1,
+   "default": "0",
    "description": "Hourly Basis",
    "fieldname": "energy_cost",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Energy Cost",
    "non_negative": 1,
-   "precision": "2"
+   "options": "currency"
   },
   {
    "allow_in_quick_entry": 1,
+   "default": "0",
    "description": "Hourly Basis",
    "fieldname": "other_cost",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Other Cost",
    "non_negative": 1,
-   "precision": "2"
+   "options": "currency"
   },
   {
    "allow_in_quick_entry": 1,
+   "default": "0",
    "description": "Hourly Basis",
    "fieldname": "total_operating_cost",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Total Operating Cost",
    "non_negative": 1,
-   "precision": "2"
+   "options": "currency",
+   "read_only": 1
   },
   {
    "fieldname": "workstation_operating_cost",
    "fieldtype": "Section Break",
    "label": "Workstation Operating Cost"
+  },
+  {
+   "default": "INR",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "description": "Maximum Output The Workstation Can Process Per Minute.",
+   "fieldname": "ideal_run_rate",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Ideal Run Rate",
+   "non_negative": 1,
+   "reqd": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-14 17:17:12.328785",
+ "modified": "2024-12-17 15:25:20.706346",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Workstation",
@@ -141,7 +161,6 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
  "search_fields": "site",
  "sort_field": "modified",
  "sort_order": "DESC",

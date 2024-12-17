@@ -10,9 +10,11 @@
   "plan",
   "manufacturing_plan",
   "posting_date",
-  "status",
   "workstation",
+  "column_break_crzy",
+  "status",
   "site",
+  "section_break_laaq",
   "operation",
   "instructions",
   "planned_input",
@@ -20,11 +22,12 @@
   "planned_metrics",
   "planned_setup_time",
   "planned_run_rate",
+  "planned_duration",
+  "column_break_izft",
   "total_planned_input_quantity_in_default_uom",
   "total_planned_input_quantity_in_alternate_uom",
   "total_planned_output_quantity_in_default_uom",
   "total_planned_output_quantity_in_alternate_uom",
-  "planned_duration",
   "actual",
   "manufacturing_actual",
   "actual_start_date_time",
@@ -32,7 +35,9 @@
   "actual_duration",
   "actual_run_rate",
   "column_break_vgkx",
+  "total_actual_input_quantity_in_default_uom",
   "total_actual_input_quantity_in_alternate_uom",
+  "total_actual_output_quantity_in_default_uom",
   "total_actual_output_quantity_in_alternate_uom",
   "section_break_rbef",
   "actual_input_table",
@@ -74,7 +79,6 @@
    "fetch_if_empty": 1,
    "fieldname": "site",
    "fieldtype": "Link",
-   "hidden": 1,
    "label": "Site",
    "options": "Site",
    "read_only": 1
@@ -120,7 +124,7 @@
    "label": "Planned Metrics"
   },
   {
-   "fetch_from": "operation.ideal_run_rate",
+   "fetch_from": "workstation.ideal_run_rate",
    "fieldname": "planned_run_rate",
    "fieldtype": "Int",
    "label": "Planned Run Rate",
@@ -241,7 +245,8 @@
    "fieldname": "total_planned_input_quantity_in_default_uom",
    "fieldtype": "Int",
    "label": "Total Planned Input Quantity in Default UOM",
-   "non_negative": 1
+   "non_negative": 1,
+   "read_only": 1
   },
   {
    "fieldname": "total_planned_input_quantity_in_alternate_uom",
@@ -255,7 +260,8 @@
    "fieldname": "total_planned_output_quantity_in_default_uom",
    "fieldtype": "Int",
    "label": "Total Planned Output Quantity in Default UOM",
-   "non_negative": 1
+   "non_negative": 1,
+   "read_only": 1
   },
   {
    "fieldname": "total_planned_output_quantity_in_alternate_uom",
@@ -264,12 +270,38 @@
    "non_negative": 1,
    "precision": "2",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_crzy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_laaq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_izft",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_actual_input_quantity_in_default_uom",
+   "fieldtype": "Int",
+   "label": "Total Actual Input Quantity In Default UOM",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "total_actual_output_quantity_in_default_uom",
+   "fieldtype": "Int",
+   "label": "Total Actual Output Quantity In Default UOM",
+   "non_negative": 1,
+   "precision": "2"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-16 15:56:38.606952",
+ "modified": "2024-12-17 17:47:44.756882",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",

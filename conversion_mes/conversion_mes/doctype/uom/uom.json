@@ -15,7 +15,6 @@
    "allow_in_quick_entry": 1,
    "fieldname": "uom_name",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "UOM Name",
    "reqd": 1,
    "unique": 1
@@ -25,13 +24,14 @@
    "default": "1",
    "fieldname": "is_active",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Is Active"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-14 17:24:43.052231",
+ "modified": "2024-12-17 12:38:29.480411",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "UOM",
