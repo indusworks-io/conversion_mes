@@ -94,8 +94,7 @@
   {
    "fieldname": "instructions",
    "fieldtype": "Small Text",
-   "label": "Instructions",
-   "reqd": 1
+   "label": "Instructions"
   },
   {
    "allow_bulk_edit": 1,
@@ -110,8 +109,7 @@
    "fieldname": "planned_output",
    "fieldtype": "Table",
    "label": "Planned Output",
-   "options": "MO Item Plan",
-   "reqd": 1
+   "options": "MO Item Plan"
   },
   {
    "fieldname": "manufacturing_plan",
@@ -301,7 +299,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-17 17:47:44.756882",
+ "modified": "2024-12-17 18:21:37.420700",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",
