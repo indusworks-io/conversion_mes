@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "format:device_type-{###}",
+ "autoname": "format:{###}",
  "creation": "2024-12-16 17:24:46.195586",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -24,20 +24,24 @@
   {
    "allow_in_quick_entry": 1,
    "default": "60",
+   "depends_on": "eval:doc.device_type=='Downtime Monitor'",
    "fieldname": "current_sensitivity",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Current Sensitivity",
+   "mandatory_depends_on": "eval:doc.device_type=='Downtime Monitor'",
    "non_negative": 1,
    "reqd": 1
   },
   {
    "allow_in_quick_entry": 1,
    "default": "3600",
+   "depends_on": "eval:doc.device_type=='Downtime Monitor'",
    "fieldname": "heartbeat_threshold",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Heartbeat Threshold",
+   "mandatory_depends_on": "eval:doc.device_type=='Downtime Monitor'",
    "non_negative": 1,
    "reqd": 1
   },
@@ -47,6 +51,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Workstation",
+   "link_filters": "[[\"Workstation\",\"is_active\",\"=\",1]]",
    "options": "Workstation",
    "reqd": 1
   },
@@ -56,16 +61,18 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Supervisor",
+   "link_filters": "[]",
    "options": "User",
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-16 17:28:56.467927",
+ "modified": "2024-12-18 14:32:11.575967",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Device",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

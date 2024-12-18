@@ -107,7 +107,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-16 16:30:01.570607",
+ "modified": "2024-12-18 12:20:16.673990",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Downtime Log",
@@ -127,7 +127,6 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
  "search_fields": "workstation",
  "sort_field": "modified",
  "sort_order": "DESC",

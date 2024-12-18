@@ -8,8 +8,8 @@
  "engine": "InnoDB",
  "field_order": [
   "device",
-  "timestamp",
-  "assigned_to"
+  "assigned_to",
+  "timestamp"
  ],
  "fields": [
   {
@@ -31,6 +31,8 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "fetch_from": "device.supervisor",
+   "fetch_if_empty": 1,
    "fieldname": "assigned_to",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -42,7 +44,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-16 17:34:10.950242",
+ "modified": "2024-12-18 14:34:44.441667",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Device Alert",

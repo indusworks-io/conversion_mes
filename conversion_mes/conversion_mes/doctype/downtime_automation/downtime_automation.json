@@ -29,7 +29,6 @@
    "allow_in_quick_entry": 1,
    "fieldname": "site",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Site",
    "link_filters": "[[\"Site\",\"is_active\",\"=\",1]]",
    "options": "Site",
@@ -40,43 +39,55 @@
    "default": "0",
    "fieldname": "enable_downtime_creation_for_holidays",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Enable Downtime Creation For Holidays?"
   },
   {
+   "depends_on": "eval:doc.enable_downtime_creation_for_holidays=='1';",
    "fieldname": "downtime_reason_for_holidays",
    "fieldtype": "Link",
    "label": "Downtime Reason for Holidays",
+   "mandatory_depends_on": "eval:doc.enable_downtime_creation_for_holidays=='1';",
    "options": "Downtime Reason"
   },
   {
+   "depends_on": "eval:doc.enable_downtime_creation_for_holidays=='1';",
    "fieldname": "holiday_list",
    "fieldtype": "Link",
    "label": "Holiday List",
+   "mandatory_depends_on": "eval:doc.enable_downtime_creation_for_holidays=='1';",
    "options": "Holiday List"
   },
   {
    "default": "0",
    "fieldname": "auto_create_downtime_for_non_working_period",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Auto Create Downtime For Non Working Period?"
   },
   {
+   "depends_on": "eval:doc.auto_create_downtime_for_non_working_period=='1';",
    "fieldname": "downtime_reason_for_non_working_days",
    "fieldtype": "Link",
    "label": "Downtime Reason for Non Working Days",
+   "mandatory_depends_on": "eval:doc.auto_create_downtime_for_non_working_period=='1';",
    "options": "Downtime Reason"
   },
   {
+   "depends_on": "eval:doc.auto_create_downtime_for_non_working_period=='1';",
    "fieldname": "downtime_reason_for_non_working_hours",
    "fieldtype": "Link",
    "label": "Downtime Reason for Non Working Hours",
+   "mandatory_depends_on": "eval:doc.auto_create_downtime_for_non_working_period=='1';",
    "options": "Downtime Reason"
   },
   {
    "allow_bulk_edit": 1,
+   "depends_on": "eval:doc.auto_create_downtime_for_non_working_period=='1';",
    "fieldname": "working_time",
    "fieldtype": "Table",
    "label": "Working Time",
+   "mandatory_depends_on": "eval:doc.auto_create_downtime_for_non_working_period=='1';",
    "options": "Working Time"
   },
   {
@@ -98,13 +109,16 @@
    "default": "0",
    "fieldname": "auto_create_downtime_for_breaks",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Auto Create Downtime For Breaks?"
   },
   {
    "allow_bulk_edit": 1,
+   "depends_on": "eval:doc.auto_create_downtime_for_breaks=='1';",
    "fieldname": "breaks",
    "fieldtype": "Table",
    "label": "Breaks",
+   "mandatory_depends_on": "eval:doc.auto_create_downtime_for_breaks=='1';",
    "options": "Break Time"
   },
   {
@@ -119,22 +133,26 @@
    "label": "Enable Auto Update of Minor Downtime?"
   },
   {
+   "depends_on": "eval:doc.enable_auto_update_of_minor_downtime=='1';",
    "fieldname": "reason_for_minor_downtime",
    "fieldtype": "Link",
    "label": "Downtime Reason for Minor Downtime",
+   "mandatory_depends_on": "eval:doc.enable_auto_update_of_minor_downtime=='1';",
    "options": "Downtime Reason"
   },
   {
+   "depends_on": "eval:doc.enable_auto_update_of_minor_downtime=='1';",
    "fieldname": "threshold_for_minor_downtime",
    "fieldtype": "Duration",
    "hide_days": 1,
-   "label": "Threshold For Minor Downtime"
+   "label": "Threshold For Minor Downtime",
+   "mandatory_depends_on": "eval:doc.enable_auto_update_of_minor_downtime=='1';"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-16 17:20:39.716514",
+ "modified": "2024-12-18 12:18:59.088611",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Downtime Automation",
