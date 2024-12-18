@@ -33,15 +33,15 @@
   "actual_start_date_time",
   "actual_end_date_time",
   "actual_duration",
-  "actual_run_rate",
   "column_break_vgkx",
   "total_actual_input_quantity_in_default_uom",
   "total_actual_input_quantity_in_alternate_uom",
   "total_actual_output_quantity_in_default_uom",
   "total_actual_output_quantity_in_alternate_uom",
+  "actual_run_rate",
   "section_break_rbef",
-  "actual_input_table",
-  "actual_output_table",
+  "actual_input_summary",
+  "actual_output_summary",
   "logs",
   "time_logs",
   "input_logs",
@@ -205,18 +205,6 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "actual_input_table",
-   "fieldtype": "Table",
-   "label": "Actual Input",
-   "options": "MO Item Actual"
-  },
-  {
-   "fieldname": "actual_output_table",
-   "fieldtype": "Table",
-   "label": "Actual Output",
-   "options": "MO Item Actual"
-  },
-  {
    "fieldname": "logs",
    "fieldtype": "Tab Break",
    "label": "Logs"
@@ -294,12 +282,24 @@
    "label": "Total Actual Output Quantity In Default UOM",
    "non_negative": 1,
    "precision": "2"
+  },
+  {
+   "fieldname": "actual_input_summary",
+   "fieldtype": "Table",
+   "label": "Actual Input Summary",
+   "options": "MO Item Actual"
+  },
+  {
+   "fieldname": "actual_output_summary",
+   "fieldtype": "Table",
+   "label": "Actual Output Summary",
+   "options": "MO Item Actual"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-17 18:21:37.420700",
+ "modified": "2024-12-18 11:23:20.903347",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",
