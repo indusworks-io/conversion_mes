@@ -148,23 +148,28 @@ app_license = "mit"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"conversion_mes.tasks.all"
-# 	],
-# 	"daily": [
-# 		"conversion_mes.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"conversion_mes.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"conversion_mes.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"conversion_mes.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+    "cron": {
+        "0 3 * * *": [
+            "conversion_mes.functions.downtime_automation"
+        ]
+    }
+	# "all": [
+	# 	"conversion_mes.tasks.all"
+	# ],
+	# "daily": [
+	# 	"conversion_mes.tasks.daily"
+	# ],
+	# "hourly": [
+	# 	"conversion_mes.tasks.hourly"
+	# ],
+	# "weekly": [
+	# 	"conversion_mes.tasks.weekly"
+	# ],
+	# "monthly": [
+	# 	"conversion_mes.tasks.monthly"
+	# ],
+}
 
 # Testing
 # -------
