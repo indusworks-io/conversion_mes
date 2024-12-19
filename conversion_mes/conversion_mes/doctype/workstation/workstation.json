@@ -13,6 +13,10 @@
   "site",
   "operators",
   "ideal_run_rate",
+  "auto_update_minor_stop",
+  "auto_update_minor_stops",
+  "minor_stop_threshold",
+  "minor_stop_downtime_reason",
   "workstation_operating_cost",
   "currency",
   "land_cost",
@@ -136,12 +140,39 @@
    "label": "Ideal Run Rate",
    "non_negative": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "auto_update_minor_stop",
+   "fieldtype": "Section Break",
+   "label": "Auto Update Minor Stops"
+  },
+  {
+   "default": "0",
+   "fieldname": "auto_update_minor_stops",
+   "fieldtype": "Check",
+   "label": "Auto Update Minor Stops"
+  },
+  {
+   "depends_on": "eval:doc.auto_update_minor_stops==1;",
+   "fieldname": "minor_stop_threshold",
+   "fieldtype": "Duration",
+   "hide_days": 1,
+   "label": "Minor Stop Threshold",
+   "mandatory_depends_on": "eval:doc.auto_update_minor_stops==1;"
+  },
+  {
+   "depends_on": "eval:doc.auto_update_minor_stops==1;",
+   "fieldname": "minor_stop_downtime_reason",
+   "fieldtype": "Link",
+   "label": "Minor Stop Downtime Reason",
+   "mandatory_depends_on": "eval:doc.auto_update_minor_stops==1;",
+   "options": "Downtime Reason"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-17 15:25:20.706346",
+ "modified": "2024-12-19 15:39:23.143300",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Workstation",
