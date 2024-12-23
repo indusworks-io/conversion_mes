@@ -1,8 +1,7 @@
 {
  "actions": [],
  "allow_import": 1,
- "allow_rename": 1,
- "autoname": "format:MO-{YYMMDD}-{###}",
+ "autoname": "format:MO-{YY}{MM}{DD}-{###}",
  "creation": "2024-12-16 14:29:12.576841",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -79,6 +78,7 @@
    "fetch_if_empty": 1,
    "fieldname": "site",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Site",
    "options": "Site",
    "read_only": 1
@@ -86,6 +86,7 @@
   {
    "fieldname": "operation",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Operation",
    "link_filters": "[[\"Operation\",\"is_active\",\"=\",1]]",
    "options": "Operation",
@@ -299,7 +300,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-18 11:23:20.903347",
+ "modified": "2024-12-21 16:05:46.294365",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",
