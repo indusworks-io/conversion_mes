@@ -12,7 +12,6 @@
   "is_active",
   "site",
   "operators",
-  "ideal_run_rate",
   "auto_update_minor_stop",
   "auto_update_minor_stops",
   "minor_stop_threshold",
@@ -132,16 +131,6 @@
    "options": "Currency"
   },
   {
-   "allow_in_quick_entry": 1,
-   "description": "Maximum Output The Workstation Can Process Per Minute.",
-   "fieldname": "ideal_run_rate",
-   "fieldtype": "Int",
-   "in_list_view": 1,
-   "label": "Ideal Run Rate",
-   "non_negative": 1,
-   "reqd": 1
-  },
-  {
    "fieldname": "auto_update_minor_stop",
    "fieldtype": "Section Break",
    "label": "Auto Update Minor Stops"
@@ -172,7 +161,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-19 15:39:23.143300",
+ "modified": "2024-12-30 15:15:22.613143",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Workstation",

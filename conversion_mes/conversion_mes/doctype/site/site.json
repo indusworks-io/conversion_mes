@@ -183,13 +183,8 @@
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
- "links": [
-  {
-   "link_doctype": "Workstation",
-   "link_fieldname": "site"
-  }
- ],
- "modified": "2024-12-23 17:41:50.627671",
+ "links": [],
+ "modified": "2024-12-26 15:12:33.279863",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Site",

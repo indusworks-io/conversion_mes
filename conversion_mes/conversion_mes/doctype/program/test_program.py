@@ -1,0 +1,9 @@
+# Copyright (c) 2024, IndusWorks and Contributors
+# See license.txt
+
+# import frappe
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestProgram(FrappeTestCase):
+	pass

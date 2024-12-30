@@ -10,41 +10,41 @@
   "manufacturing_plan",
   "posting_date",
   "workstation",
+  "program",
   "column_break_crzy",
   "status",
   "site",
   "section_break_laaq",
-  "operation",
   "instructions",
   "planned_input",
   "planned_output",
   "planned_metrics",
+  "total_planned_output_quantity_in_default_uom",
+  "total_planned_output_quantity_in_alternate_uom",
+  "column_break_izft",
   "planned_setup_time",
   "planned_run_rate",
   "planned_duration",
-  "column_break_izft",
-  "total_planned_input_quantity_in_default_uom",
-  "total_planned_input_quantity_in_alternate_uom",
-  "total_planned_output_quantity_in_default_uom",
-  "total_planned_output_quantity_in_alternate_uom",
   "actual",
   "manufacturing_actual",
   "actual_start_date_time",
   "actual_end_date_time",
   "actual_duration",
+  "actual_run_rate",
   "column_break_vgkx",
-  "total_actual_input_quantity_in_default_uom",
-  "total_actual_input_quantity_in_alternate_uom",
   "total_actual_output_quantity_in_default_uom",
   "total_actual_output_quantity_in_alternate_uom",
-  "actual_run_rate",
+  "total_actual_scrap_quantity_in_default_uom",
+  "total_actual_scrap_quantity_in_alternate_uom",
   "section_break_rbef",
-  "actual_input_summary",
+  "batch_serial_numbers",
   "actual_output_summary",
+  "actual_scrap_summary",
   "logs",
   "time_logs",
-  "input_logs",
-  "output_logs"
+  "batch_serial_logs",
+  "output_logs",
+  "scrap_logs"
  ],
  "fields": [
   {
@@ -84,25 +84,18 @@
    "read_only": 1
   },
   {
-   "fieldname": "operation",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Operation",
-   "link_filters": "[[\"Operation\",\"is_active\",\"=\",1]]",
-   "options": "Operation",
-   "reqd": 1
-  },
-  {
    "fieldname": "instructions",
    "fieldtype": "Small Text",
    "label": "Instructions"
   },
   {
    "allow_bulk_edit": 1,
+   "columns": 3,
+   "description": "Raw Material To Use.",
    "fieldname": "planned_input",
    "fieldtype": "Table",
    "label": "Planned Input",
-   "options": "MO Item Plan",
+   "options": "MO Plan Item",
    "reqd": 1
   },
   {
@@ -123,7 +116,8 @@
    "label": "Planned Metrics"
   },
   {
-   "fetch_from": "workstation.ideal_run_rate",
+   "description": "Output Per Minute.",
+   "fetch_from": "program.ideal_run_rate",
    "fieldname": "planned_run_rate",
    "fieldtype": "Int",
    "label": "Planned Run Rate",
@@ -137,7 +131,8 @@
    "read_only": 1
   },
   {
-   "fetch_from": "operation.setup_time",
+   "description": "Ideal Time Required To Setup This Workstation For A Manufacturing Order.",
+   "fetch_from": "program.setup_time",
    "fieldname": "planned_setup_time",
    "fieldtype": "Duration",
    "hide_days": 1,
@@ -188,13 +183,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "total_actual_input_quantity_in_alternate_uom",
-   "fieldtype": "Float",
-   "label": "Total Actual Input Quantity In Alternate UOM",
-   "non_negative": 1,
-   "precision": "2"
-  },
-  {
    "fieldname": "total_actual_output_quantity_in_alternate_uom",
    "fieldtype": "Float",
    "label": "Total Actual Output Quantity In Alternate UOM",
@@ -217,31 +205,11 @@
    "options": "MO Time Log"
   },
   {
-   "fieldname": "input_logs",
-   "fieldtype": "Table",
-   "label": "Input Logs",
-   "options": "MO Item Log"
-  },
-  {
+   "allow_bulk_edit": 1,
    "fieldname": "output_logs",
    "fieldtype": "Table",
    "label": "Output Logs",
    "options": "MO Item Log"
-  },
-  {
-   "fieldname": "total_planned_input_quantity_in_default_uom",
-   "fieldtype": "Int",
-   "label": "Total Planned Input Quantity in Default UOM",
-   "non_negative": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_planned_input_quantity_in_alternate_uom",
-   "fieldtype": "Float",
-   "label": "Total Planned Input Quantity in Alternate UOM",
-   "non_negative": 1,
-   "precision": "2",
-   "read_only": 1
   },
   {
    "fieldname": "total_planned_output_quantity_in_default_uom",
@@ -271,13 +239,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "total_actual_input_quantity_in_default_uom",
-   "fieldtype": "Int",
-   "label": "Total Actual Input Quantity In Default UOM",
-   "non_negative": 1,
-   "precision": "2"
-  },
-  {
    "fieldname": "total_actual_output_quantity_in_default_uom",
    "fieldtype": "Int",
    "label": "Total Actual Output Quantity In Default UOM",
@@ -285,22 +246,66 @@
    "precision": "2"
   },
   {
-   "fieldname": "actual_input_summary",
-   "fieldtype": "Table",
-   "label": "Actual Input Summary",
-   "options": "MO Item Actual"
-  },
-  {
+   "allow_bulk_edit": 1,
    "fieldname": "actual_output_summary",
    "fieldtype": "Table",
    "label": "Actual Output Summary",
    "options": "MO Item Actual"
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "label": "Program",
+   "link_filters": "[[\"Program\",\"is_active\",\"=\",1]]",
+   "options": "Program",
+   "reqd": 1
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "scrap_logs",
+   "fieldtype": "Table",
+   "label": "Scrap Logs",
+   "options": "MO Item Log"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "actual_scrap_summary",
+   "fieldtype": "Table",
+   "label": "Actual Scrap Summary",
+   "options": "MO Item Actual"
+  },
+  {
+   "fieldname": "total_actual_scrap_quantity_in_default_uom",
+   "fieldtype": "Int",
+   "label": "Total Actual Scrap Quantity In Default UOM",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "total_actual_scrap_quantity_in_alternate_uom",
+   "fieldtype": "Float",
+   "label": "Total Actual Scrap Quantity In Alternate UOM",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "batch_serial_logs",
+   "fieldtype": "Table",
+   "label": "Batch/Serial Logs",
+   "options": "MO Batch Serial Input Log"
+  },
+  {
+   "fieldname": "batch_serial_numbers",
+   "fieldtype": "Table",
+   "label": "Batch/Serial Numbers",
+   "options": "MO Input Batch Serial"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-21 16:05:46.294365",
+ "modified": "2024-12-30 15:53:01.483206",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",

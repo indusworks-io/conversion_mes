@@ -125,7 +125,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Material Masters",
-   "link_count": 4,
+   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -159,19 +159,9 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Operations",
-   "link_count": 0,
-   "link_to": "Operation",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
   }
  ],
- "modified": "2024-12-19 16:58:22.590164",
+ "modified": "2024-12-26 15:36:41.452920",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing",

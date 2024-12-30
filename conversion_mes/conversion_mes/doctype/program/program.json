@@ -1,0 +1,77 @@
+{
+ "actions": [],
+ "allow_copy": 1,
+ "autoname": "field:program_name",
+ "creation": "2024-12-30 15:01:28.808241",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "program_name",
+  "is_active",
+  "setup_time",
+  "ideal_run_rate"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "program_name",
+   "fieldtype": "Data",
+   "label": "Program Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active?"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "setup_time",
+   "fieldtype": "Duration",
+   "hide_days": 1,
+   "hide_seconds": 1,
+   "in_list_view": 1,
+   "label": "Setup Time",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "ideal_run_rate",
+   "fieldtype": "Int",
+   "label": "Ideal Run Rate",
+   "non_negative": 1,
+   "reqd": 1
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-12-30 15:05:55.270237",
+ "modified_by": "Administrator",
+ "module": "Conversion Mes",
+ "name": "Program",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
