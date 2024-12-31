@@ -7,9 +7,11 @@
  "engine": "InnoDB",
  "field_order": [
   "program_name",
-  "is_active",
+  "description",
   "setup_time",
-  "ideal_run_rate"
+  "ideal_run_rate",
+  "column_break_fyjy",
+  "is_active"
  ],
  "fields": [
   {
@@ -30,6 +32,7 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "description": "Duration Required To Setup Machine For This Program",
    "fieldname": "setup_time",
    "fieldtype": "Duration",
    "hide_days": 1,
@@ -40,17 +43,30 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "description": "Ideal Output Per Minute",
    "fieldname": "ideal_run_rate",
    "fieldtype": "Int",
+   "in_list_view": 1,
    "label": "Ideal Run Rate",
    "non_negative": 1,
    "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_fyjy",
+   "fieldtype": "Column Break"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-30 15:05:55.270237",
+ "modified": "2024-12-31 10:19:22.024618",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Program",

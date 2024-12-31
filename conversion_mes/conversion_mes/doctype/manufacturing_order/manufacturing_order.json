@@ -7,7 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "plan",
-  "manufacturing_plan",
+  "section_break_kxzh",
   "posting_date",
   "workstation",
   "program",
@@ -15,9 +15,10 @@
   "status",
   "site",
   "section_break_laaq",
-  "instructions",
   "planned_input",
   "planned_output",
+  "scrap_item_code",
+  "instructions",
   "planned_metrics",
   "total_planned_output_quantity_in_default_uom",
   "total_planned_output_quantity_in_alternate_uom",
@@ -26,7 +27,7 @@
   "planned_run_rate",
   "planned_duration",
   "actual",
-  "manufacturing_actual",
+  "section_break_gqsq",
   "actual_start_date_time",
   "actual_end_date_time",
   "actual_duration",
@@ -37,10 +38,10 @@
   "total_actual_scrap_quantity_in_default_uom",
   "total_actual_scrap_quantity_in_alternate_uom",
   "section_break_rbef",
-  "batch_serial_numbers",
+  "batch_serial_number_summary",
   "actual_output_summary",
-  "actual_scrap_summary",
   "logs",
+  "section_break_qzbi",
   "time_logs",
   "batch_serial_logs",
   "output_logs",
@@ -84,6 +85,7 @@
    "read_only": 1
   },
   {
+   "description": "Mention any additional instructions to be shared with the operator.",
    "fieldname": "instructions",
    "fieldtype": "Small Text",
    "label": "Instructions"
@@ -91,7 +93,6 @@
   {
    "allow_bulk_edit": 1,
    "columns": 3,
-   "description": "Raw Material To Use.",
    "fieldname": "planned_input",
    "fieldtype": "Table",
    "label": "Planned Input",
@@ -103,12 +104,8 @@
    "fieldname": "planned_output",
    "fieldtype": "Table",
    "label": "Planned Output",
-   "options": "MO Item Plan"
-  },
-  {
-   "fieldname": "manufacturing_plan",
-   "fieldtype": "Section Break",
-   "label": "Manufacturing Plan "
+   "options": "MO Item Plan",
+   "reqd": 1
   },
   {
    "fieldname": "planned_metrics",
@@ -151,32 +148,31 @@
    "label": "Actual"
   },
   {
-   "fieldname": "manufacturing_actual",
-   "fieldtype": "Section Break",
-   "label": "Manufacturing Actual"
-  },
-  {
    "fieldname": "actual_start_date_time",
    "fieldtype": "Datetime",
-   "label": "Actual Start Date Time"
+   "label": "Actual Start Date Time",
+   "read_only": 1
   },
   {
    "fieldname": "actual_end_date_time",
    "fieldtype": "Datetime",
-   "label": "Actual End Date Time"
+   "label": "Actual End Date Time",
+   "read_only": 1
   },
   {
    "fieldname": "actual_duration",
    "fieldtype": "Duration",
    "hide_days": 1,
    "hide_seconds": 1,
-   "label": "Actual Duration"
+   "label": "Actual Duration",
+   "read_only": 1
   },
   {
    "fieldname": "actual_run_rate",
    "fieldtype": "Int",
    "label": "Actual Run Rate",
-   "non_negative": 1
+   "non_negative": 1,
+   "read_only": 1
   },
   {
    "fieldname": "column_break_vgkx",
@@ -187,7 +183,8 @@
    "fieldtype": "Float",
    "label": "Total Actual Output Quantity In Alternate UOM",
    "non_negative": 1,
-   "precision": "2"
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_rbef",
@@ -243,14 +240,16 @@
    "fieldtype": "Int",
    "label": "Total Actual Output Quantity In Default UOM",
    "non_negative": 1,
-   "precision": "2"
+   "precision": "2",
+   "read_only": 1
   },
   {
    "allow_bulk_edit": 1,
    "fieldname": "actual_output_summary",
    "fieldtype": "Table",
    "label": "Actual Output Summary",
-   "options": "MO Item Actual"
+   "options": "MO Item Actual",
+   "read_only": 1
   },
   {
    "fieldname": "program",
@@ -268,25 +267,20 @@
    "options": "MO Item Log"
   },
   {
-   "allow_bulk_edit": 1,
-   "fieldname": "actual_scrap_summary",
-   "fieldtype": "Table",
-   "label": "Actual Scrap Summary",
-   "options": "MO Item Actual"
-  },
-  {
    "fieldname": "total_actual_scrap_quantity_in_default_uom",
    "fieldtype": "Int",
    "label": "Total Actual Scrap Quantity In Default UOM",
    "non_negative": 1,
-   "precision": "2"
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "total_actual_scrap_quantity_in_alternate_uom",
    "fieldtype": "Float",
    "label": "Total Actual Scrap Quantity In Alternate UOM",
    "non_negative": 1,
-   "precision": "2"
+   "precision": "2",
+   "read_only": 1
   },
   {
    "allow_bulk_edit": 1,
@@ -296,16 +290,37 @@
    "options": "MO Batch Serial Input Log"
   },
   {
-   "fieldname": "batch_serial_numbers",
+   "description": "Select The Item Code Where Scrap & Rejections Should Be Added.",
+   "fieldname": "scrap_item_code",
+   "fieldtype": "Link",
+   "label": "Scrap Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "batch_serial_number_summary",
    "fieldtype": "Table",
-   "label": "Batch/Serial Numbers",
-   "options": "MO Input Batch Serial"
+   "label": "Batch/Serial Number Summary",
+   "options": "MO Input Batch Serial",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_kxzh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_gqsq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_qzbi",
+   "fieldtype": "Section Break"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-30 15:53:01.483206",
+ "modified": "2024-12-31 12:54:29.177742",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",
