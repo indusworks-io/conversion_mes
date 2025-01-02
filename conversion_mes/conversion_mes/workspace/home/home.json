@@ -1,0 +1,230 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"MvpFeCfxrU\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h3\\\"><b>Transactions</b></span>\",\"col\":12}},{\"id\":\"RwZGaRAe8U\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Manufacturing Orders\",\"col\":3}},{\"id\":\"ZVTsV3T_5p\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Downtime Logs\",\"col\":3}},{\"id\":\"YEPs7o_qxy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Telemetry\",\"col\":3}},{\"id\":\"DQDM0JbuJM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Device Alerts\",\"col\":3}},{\"id\":\"w1MhLP4riV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"w1-iV2Gkej\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Analytics</b></span>\",\"col\":12}},{\"id\":\"bn1O7oW-IE\",\"type\":\"card\",\"data\":{\"card_name\":\"Manufacturing Report\",\"col\":4}},{\"id\":\"T9DFV2fUJ2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"rK4KRe5Ish\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data</b></span>\",\"col\":12}},{\"id\":\"8e350U1B66\",\"type\":\"card\",\"data\":{\"card_name\":\"Organization Masters\",\"col\":4}},{\"id\":\"3eg0GIEXW6\",\"type\":\"card\",\"data\":{\"card_name\":\"Material Masters\",\"col\":4}},{\"id\":\"1FRSj9ZFiW\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}}]",
+ "creation": "2024-12-19 16:49:05.857989",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "setting-gear",
+ "idx": 1,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Home",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Material Masters",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "UOMs",
+   "link_count": 0,
+   "link_to": "UOM",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "item Groups",
+   "link_count": 0,
+   "link_to": "Item Group",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Items",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Settings",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Downtime Reasons",
+   "link_count": 0,
+   "link_to": "Downtime Reason",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Holiday Lists",
+   "link_count": 0,
+   "link_to": "Holiday List",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Organization Masters",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sites",
+   "link_count": 0,
+   "link_to": "Site",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Operators",
+   "link_count": 0,
+   "link_to": "Operator",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Workstations",
+   "link_count": 0,
+   "link_to": "Workstation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Programs",
+   "link_count": 0,
+   "link_to": "Program",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Devices",
+   "link_count": 0,
+   "link_to": "Device",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Manufacturing Report",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Manufacturing Order Output Details",
+   "link_count": 0,
+   "link_to": "Manufacturing Order Output Details",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Manufacturing Order Plan vs Actual",
+   "link_count": 0,
+   "link_to": "Manufacturing Order Plan vs Actual",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Batch and Serial Number Tracking",
+   "link_count": 0,
+   "link_to": "Batch and Serial Number Tracking",
+   "link_type": "Report",
+   "onboard": 1,
+   "report_ref_doctype": "Manufacturing Order",
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-01-02 15:03:55.415213",
+ "modified_by": "Administrator",
+ "module": "Conversion Mes",
+ "name": "Home",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 1.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Manufacturing Orders",
+   "link_to": "Manufacturing Order",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Downtime Logs",
+   "link_to": "Downtime Log",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Telemetry",
+   "link_to": "Telemetry",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Device Alerts",
+   "link_to": "Device Alert",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Home"
+}

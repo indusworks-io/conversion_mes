@@ -18,6 +18,8 @@
   "planned_input",
   "planned_output",
   "scrap_item_code",
+  "scrap_uom",
+  "scrap_alternate_uom",
   "instructions",
   "planned_metrics",
   "total_planned_output_quantity_in_default_uom",
@@ -248,8 +250,7 @@
    "fieldname": "actual_output_summary",
    "fieldtype": "Table",
    "label": "Actual Output Summary",
-   "options": "MO Item Actual",
-   "read_only": 1
+   "options": "MO Item Actual"
   },
   {
    "fieldname": "program",
@@ -315,12 +316,30 @@
   {
    "fieldname": "section_break_qzbi",
    "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "scrap_item_code.default_uom",
+   "fieldname": "scrap_uom",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Scrap UOM",
+   "options": "UOM",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "scrap_item_code.alternate_uom",
+   "fieldname": "scrap_alternate_uom",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Scrap Alternate UOM",
+   "options": "UOM",
+   "read_only": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-31 12:54:29.177742",
+ "modified": "2025-01-02 13:02:29.910164",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",
