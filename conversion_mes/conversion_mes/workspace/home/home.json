@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"MvpFeCfxrU\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h3\\\"><b>Transactions</b></span>\",\"col\":12}},{\"id\":\"RwZGaRAe8U\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Manufacturing Orders\",\"col\":3}},{\"id\":\"ZVTsV3T_5p\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Downtime Logs\",\"col\":3}},{\"id\":\"YEPs7o_qxy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Telemetry\",\"col\":3}},{\"id\":\"DQDM0JbuJM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Device Alerts\",\"col\":3}},{\"id\":\"w1MhLP4riV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"w1-iV2Gkej\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Analytics</b></span>\",\"col\":12}},{\"id\":\"bn1O7oW-IE\",\"type\":\"card\",\"data\":{\"card_name\":\"Manufacturing Report\",\"col\":4}},{\"id\":\"T9DFV2fUJ2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"rK4KRe5Ish\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data</b></span>\",\"col\":12}},{\"id\":\"8e350U1B66\",\"type\":\"card\",\"data\":{\"card_name\":\"Organization Masters\",\"col\":4}},{\"id\":\"3eg0GIEXW6\",\"type\":\"card\",\"data\":{\"card_name\":\"Material Masters\",\"col\":4}},{\"id\":\"1FRSj9ZFiW\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}}]",
+ "content": "[{\"id\":\"MvpFeCfxrU\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h3\\\"><b>Transactions</b></span>\",\"col\":12}},{\"id\":\"RwZGaRAe8U\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Manufacturing Orders\",\"col\":3}},{\"id\":\"ZVTsV3T_5p\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Downtime Logs\",\"col\":3}},{\"id\":\"YEPs7o_qxy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Telemetry\",\"col\":3}},{\"id\":\"DQDM0JbuJM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Device Alerts\",\"col\":3}},{\"id\":\"w1MhLP4riV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"sqAhZs9Kau\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"w1-iV2Gkej\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Analytics</b></span>\",\"col\":12}},{\"id\":\"bn1O7oW-IE\",\"type\":\"card\",\"data\":{\"card_name\":\"Manufacturing Report\",\"col\":4}},{\"id\":\"fK2XY52Y-p\",\"type\":\"card\",\"data\":{\"card_name\":\"Downtime Reports\",\"col\":4}},{\"id\":\"T9DFV2fUJ2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"UrIows_3k4\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"rK4KRe5Ish\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data</b></span>\",\"col\":12}},{\"id\":\"8e350U1B66\",\"type\":\"card\",\"data\":{\"card_name\":\"Organization Masters\",\"col\":4}},{\"id\":\"3eg0GIEXW6\",\"type\":\"card\",\"data\":{\"card_name\":\"Material Masters\",\"col\":4}},{\"id\":\"1FRSj9ZFiW\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}}]",
  "creation": "2024-12-19 16:49:05.857989",
  "custom_blocks": [],
  "docstatus": 0,
@@ -199,9 +199,38 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Downtime Reports",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Downtime Logs",
+   "link_count": 0,
+   "link_to": "Downtime Logs",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Downtime Reason Analysis",
+   "link_count": 0,
+   "link_to": "Downtime Reason Analysis",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-01-03 11:17:31.420224",
+ "modified": "2025-01-03 13:04:43.209983",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Home",

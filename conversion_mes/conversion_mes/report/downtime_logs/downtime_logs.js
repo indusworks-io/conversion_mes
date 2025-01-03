@@ -1,7 +1,7 @@
 // Copyright (c) 2025, IndusWorks and contributors
 // For license information, please see license.txt
 
-frappe.query_reports["Manufacturing Order Output Details"] = {
+frappe.query_reports["Downtime Logs"] = {
 	"filters": [
 		{
             "fieldname": "from_date",
