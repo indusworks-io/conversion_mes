@@ -144,7 +144,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Manufacturing Report",
-   "link_count": 3,
+   "link_count": 5,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -179,9 +179,29 @@
    "onboard": 1,
    "report_ref_doctype": "Manufacturing Order",
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Scrap Analysis",
+   "link_count": 0,
+   "link_to": "Scrap Analysis",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Run Rate Analysis",
+   "link_count": 0,
+   "link_to": "Run Rate Analysis",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-01-02 15:03:55.415213",
+ "modified": "2025-01-03 11:17:31.420224",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Home",
