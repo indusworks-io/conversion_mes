@@ -32,6 +32,9 @@ let router = createRouter({
   routes,
 })
 
+
+let defaultWorkstation = localStorage.getItem('defaultWorkstation');
+
 router.beforeEach(async (to, from, next) => {
   let isLoggedIn = session.isLoggedIn
   try {

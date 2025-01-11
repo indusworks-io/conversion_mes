@@ -6,8 +6,10 @@
     
         <!-- Create List Of Workstations -->
         <div class="mt-4">
+            
         <ListView
-            class="h-[500px]"
+            v-if="workstations.list.data"
+            class="</template>h-[500px]"
             :columns="[
                 { label: 'Workstation Name', key: 'name' },
                 { label: 'Site', key: 'site'},
@@ -19,7 +21,7 @@
                 emptyState: {
                     title: 'No Workstations Found',
                 },
-                onRowClick: (row) => handleRowClick(row)
+                getRowRoute: (row) => ({ name: 'WorkstationDetails', params: { id: row.name } })
             }"
             row-key="name"
         />
@@ -39,11 +41,4 @@ let workstations = createListResource({
   fields: ['name', 'site'],
   auto: true
 })
-
-const router = useRouter();
-function handleRowClick(row) {
-    router.push({ name: 'WorkstationDetails', params: { id: row.name } });
-    // console.log('Row Clicked', row.name);
-    }
-
 </script>
