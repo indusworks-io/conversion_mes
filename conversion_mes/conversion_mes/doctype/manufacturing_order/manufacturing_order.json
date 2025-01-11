@@ -11,6 +11,7 @@
   "posting_date",
   "workstation",
   "program",
+  "operation",
   "column_break_crzy",
   "status",
   "site",
@@ -330,12 +331,18 @@
    "label": "Scrap Alternate UOM",
    "options": "UOM",
    "read_only": 1
+  },
+  {
+   "fieldname": "operation",
+   "fieldtype": "Link",
+   "label": "Operation",
+   "options": "Operation"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-08 15:58:47.056488",
+ "modified": "2025-01-11 17:48:50.441807",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",
