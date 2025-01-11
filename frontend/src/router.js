@@ -6,7 +6,19 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/pages/Home.vue'),
+    redirect: {
+      name: 'Workstations',
+    }
+  },
+  {
+    path: '/workstations',
+    name: 'Workstations',
+    component: () => import('@/pages/WorkstationList.vue'),
+  },
+  {
+    path: '/workstation/:id',
+    name: 'WorkstationDetails',
+    component: () => import('@/pages/WorkstationDetails.vue'),
   },
   {
     name: 'Login',

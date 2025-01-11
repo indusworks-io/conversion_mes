@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-3xl py-12 mx-auto">
+  <div class="pl-4 min-w-full py-4 mx-auto">
     <h2 class="font-bold text-lg text-gray-600 mb-4">
       Welcome {{ session.user }}!
     </h2>
@@ -17,8 +17,19 @@
       <Button @click="session.logout.submit()">Logout</Button>
     </div>
 
+    <!-- Create List Of Workstations -->
+    <div class="mt-8">
+      <h3 class="font-bold text-lg text-gray-600 mb-4">Workstations</h3>
+      <div v-if="workstations.loading">Loading...</div>
+      <div v-else>
+        <div v-for="workstation in workstations.data" :key="workstation.name">
+          <div>{{ workstation.name }}</div>
+          <div>{{ workstation.site }}</div>
+        </div>
+    </div>
     <!-- Dialog -->
     <Dialog title="Title" v-model="showDialog"> Dialog content </Dialog>
+  </div>
   </div>
 </template>
 
@@ -26,12 +37,20 @@
 import { ref } from 'vue'
 import { Dialog } from 'frappe-ui'
 import { createResource } from 'frappe-ui'
+import { createListResource } from 'frappe-ui'
 import { session } from '../data/session'
 
 const ping = createResource({
   url: 'ping',
   auto: true,
 })
+
+let workstations = createListResource({
+  doctype: 'Workstation',
+  fields: ['name', 'site'],
+})
+
+workstations.fetch()
 
 const showDialog = ref(false)
 </script>
