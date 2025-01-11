@@ -152,29 +152,25 @@
   {
    "fieldname": "actual_start_date_time",
    "fieldtype": "Datetime",
-   "label": "Actual Start Date Time",
-   "read_only": 1
+   "label": "Actual Start Date Time"
   },
   {
    "fieldname": "actual_end_date_time",
    "fieldtype": "Datetime",
-   "label": "Actual End Date Time",
-   "read_only": 1
+   "label": "Actual End Date Time"
   },
   {
    "fieldname": "actual_duration",
    "fieldtype": "Duration",
    "hide_days": 1,
    "hide_seconds": 1,
-   "label": "Actual Duration",
-   "read_only": 1
+   "label": "Actual Duration"
   },
   {
    "fieldname": "actual_run_rate",
    "fieldtype": "Int",
    "label": "Actual Run Rate",
-   "non_negative": 1,
-   "read_only": 1
+   "non_negative": 1
   },
   {
    "fieldname": "column_break_vgkx",
@@ -339,7 +335,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-02 13:02:29.910164",
+ "modified": "2025-01-08 15:58:47.056488",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",

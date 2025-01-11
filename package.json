@@ -1,0 +1,23 @@
+{
+  "name": "conversion_mes",
+  "version": "1.0.0",
+  "description": "MES Application for Conversion Industry",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd frontend && yarn install",
+    "dev": "cd frontend && yarn dev",
+    "build": "cd frontend && yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navneet-indusworks/conversion_mes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/navneet-indusworks/conversion_mes/issues"
+  },
+  "homepage": "https://github.com/navneet-indusworks/conversion_mes#readme"
+}
