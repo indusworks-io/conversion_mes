@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center justify-between">
-        <h2 class="font-black text-2xl text-gray-600">
+        <h2 class="font-black text-xl text-gray-600">
         {{ workstationId }} Dashboard
         </h2>
         <div class='flex items-center space-x-4'>
@@ -41,7 +41,7 @@
         </h3>
         <ListView
             v-if="ManufacturingOrders.list.data"
-            class="h-[500px] mt-4"
+            class="mt-4"
             :columns="[
                 { label: 'Date', key: 'posting_date', width:1 },
                 { label: 'Order Number', key: 'name', width:2 },
@@ -55,6 +55,7 @@
                 emptyState: {
                     title: 'No Manufacturing Orders Found',
                 },
+                getRowRoute: (row) => ({ name: 'OrderDetails', params: { orderid: row.name } })
             }"
             row-key="name"
         />
@@ -87,7 +88,10 @@ const goToWorkstationList = () => {
 let ManufacturingOrders = createListResource({
     doctype: 'Manufacturing Order',
     fields: ['posting_date', 'name', 'operation', 'status'],
-    filters: [['workstation', '=', workstationId]],
+    filters: [
+        ['workstation', '=', workstationId],
+        ['status', 'not in', ['Draft', 'Cancelled', 'Closed', 'Completed']]
+    ],
     auto: true
 });
 

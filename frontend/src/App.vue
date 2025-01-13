@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2">
+  <div class="p-2 h-full overflow-hidden">
     <router-view />
   </div>
 </template>

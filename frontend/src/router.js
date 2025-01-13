@@ -21,6 +21,11 @@ const routes = [
     component: () => import('@/pages/WorkstationDetails.vue'),
   },
   {
+    path: '/workstation/:id/order/:orderid',
+    name: 'OrderDetails',
+    component: () => import('@/pages/OrderDetails.vue'),
+  },
+  {
     name: 'Login',
     path: '/account/login',
     component: () => import('@/pages/Login.vue'),

@@ -1,15 +1,13 @@
 <template>
     <div>
-        <h2 class="font-black text-2xl text-gray-600">
+        <h2 class="font-black text-xl text-gray-600">
         Workstation List
         </h2>
     
         <!-- Create List Of Workstations -->
         <div class="mt-4">
-            
         <ListView
             v-if="workstations.list.data"
-            class="</template>h-[500px]"
             :columns="[
                 { label: 'Workstation Name', key: 'name' },
                 { label: 'Site', key: 'site'},
