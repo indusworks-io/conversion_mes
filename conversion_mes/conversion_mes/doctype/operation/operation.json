@@ -7,9 +7,20 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "basic_information_section",
   "operation_name",
+  "setup_time",
+  "cycle_time",
+  "clean_up_time",
+  "column_break_nlzf",
   "is_active",
-  "setup_time"
+  "instructions",
+  "material_needed_for_1_cycle_section",
+  "input_items",
+  "output_from_1_cycle_section",
+  "output_items",
+  "scrap_section",
+  "scrap_item_code"
  ],
  "fields": [
   {
@@ -30,6 +41,7 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "description": "Time Required To Setup The Line For Production Run",
    "fieldname": "setup_time",
    "fieldtype": "Duration",
    "hide_days": 1,
@@ -37,12 +49,80 @@
    "in_list_view": 1,
    "label": "Setup Time",
    "reqd": 1
+  },
+  {
+   "fieldname": "instructions",
+   "fieldtype": "Small Text",
+   "label": "Instructions"
+  },
+  {
+   "description": "Machining Time Required For Each Cycle",
+   "fieldname": "cycle_time",
+   "fieldtype": "Duration",
+   "hide_days": 1,
+   "hide_seconds": 1,
+   "label": "Cycle Time",
+   "reqd": 1
+  },
+  {
+   "description": "Time Required To Prepare The Line For Next Production Run",
+   "fieldname": "clean_up_time",
+   "fieldtype": "Duration",
+   "hide_days": 1,
+   "hide_seconds": 1,
+   "label": "Clean Up Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "basic_information_section",
+   "fieldtype": "Section Break",
+   "label": "Basic Information"
+  },
+  {
+   "fieldname": "material_needed_for_1_cycle_section",
+   "fieldtype": "Section Break",
+   "label": "Input For 1 Cycle"
+  },
+  {
+   "fieldname": "input_items",
+   "fieldtype": "Table",
+   "label": "Input Items",
+   "options": "Planned Input Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "output_from_1_cycle_section",
+   "fieldtype": "Section Break",
+   "label": "Output From 1 Cycle"
+  },
+  {
+   "fieldname": "output_items",
+   "fieldtype": "Table",
+   "label": "Output Items",
+   "options": "MO Item Plan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_nlzf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "scrap_section",
+   "fieldtype": "Section Break",
+   "label": "Scrap"
+  },
+  {
+   "fieldname": "scrap_item_code",
+   "fieldtype": "Link",
+   "label": "Scrap Item Code",
+   "options": "Item",
+   "reqd": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-17 15:09:23.071428",
+ "modified": "2025-01-23 16:03:09.696136",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Operation",

@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "format:WO-{YY}{MM}{DD}-{###}",
+ "creation": "2025-01-23 12:43:22.273137",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "site",
+  "item",
+  "planned_quantity",
+  "completed_quantity",
+  "due_date",
+  "status",
+  "reference_number"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Site",
+   "options": "Site",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Due Date",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "Open",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nOpen\nIn Progress\nCompleted\nCancelled",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "planned_quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Planned Quantity",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "completed_quantity",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Completed Quantity",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "reference_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reference Number"
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-01-23 15:45:49.818978",
+ "modified_by": "Administrator",
+ "module": "Conversion Mes",
+ "name": "Work Order",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "search_fields": "item",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

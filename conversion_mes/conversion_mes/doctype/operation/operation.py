@@ -6,4 +6,9 @@ from frappe.model.document import Document
 
 
 class Operation(Document):
-	pass
+	def before_save(self):
+		for row in self.input_items:
+			row.alternate_quantity = row.quantity * row.conversion_factor
+		
+		for row in self.output_items:
+			row.alternate_quantity = row.quantity * row.conversion_factor

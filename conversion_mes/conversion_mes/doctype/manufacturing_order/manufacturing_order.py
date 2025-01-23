@@ -8,19 +8,49 @@ from frappe.model.document import Document
 class ManufacturingOrder(Document):
 	def before_save(self):
 
-		# Update Alternate Quantity In Planned Output Table
-		for row in self.planned_output:
-			row.alternate_quantity = row.quantity * row.conversion_factor
+		# Update Planned Input & Output based on Operation and Cycles
 
-		# Update Total Planned Output Quantity in Default UOM
-		self.total_planned_output_quantity_in_default_uom = sum([row.quantity for row in self.planned_output])
+		operation = frappe.get_doc("Operation", self.operation)
+		cycles = self.planned_cycles
 
-		# Update Total Planned Output Quantity in Alternate UOM
-		self.total_planned_output_quantity_in_alternate_uom = sum([row.alternate_quantity for row in self.planned_output])
-
-		# Update Planned Duration
-		self.planned_duration = self.planned_setup_time + ((self.total_planned_output_quantity_in_alternate_uom/self.planned_run_rate)*60)
+		input_items = operation.input_items
+		self.planned_input = []
+		for input_item in input_items:
+			self.append('planned_input', {
+				'item': input_item.item,
+				'track_batch_serial_number': input_item.track_batch_serial_number,
+				'quantity': input_item.quantity*cycles,
+				'uom': input_item.uom,
+				'conversion_factor': input_item.conversion_factor,
+				'alternate_quantity': input_item.quantity*cycles*input_item.conversion_factor,
+				'alternate_uom': input_item.alternate_uom
+			})
 		
+
+		output_items = operation.output_items
+		self.planned_output = []
+		for output_item in output_items:
+			self.append('planned_output', {
+				'item': output_item.item,
+				'quantity': output_item.quantity*cycles,
+				'uom': output_item.uom,
+				'conversion_factor': output_item.conversion_factor,
+				'alternate_quantity': output_item.quantity*cycles*output_item.conversion_factor,
+				'alternate_uom': output_item.alternate_uom
+			})
+		
+		# Update Planned Input & Output Quantities
+		self.total_planned_input_quantity_in_default_uom = sum([item.quantity for item in self.planned_input])
+
+		self.total_planned_input_quantity_in_alternate_uom = sum([item.alternate_quantity for item in self.planned_input])
+
+		self.total_planned_output_quantity_in_default_uom = sum([item.quantity for item in self.planned_output])
+
+		self.total_planned_output_quantity_in_alternate_uom = sum([item.alternate_quantity for item in self.planned_output])
+
+		# Update Planned Duration based on Planned Setup Time, Planned Cycle Time and Planned Cycles
+		self.planned_duration = self.planned_setup_time + (self.planned_cycle_time * cycles)
+
 		# Update Duration Feild In Time Logs Table && Actual Duration
 		self.actual_duration = 0
 		if self.time_logs:
@@ -33,6 +63,14 @@ class ManufacturingOrder(Document):
 				else:
 					time_log.duration = time_diff_in_seconds(end, start)
 					self.actual_duration += time_log.duration
+		
+		self.actual_cycles = 0
+		for log in self.cycle_logs:
+			self.actual_cycles += log.cycles
+
+		self.actual_cycle_time = 0
+		if self.actual_duration and self.actual_cycles:
+			self.actual_cycle_time = self.actual_duration / self.actual_cycles
 		
 		# Update Batch/Serial Number Summary
 		self.batch_serial_number_summary = []
@@ -50,80 +88,48 @@ class ManufacturingOrder(Document):
 					'serial_batch_number': batch_serial_log.batch_serial_number
 				})
 		
-		# Update actual_input_summary from input_logs
-		# self.total_actual_input_quantity_in_default_uom = 0
-		# self.total_actual_input_quantity_in_alternate_uom = 0
-		# self.actual_input_summary = []
-		# for input_log in self.input_logs:
-		# 	input_log.alternate_quantity = input_log.quantity * input_log.conversion_factor
-		# 	input_item = input_log.item
-		# 	input_quantity = input_log.quantity
-		# 	uom = input_log.uom
-		# 	conversion_factor = input_log.conversion_factor
-		# 	alternate_quantity = input_log.alternate_quantity
-		# 	alternate_uom = input_log.alternate_uom
-		# 	batch_number = input_log.batch_number
-		# 	found = False
-		# 	for summary in self.actual_input_summary:
-		# 		if (summary.item == input_item and summary.batch_number == batch_number):
-		# 			summary.quantity += input_quantity
-		# 			summary.alternate_quantity += alternate_quantity
-		# 			found = True
-		# 			break
-		# 	if not found:
-		# 		self.append('actual_input_summary', {
-		# 			'item': input_item,
-		# 			'quantity': input_quantity,
-		# 			'uom': uom,
-		# 			'conversion_factor': conversion_factor,
-		# 			'alternate_quantity': alternate_quantity,
-		# 			'alternate_uom': alternate_uom,
-		# 			'batch_number': batch_number
-		# 		})
-		# 	self.total_actual_input_quantity_in_default_uom += input_quantity
-		# 	self.total_actual_input_quantity_in_alternate_uom += alternate_quantity
-
-		# Update Actual Output Summary from Output Logs
+		# Update Actual Input based on Cycles
+		self.actual_input_summary = []
+		self.total_actual_input_quantity_in_default_uom = 0
+		self.total_actual_input_quantity_in_alternate_uom = 0
+		if self.actual_cycles:
+			for input_item in input_items:
+				self.append('actual_input_summary', {
+					'item': input_item.item,
+					'quantity': input_item.quantity * self.actual_cycles,
+					'uom': input_item.uom,
+					'conversion_factor': input_item.conversion_factor,
+					'alternate_quantity': input_item.quantity * self.actual_cycles * input_item.conversion_factor,
+					'alternate_uom': input_item.alternate_uom
+				})
+				self.total_actual_input_quantity_in_default_uom += input_item.quantity * self.actual_cycles
+				self.total_actual_input_quantity_in_alternate_uom += input_item.quantity * self.actual_cycles * input_item.conversion_factor
+		
+		# Update Actual Output based on Cycles
+		self.actual_output_summary = []
 		self.total_actual_output_quantity_in_default_uom = 0
 		self.total_actual_output_quantity_in_alternate_uom = 0
-		self.actual_output_summary = []
-		for output_log in self.output_logs:
-			output_log.alternate_quantity = output_log.quantity * output_log.conversion_factor
-			output_item = output_log.item
-			output_quantity = output_log.quantity
-			uom = output_log.uom
-			conversion_factor = output_log.conversion_factor
-			alternate_quantity = output_log.alternate_quantity
-			alternate_uom = output_log.alternate_uom
-			found = False
-			for summary in self.actual_output_summary:
-				if (summary.item == output_item):
-					summary.quantity += output_quantity
-					summary.alternate_quantity += alternate_quantity
-					found = True
-					break
-			if not found:
+		if self.actual_cycles:
+			for output_item in output_items:
 				self.append('actual_output_summary', {
-					'item': output_item,
-					'quantity': output_quantity,
-					'uom': uom,
-					'conversion_factor': conversion_factor,
-					'alternate_quantity': alternate_quantity,
-					'alternate_uom': alternate_uom
+					'item': output_item.item,
+					'quantity': output_item.quantity * self.actual_cycles,
+					'uom': output_item.uom,
+					'conversion_factor': output_item.conversion_factor,
+					'alternate_quantity': output_item.quantity * self.actual_cycles * output_item.conversion_factor,
+					'alternate_uom': output_item.alternate_uom
 				})
-			self.total_actual_output_quantity_in_default_uom += output_quantity
-			self.total_actual_output_quantity_in_alternate_uom += alternate_quantity
+				self.total_actual_output_quantity_in_default_uom += output_item.quantity * self.actual_cycles
+				self.total_actual_output_quantity_in_alternate_uom += output_item.quantity * self.actual_cycles * output_item.conversion_factor
 		
+		# Update Scrap Summary
+		self.actual_scrap_summary = []
 		self.total_actual_scrap_quantity_in_default_uom = 0
 		self.total_actual_scrap_quantity_in_alternate_uom = 0
 		for scrap_log in self.scrap_logs:
-			scrap_log.alternate_quantity = scrap_log.quantity * scrap_log.conversion_factor
+			scrap_item = scrap_log.item
 			scrap_quantity = scrap_log.quantity
 			scrap_alternate_quantity = scrap_log.alternate_quantity
-			self.total_actual_scrap_quantity_in_default_uom += scrap_quantity
-			self.total_actual_scrap_quantity_in_alternate_uom += scrap_alternate_quantity
-
-
-		# Update Run Rate
-		if self.actual_duration != 0:
-			self.actual_run_rate = ((self.total_actual_output_quantity_in_alternate_uom + self.total_actual_scrap_quantity_in_alternate_uom)/self.actual_duration)*60
+			found = False
+			
+			
