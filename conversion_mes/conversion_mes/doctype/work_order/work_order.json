@@ -65,8 +65,7 @@
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Completed Quantity",
-   "non_negative": 1,
-   "reqd": 1
+   "non_negative": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -79,7 +78,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-23 15:45:49.818978",
+ "modified": "2025-01-24 15:19:30.080149",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Work Order",

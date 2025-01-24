@@ -19,9 +19,6 @@
   "instructions",
   "planned_input",
   "planned_output",
-  "scrap_item_code",
-  "scrap_uom",
-  "scrap_alternate_uom",
   "planned_metrics",
   "total_planned_input_quantity_in_default_uom",
   "total_planned_input_quantity_in_alternate_uom",
@@ -56,7 +53,6 @@
   "time_logs",
   "batch_serial_logs",
   "cycle_logs",
-  "output_logs",
   "scrap_logs"
  ],
  "fields": [
@@ -198,13 +194,6 @@
    "options": "MO Time Log"
   },
   {
-   "allow_bulk_edit": 1,
-   "fieldname": "output_logs",
-   "fieldtype": "Table",
-   "label": "Output Logs",
-   "options": "MO Item Log"
-  },
-  {
    "fieldname": "total_planned_output_quantity_in_default_uom",
    "fieldtype": "Int",
    "label": "Total Planned Output Quantity in Default UOM",
@@ -273,16 +262,6 @@
    "options": "MO Batch Serial Input Log"
   },
   {
-   "description": "Item Code Where Scrap & Rejections Should Be Added.",
-   "fetch_from": "operation.scrap_item_code",
-   "fieldname": "scrap_item_code",
-   "fieldtype": "Link",
-   "label": "Scrap Item Code",
-   "options": "Item",
-   "read_only": 1,
-   "reqd": 1
-  },
-  {
    "fieldname": "batch_serial_number_summary",
    "fieldtype": "Table",
    "label": "Batch/Serial Number Summary",
@@ -300,24 +279,6 @@
   {
    "fieldname": "section_break_qzbi",
    "fieldtype": "Section Break"
-  },
-  {
-   "fetch_from": "scrap_item_code.default_uom",
-   "fieldname": "scrap_uom",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "label": "Scrap UOM",
-   "options": "UOM",
-   "read_only": 1
-  },
-  {
-   "fetch_from": "scrap_item_code.alternate_uom",
-   "fieldname": "scrap_alternate_uom",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "label": "Scrap Alternate UOM",
-   "options": "UOM",
-   "read_only": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -431,7 +392,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-23 19:24:05.304511",
+ "modified": "2025-01-24 12:18:54.018303",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",

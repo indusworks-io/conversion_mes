@@ -18,9 +18,7 @@
   "material_needed_for_1_cycle_section",
   "input_items",
   "output_from_1_cycle_section",
-  "output_items",
-  "scrap_section",
-  "scrap_item_code"
+  "output_items"
  ],
  "fields": [
   {
@@ -105,24 +103,12 @@
   {
    "fieldname": "column_break_nlzf",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "scrap_section",
-   "fieldtype": "Section Break",
-   "label": "Scrap"
-  },
-  {
-   "fieldname": "scrap_item_code",
-   "fieldtype": "Link",
-   "label": "Scrap Item Code",
-   "options": "Item",
-   "reqd": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-23 16:03:09.696136",
+ "modified": "2025-01-24 12:19:17.836945",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Operation",
