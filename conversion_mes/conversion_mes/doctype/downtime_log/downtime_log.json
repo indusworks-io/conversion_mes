@@ -24,6 +24,7 @@
    "fieldname": "created_date",
    "fieldtype": "Date",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Created Date",
    "reqd": 1
   },
@@ -32,6 +33,7 @@
    "fieldname": "workstation",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Workstation",
    "options": "Workstation",
    "reqd": 1
@@ -42,6 +44,7 @@
    "fieldname": "site",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Site",
    "options": "Site",
    "reqd": 1
@@ -75,6 +78,7 @@
    "fieldname": "reason",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Reason",
    "options": "Downtime Reason"
   },
@@ -107,7 +111,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-03 12:10:44.644576",
+ "modified": "2025-01-24 16:59:58.210681",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Downtime Log",

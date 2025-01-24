@@ -183,8 +183,8 @@ const orderdetails = createDocumentResource({
 
 console.log('Order Details:', orderdetails);
 
-const rawinstructions = orderdetails.doc.instructions;
-const instructions = ref(rawinstructions.split('\n'));
+// const rawinstructions = orderdetails.doc.instructions;
+// const instructions = ref(rawinstructions.split('\n'));
 
 
 
