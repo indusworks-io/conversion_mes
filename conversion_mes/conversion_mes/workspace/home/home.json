@@ -113,85 +113,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Performance Report",
-   "link_count": 3,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Workstation Wise KPI Analysis",
-   "link_count": 0,
-   "link_to": "Workstation Wise KPI Analysis",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Scrap Analysis",
-   "link_count": 0,
-   "link_to": "Scrap Analysis",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Run Rate Analysis",
-   "link_count": 0,
-   "link_to": "Run Rate Analysis",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Manufacturing Report",
-   "link_count": 3,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Manufacturing Order Output Details",
-   "link_count": 0,
-   "link_to": "Manufacturing Order Output Details",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Manufacturing Order Plan vs Actual",
-   "link_count": 0,
-   "link_to": "Manufacturing Order Plan vs Actual",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Batch and Serial Number Tracking",
-   "link_count": 0,
-   "link_to": "Batch and Serial Number Tracking",
-   "link_type": "Report",
-   "onboard": 1,
-   "report_ref_doctype": "Manufacturing Order",
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Organization Masters",
    "link_count": 5,
    "link_type": "DocType",
@@ -247,9 +168,67 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Manufacturing Report",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Manufacturing Order Output Details",
+   "link_count": 0,
+   "link_to": "Manufacturing Order Output Details",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Manufacturing Order Plan vs Actual",
+   "link_count": 0,
+   "link_to": "Manufacturing Order Plan vs Actual",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Batch and Serial Number Tracking",
+   "link_count": 0,
+   "link_to": "Batch and Serial Number Tracking",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Performance Report",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Workstation Wise KPI Analysis",
+   "link_count": 0,
+   "link_to": "Workstation Wise KPI Analysis",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-01-24 13:42:45.299493",
+ "modified": "2025-01-25 16:26:38.457983",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Home",

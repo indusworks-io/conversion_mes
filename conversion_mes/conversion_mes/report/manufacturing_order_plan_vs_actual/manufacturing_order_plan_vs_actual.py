@@ -67,15 +67,15 @@ def get_columns():
 			"width": 150
 		},
 		{
-			'fieldname': 'actual_run_rate',
-			'label': ('Actual Run Rate'),
-			'fieldtype': 'Int',
+			'fieldname': 'planned_cycle_time',
+			'label': ('Planned Cycle Time'),
+			'fieldtype': 'Duration',
 			"width": 150
 		},
 		{
-			'fieldname': 'planned_run_rate',
-			'label': ('Planned Run Rate'),
-			'fieldtype': 'Int',
+			'fieldname': 'actual_cycle_time',
+			'label': ('Actual Cycle Time'),
+			'fieldtype': 'Duration',
 			"width": 150
 		},
 		{
@@ -114,8 +114,8 @@ def get_data(from_date, to_date):
 			"actual_duration": manufacturing_order.actual_duration,
 			"total_planned_output_quantity_in_default_uom": manufacturing_order.total_planned_output_quantity_in_default_uom,
 			"total_actual_output_quantity_in_default_uom": manufacturing_order.total_actual_output_quantity_in_default_uom,
-			"planned_run_rate": manufacturing_order.planned_run_rate,
-			"actual_run_rate": manufacturing_order.actual_run_rate
+			"planned_cycle_time": manufacturing_order.planned_cycle_time,
+			"actual_cycle_time": manufacturing_order.actual_cycle_time
 		}
 		data.append(row)
 	return data

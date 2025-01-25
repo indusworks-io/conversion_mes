@@ -28,7 +28,7 @@ def get_columns():
 		{"fieldname": "output", "label": "Output", "fieldtype": "Float", "width": 150},
 		{"fieldname": "scrap", "label": "Scrap", "fieldtype": "Float", "width": 150},
 		{"fieldname": "total_output", "label": "Total Output", "fieldtype": "Int", "width": 150},
-		{"fieldname": "ideal_run_rate", "label": "Ideal Run Rate", "fieldtype": "Int", "width": 150},
+		{"fieldname": "ideal_cycle_time", "label": "Ideal Cycle Time", "fieldtype": "Duration", "width": 150},
 		{"fieldname": "performance", "label": "Performance Percentage", "fieldtype": "Percent", "width": 150},
 		{"fieldname": "quality", "label": "Quality", "fieldtype": "Percent", "width": 150},
 		{"fieldname": "oee", "label": "OEE", "fieldtype": "Percent", "width": 150},
@@ -62,7 +62,7 @@ def get_downtime_losses(workstation, from_date, to_date):
 	return schedule_loss, planned_downtime, unplanned_downtime
 
 def get_manufacturing_data(workstation, from_date, to_date):
-	manufacturing_orders = frappe.get_all("Manufacturing Order", filters={"workstation": workstation, "posting_date": ["between", [from_date, to_date]], "status":"Completed"}, fields=["planned_run_rate","total_actual_output_quantity_in_alternate_uom", "total_actual_scrap_quantity_in_alternate_uom",])
+	manufacturing_orders = frappe.get_all("Manufacturing Order", filters={"workstation": workstation, "posting_date": ["between", [from_date, to_date]], "status":"Completed"}, fields=["planned_cycle_time","total_actual_output_quantity_in_alternate_uom", "total_actual_scrap_quantity_in_alternate_uom",])
 
 	output = 0
 	scrap = 0
@@ -73,18 +73,18 @@ def get_manufacturing_data(workstation, from_date, to_date):
 		output_quantity = manufacturing_order['total_actual_output_quantity_in_alternate_uom'] or 0
 		scrap_quantity = manufacturing_order['total_actual_scrap_quantity_in_alternate_uom'] or 0
 		total_quantity = output_quantity + scrap_quantity
-		irr = manufacturing_order['planned_run_rate'] or 0
+		pcc = manufacturing_order['planned_cycle_time'] or 0
 		output += output_quantity
 		scrap += scrap_quantity
 		total_output += total_quantity
-		weighed_count += irr * total_output
+		weighed_count += pcc * total_output
 
 	if total_output == 0:
-		irr = 0
+		pcc = 0
 	else:
-		irr = weighed_count / total_output
+		pcc = weighed_count / total_output
 
-	return irr, output, scrap, total_output
+	return pcc, output, scrap, total_output
 
 
 
@@ -98,13 +98,13 @@ def get_data(sites, from_date, to_date):
 		workstation = frappe.get_doc("Workstation", workstation.name)
 		total_time = get_total_time(from_date, to_date)
 		schedule_loss, planned_downtime, unplanned_downtime = get_downtime_losses(workstation.name, from_date, to_date)
-		irr, output, scrap, total_output = get_manufacturing_data(workstation.name, from_date, to_date)
+		pcc, output, scrap, total_output = get_manufacturing_data(workstation.name, from_date, to_date)
 		planned_production_time = total_time - schedule_loss
 		run_time = total_time - schedule_loss - planned_downtime - unplanned_downtime
 		run_time_in_minutes = run_time / 60
 		utilization = ((total_time - schedule_loss) / total_time)*100 if total_time else 0
 		availability = ((total_time - schedule_loss - planned_downtime - unplanned_downtime) / (total_time - schedule_loss))*100 if total_time else 0
-		performance = ((total_output / run_time_in_minutes) / irr)*100 if irr else 0
+		performance = ((total_output / run_time_in_minutes) / pcc)*100 if pcc else 0
 		quality = (output / total_output)*100 if total_output else 0
 		oee = availability * performance * quality / 10000 if availability and performance and quality else 0
 		teep = oee * utilization if oee and utilization else 0
@@ -121,7 +121,7 @@ def get_data(sites, from_date, to_date):
 			"output": output,
 			"scrap": scrap,
 			"total_output": total_output,
-			"ideal_run_rate": irr,
+			"plannec_cycle_time": pcc,
 			"performance": performance,
 			"quality": quality,
 			"oee": oee,

@@ -41,10 +41,10 @@ def get_columns():
 			"width": 150
 		},
 		{
-			'fieldname': 'program',
-			'label': ('Program'),
+			'fieldname': 'operation',
+			'label': ('Operation'),
 			'fieldtype': 'Link',
-			'options': 'Program',
+			'options': 'Operation',
 			"width": 150
 		},
 		{
@@ -106,7 +106,7 @@ def get_data(from_date, to_date):
 				"name": manufacturing_order.name,
 				"site": manufacturing_order.site,
 				"workstation": manufacturing_order.workstation,
-				"program": manufacturing_order.program,
+				"program": manufacturing_order.operation,
 				"status": manufacturing_order.status,
 				"item": row.item,
 				"quantity": row.quantity,
@@ -119,7 +119,7 @@ def get_data(from_date, to_date):
 			"name": manufacturing_order.name,
 			"site": manufacturing_order.site,
 			"workstation": manufacturing_order.workstation,
-			"program": manufacturing_order.program,
+			"operation": manufacturing_order.operation,
 			"status": manufacturing_order.status,
 			"item": manufacturing_order.scrap_item_code,
 			"quantity": manufacturing_order.total_actual_scrap_quantity_in_default_uom,

@@ -12,6 +12,10 @@
   "is_active",
   "site",
   "operators",
+  "operating_information",
+  "operating_current_threshold",
+  "idle_current_threshold",
+  "idle_time_threshold",
   "auto_update_minor_stop",
   "auto_update_minor_stops",
   "minor_stop_threshold",
@@ -156,12 +160,45 @@
    "label": "Minor Stop Downtime Reason",
    "mandatory_depends_on": "eval:doc.auto_update_minor_stops==1;",
    "options": "Downtime Reason"
+  },
+  {
+   "fieldname": "operating_information",
+   "fieldtype": "Section Break",
+   "label": "Operating Information"
+  },
+  {
+   "description": "Current value that machine draws when it is producing parts.",
+   "fieldname": "operating_current_threshold",
+   "fieldtype": "Float",
+   "label": "Operating Current Threshold",
+   "non_negative": 1,
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "description": "Current value that machine draws when it is not producing parts.",
+   "fieldname": "idle_current_threshold",
+   "fieldtype": "Float",
+   "label": "Idle Current Threshold",
+   "non_negative": 1,
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "description": "Downtime logs will be created after this time.",
+   "fieldname": "idle_time_threshold",
+   "fieldtype": "Duration",
+   "hide_days": 1,
+   "label": "Idle Time Threshold",
+   "non_negative": 1,
+   "precision": "2",
+   "reqd": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-30 15:15:22.613143",
+ "modified": "2025-01-25 13:47:55.477634",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Workstation",

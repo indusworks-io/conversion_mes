@@ -9,6 +9,7 @@ def execute(filters=None):
 	to_date = filters.get("to_date")
 	columns = get_columns()
 	data = get_data(from_date, to_date)
+	print('Hello There')
 	return columns, data
 
 def get_columns():
@@ -41,11 +42,11 @@ def get_columns():
 			"width": 150
 		},
 		{
-			'fieldname': 'program',
-			'label': ('Program'),
+			'fieldname': 'operation',
+			'label': ('Operation'),
 			'fieldtype': 'Link',
-			'options': 'Program',
-			"width": 150
+			'options': 'Operation',
+			"width": 200
 		},
 		{
 			'fieldname': 'status',
@@ -85,7 +86,7 @@ def get_data(from_date, to_date):
 				"name": manufacturing_order.name,
 				"site": manufacturing_order.site,
 				"workstation": manufacturing_order.workstation,
-				"program": manufacturing_order.program,
+				"operation": manufacturing_order.operation,
 				"status": manufacturing_order.status,
 				"item": row.item,
 				"batch_serial_number": row.serial_batch_number
