@@ -260,6 +260,63 @@ def get_configuration_data(device_name):
 
 
 @frappe.whitelist()
+def get_shifts(workstation_name):
+    try:
+        Date = nowdate()
+
+        shifts = []
+
+        # Fetch Shift Logs
+        shift_logs = frappe.get_all("Shift Log",
+            filters={"workstation": workstation_name, "date": Date},
+            fields=["start_time", "end_time"]
+        )
+
+        # Add shift periods
+        for log in shift_logs:
+            shifts.append({"start_time": log["start_time"], "end_time": log["end_time"]})
+
+        return shifts
+    except Exception as e:
+        return str(e)
+
+
+
+@frappe.whitelist()
+def get_open_downtime(workstation_name):
+    try:
+        downtime = frappe.get_all("Downtime Log", filters={"workstation": workstation_name, "status": "Open"}, fields=["name"])
+        if downtime:
+            return downtime[0]['name']
+        else:
+            return None
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+
+
+## TO DO ##
+@frappe.whitelist()
+def get_closed_downtime(workstation_name):
+    try:
+        Today = nowdate()
+        downtime = frappe.get_all("Downtime Log", filters={"workstation": workstation_name, "status": "Closed", "created_date": Today}, fields=["*"])
+        if downtime:
+            return downtime
+        else:
+            return None
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+
+
+
+
+@frappe.whitelist()
 def create_downtime(workstation_name):
     try:
         downtime = frappe.new_doc("Downtime Log")
@@ -275,6 +332,7 @@ def create_downtime(workstation_name):
             "status": "error",
             "message": str(e)
         }
+
 
 
 @frappe.whitelist()
@@ -298,19 +356,7 @@ def close_downtime(downtime_name):
             "message": str(e)
         }
 
-@frappe.whitelist()
-def get_open_downtime(workstation_name):
-    try:
-        downtime = frappe.get_all("Downtime Log", filters={"workstation": workstation_name, "status": "Open"}, fields=["name"])
-        if downtime:
-            return downtime[0]['name']
-        else:
-            return None
-    except Exception as e:
-        return {
-            "status": "error",
-            "message": str(e)
-        }
+
 
 
 @frappe.whitelist()
