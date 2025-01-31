@@ -1,27 +1,22 @@
 import frappe
-from frappe.utils import nowdate
+from frappe.utils import nowdate, time_diff_in_seconds
 from datetime import datetime, timedelta
 
 
 
 @frappe.whitelist(allow_guest=True)
-def downtime_automation():
+def site_automation():
     today_date = nowdate()
     today_day = datetime.now().strftime("%A")
-    sites = frappe.get_all("Site", filters={"is_active": "1", "enable_downtime_automation": "1"})
+    sites = frappe.get_all("Site", filters={"is_active": "1", "enable_site_automation": "1"})
     for site in sites:
         site = frappe.get_doc("Site", site.name)
         is_today_working = is_working_day_checker(today_day, site)
         if is_today_working == 1:
-            is_today_holiday, holiday_description = is_holiday_checker(today_date, site)
-            if is_today_holiday is True:
-                create_holiday_dt(today_date, site, holiday_description)
-            else:
-                create_no_shifts_dt(today_date, site)
-                create_breaks_dt(today_date, site)
-        if is_today_working == 0:
-            create_non_working_day_dt(today_date, site)
-            #create_no_shifts_dt(today_date, site)
+            is_today_holiday = is_holiday_checker(today_date, site)
+            if is_today_holiday is False:
+                create_shift_logs(site, today_date)
+                create_breaks_dt(site, today_date)
 
 
 def is_working_day_checker(today_day, site):
@@ -49,9 +44,8 @@ def is_holiday_checker(today_date, site):
     holidays = holiday_list.holidays
     for holiday in holidays:
         if str(holiday.holiday_date) == str(today_date):
-            holiday_description = holiday.description
-            return True, holiday_description
-    return False, None
+            return True
+    return False
 
 def create_holiday_dt(today_date, site, holiday_description):
     day_start_time = site.start_time
@@ -126,7 +120,7 @@ def create_non_working_day_dt(today_date, site):
         frappe.db.commit()
 
 
-def create_breaks_dt(today_date, site):
+def create_breaks_dt(site, today_date):
     planned_breaks = site.breaks
     for planned_break in planned_breaks:
         description = planned_break.description
@@ -149,3 +143,22 @@ def create_breaks_dt(today_date, site):
             downtime_log.remarks = description
             downtime_log.save()
             frappe.db.commit()
+
+
+def create_shift_logs(site, today_date):
+    shifts = site.shift_timings
+    if shifts:
+        for shift in shifts:
+            shift_name = shift.shift_name
+            start_time = shift.start_time
+            end_time = shift.end_time
+            workstations = frappe.get_all("Workstation", filters={"site": site.name})
+            for workstation in workstations:
+                shift_log = frappe.new_doc("Shift Log")
+                shift_log.workstation = workstation
+                shift_log.shift = shift_name
+                shift_log.date = today_date
+                shift_log.start_time = start_time
+                shift_log.end_time = end_time
+                shift_log.save()
+                frappe.db.commit()

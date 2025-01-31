@@ -10,7 +10,7 @@
   "basic_information",
   "site_name",
   "is_active",
-  "enable_downtime_automation",
+  "enable_site_automation",
   "working_days_information",
   "column_break_ojuh",
   "monday",
@@ -113,7 +113,6 @@
    "mandatory_depends_on": "eval:doc.enable_downtime_automation == 1;"
   },
   {
-   "depends_on": "eval:doc.enable_downtime_automation == 1;",
    "fieldname": "holiday_list",
    "fieldtype": "Link",
    "label": "Holiday List",
@@ -174,14 +173,6 @@
    "hidden": 1
   },
   {
-   "default": "0",
-   "fieldname": "enable_downtime_automation",
-   "fieldtype": "Check",
-   "hidden": 1,
-   "in_list_view": 1,
-   "label": "Enable Downtime Automation?"
-  },
-  {
    "allow_bulk_edit": 1,
    "fieldname": "shift_timings",
    "fieldtype": "Table",
@@ -193,12 +184,19 @@
    "description": "Enter the shift details.",
    "fieldname": "shift_timing_section",
    "fieldtype": "Section Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_site_automation",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enable Site Automation?"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-29 13:12:56.604024",
+ "modified": "2025-01-31 18:51:45.576623",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Site",

@@ -151,7 +151,7 @@ app_license = "mit"
 scheduler_events = {
     "cron": {
         "0 3 * * *": [
-            "conversion_mes.functions.downtime_automation"
+            "conversion_mes.functions.site_automation"
         ]
     }
 	# "all": [

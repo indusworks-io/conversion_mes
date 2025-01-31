@@ -1,6 +1,7 @@
 {
  "actions": [],
- "allow_rename": 1,
+ "allow_copy": 1,
+ "autoname": "format:SL-{YY}{MM}{DD}-{###}",
  "creation": "2025-01-29 13:14:21.432889",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -35,7 +36,6 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "fetch_from": "workstation.site",
    "fieldname": "shift",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -66,16 +66,17 @@
    "fieldtype": "Duration",
    "hide_days": 1,
    "hide_seconds": 1,
-   "label": "Duration",
-   "reqd": 1
+   "label": "Duration"
   }
  ],
+ "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-29 13:20:06.648021",
+ "modified": "2025-01-31 18:30:30.240722",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Shift Log",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
