@@ -241,15 +241,66 @@ def update_downtime_reason(downtime_name, downtime_reason):
 
 ### DOWNTIME REALTED API ENDPOINTS ###
 
+@frappe.whitelist(allow_guest=True)
+def get_configuration(device_name):
+    """
+    This function needs to provide following data:
+    1. from Device DocType: workstation, heartbeat_threshold
+    2. from Workstation DocType: workstation_name, idle_current_threshold, idle_time_threshold
+    3. from shift Log DocType: Shifts
+    4. from Downtime Log DocType: Open Downtime & Closed Downtime
+    """
+    try:
+
+        workstation, heartbeat_threshold = frappe.get_value("Device", device_name, ["workstation", "heartbeat_threshold"])
+        
+        idle_current_threshold, idle_time_threshold = frappe.get_value("Workstation", workstation, ["idle_current_threshold", "idle_time_threshold"])
+        
+        Date = nowdate()
+        shifts = []
+        shift_logs = frappe.get_all("Shift Log", filters={"workstation": workstation, "date": Date}, fields=["start_time", "end_time"])
+        for log in shift_logs:
+            shifts.append({"start_time": log["start_time"], "end_time": log["end_time"]})
+        
+        open_downtime_logs = frappe.get_all("Downtime Log", filters={"workstation": workstation, "status": "Open"}, fields=["name"])
+        open_downtime = None
+        if open_downtime_logs:
+            open_downtime = open_downtime_logs[0]['name']
+            
+        
+        closed_downtime_logs = frappe.get_all("Downtime Log", filters={"workstation": workstation, "status": "Closed", "created_date": Date}, fields=["start_date_time", "end_date_time"])
+        
+        closed_downtimes = None
+
+        if closed_downtime_logs:
+            closed_downtimes = closed_downtime_logs
+            
+        
+        return {
+            "workstation_name": workstation,
+            "heartbeat_threshold": heartbeat_threshold,
+            "idle_current_threshold": idle_current_threshold,
+            "idle_time_threshold": idle_time_threshold,
+            "shifts": shifts,
+            "open_downtime": open_downtime,
+            "closed_downtimes": closed_downtimes
+        }
+        
+    except Exception as e:
+        return str(e)
+
+
+
+
+
 @frappe.whitelist()
 def get_configuration_data(device_name):
     try:
         ct_sensitivity, workstation, heartbeat_threshold = frappe.get_value("Device", device_name, ["ct_sensitivity", "workstation", "heartbeat_threshold"])
-        operating_current_threshold, idle_current_threshold, idle_time_threshold = frappe.get_value("Workstation", workstation, ["operating_current_threshold","idle_current_threshold", "idle_time_threshold"])
+        idle_current_threshold, idle_time_threshold = frappe.get_value("Workstation", workstation, ["idle_current_threshold", "idle_time_threshold"])
         configuration_data = {
             "ct_sensitivity": ct_sensitivity,
             "workstation_name": workstation,
-            "operating_current_threshold": operating_current_threshold,
             "idle_current_threshold": idle_current_threshold,
             "idle_time_threshold": idle_time_threshold,
             "heartbeat_threshold": heartbeat_threshold
