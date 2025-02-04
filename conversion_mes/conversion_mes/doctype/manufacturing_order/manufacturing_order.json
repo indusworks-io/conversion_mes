@@ -292,6 +292,7 @@
    "allow_in_quick_entry": 1,
    "fieldname": "work_orders",
    "fieldtype": "Table MultiSelect",
+   "hidden": 1,
    "label": "Work Orders",
    "options": "Work Order List"
   },
@@ -392,7 +393,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-25 12:45:49.418125",
+ "modified": "2025-02-04 17:12:11.298652",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",
