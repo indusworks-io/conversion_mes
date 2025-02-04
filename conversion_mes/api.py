@@ -349,7 +349,7 @@ def get_open_downtime(workstation_name):
 
 
 ## TO DO ##
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_closed_downtime(workstation_name):
     try:
         Today = nowdate()
@@ -414,7 +414,7 @@ def close_downtime(downtime_name):
 def create_telemetry(device_id, current):
     try:
         telemetry = frappe.new_doc("Telemetry")
-        telemetry.device_name = device_id
+        telemetry.device = device_id
         telemetry.value = float(current)
         telemetry.timestamp = now()
         telemetry.save(ignore_permissions=True)
@@ -432,7 +432,7 @@ def device_offline_event():
     devices = frappe.get_all("Device", fields=["*"])
     for device in devices:
         device_id = device['name']
-        last_telemetry = frappe.get_all("Telemetry", filters={"device_name": device_id}, fields=["timestamp"], order_by="timestamp desc", limit=1)
+        last_telemetry = frappe.get_all("Telemetry", filters={"device": device_id}, fields=["timestamp"], order_by="timestamp desc", limit=1)
         if last_telemetry:
             last_telemetry_timestamp = last_telemetry[0]['timestamp']
             now_timestamp = datetime.strptime(now(), '%Y-%m-%d %H:%M:%S.%f')
