@@ -273,7 +273,12 @@ def get_configuration(device_name):
         closed_downtimes = None
 
         if closed_downtime_logs:
-            closed_downtimes = closed_downtime_logs
+            closed_downtimes = []
+            for log in closed_downtime_logs:
+                closed_downtimes.append({
+                    "start_date_time": log["start_date_time"].strftime('%Y-%m-%d %H:%M:%S'),
+                    "end_date_time": log["end_date_time"].strftime('%Y-%m-%d %H:%M:%S')
+                })
             
         
         return {
