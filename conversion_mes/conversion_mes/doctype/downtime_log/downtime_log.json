@@ -51,21 +51,6 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "fieldname": "start_date_time",
-   "fieldtype": "Datetime",
-   "in_list_view": 1,
-   "label": "Start Date Time",
-   "reqd": 1
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "fieldname": "end_date_time",
-   "fieldtype": "Datetime",
-   "in_list_view": 1,
-   "label": "End Date Time"
-  },
-  {
-   "allow_in_quick_entry": 1,
    "fieldname": "duration",
    "fieldtype": "Duration",
    "hide_seconds": 1,
@@ -106,12 +91,27 @@
    "label": "Status",
    "options": "Open\nClosed",
    "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "start_date_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Start Date Time",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "end_date_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "End Date Time"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-24 16:59:58.210681",
+ "modified": "2025-02-01 19:08:28.183425",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Downtime Log",

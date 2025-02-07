@@ -241,15 +241,71 @@ def update_downtime_reason(downtime_name, downtime_reason):
 
 ### DOWNTIME REALTED API ENDPOINTS ###
 
+@frappe.whitelist(allow_guest=True)
+def get_configuration(device_name):
+    """
+    This function needs to provide following data:
+    1. from Device DocType: workstation, heartbeat_threshold
+    2. from Workstation DocType: workstation_name, idle_current_threshold, idle_time_threshold
+    3. from shift Log DocType: Shifts
+    4. from Downtime Log DocType: Open Downtime & Closed Downtime
+    """
+    try:
+
+        workstation, heartbeat_threshold = frappe.get_value("Device", device_name, ["workstation", "heartbeat_threshold"])
+        
+        idle_current_threshold, idle_time_threshold = frappe.get_value("Workstation", workstation, ["idle_current_threshold", "idle_time_threshold"])
+        
+        Date = nowdate()
+        shifts = []
+        shift_logs = frappe.get_all("Shift Log", filters={"workstation": workstation, "date": Date}, fields=["start_time", "end_time"])
+        for log in shift_logs:
+            shifts.append({"start_time": log["start_time"], "end_time": log["end_time"]})
+        
+        open_downtime_logs = frappe.get_all("Downtime Log", filters={"workstation": workstation, "status": "Open"}, fields=["name"])
+        open_downtime = None
+        if open_downtime_logs:
+            open_downtime = open_downtime_logs[0]['name']
+            
+        
+        closed_downtime_logs = frappe.get_all("Downtime Log", filters={"workstation": workstation, "status": "Closed", "created_date": Date}, fields=["start_date_time", "end_date_time"])
+        
+        closed_downtimes = None
+
+        if closed_downtime_logs:
+            closed_downtimes = []
+            for log in closed_downtime_logs:
+                closed_downtimes.append({
+                    "start_date_time": log["start_date_time"].strftime('%Y-%m-%d %H:%M:%S'),
+                    "end_date_time": log["end_date_time"].strftime('%Y-%m-%d %H:%M:%S')
+                })
+            
+        
+        return {
+            "workstation_name": workstation,
+            "heartbeat_threshold": heartbeat_threshold,
+            "idle_current_threshold": idle_current_threshold,
+            "idle_time_threshold": idle_time_threshold,
+            "shifts": shifts,
+            "open_downtime": open_downtime,
+            "closed_downtimes": closed_downtimes
+        }
+        
+    except Exception as e:
+        return str(e)
+
+
+
+
+
 @frappe.whitelist()
 def get_configuration_data(device_name):
     try:
         ct_sensitivity, workstation, heartbeat_threshold = frappe.get_value("Device", device_name, ["ct_sensitivity", "workstation", "heartbeat_threshold"])
-        operating_current_threshold, idle_current_threshold, idle_time_threshold = frappe.get_value("Workstation", workstation, ["operating_current_threshold","idle_current_threshold", "idle_time_threshold"])
+        idle_current_threshold, idle_time_threshold = frappe.get_value("Workstation", workstation, ["idle_current_threshold", "idle_time_threshold"])
         configuration_data = {
             "ct_sensitivity": ct_sensitivity,
             "workstation_name": workstation,
-            "operating_current_threshold": operating_current_threshold,
             "idle_current_threshold": idle_current_threshold,
             "idle_time_threshold": idle_time_threshold,
             "heartbeat_threshold": heartbeat_threshold
@@ -298,7 +354,7 @@ def get_open_downtime(workstation_name):
 
 
 ## TO DO ##
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_closed_downtime(workstation_name):
     try:
         Today = nowdate()
@@ -363,7 +419,7 @@ def close_downtime(downtime_name):
 def create_telemetry(device_id, current):
     try:
         telemetry = frappe.new_doc("Telemetry")
-        telemetry.device_name = device_id
+        telemetry.device = device_id
         telemetry.value = float(current)
         telemetry.timestamp = now()
         telemetry.save(ignore_permissions=True)
@@ -381,7 +437,7 @@ def device_offline_event():
     devices = frappe.get_all("Device", fields=["*"])
     for device in devices:
         device_id = device['name']
-        last_telemetry = frappe.get_all("Telemetry", filters={"device_name": device_id}, fields=["timestamp"], order_by="timestamp desc", limit=1)
+        last_telemetry = frappe.get_all("Telemetry", filters={"device": device_id}, fields=["timestamp"], order_by="timestamp desc", limit=1)
         if last_telemetry:
             last_telemetry_timestamp = last_telemetry[0]['timestamp']
             now_timestamp = datetime.strptime(now(), '%Y-%m-%d %H:%M:%S.%f')

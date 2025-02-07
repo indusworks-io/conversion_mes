@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"MvpFeCfxrU\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h3\\\"><b>Transactions</b></span>\",\"col\":12}},{\"id\":\"3QrVs9Fvcg\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Work Orders\",\"col\":4}},{\"id\":\"RwZGaRAe8U\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Manufacturing Orders\",\"col\":4}},{\"id\":\"ZVTsV3T_5p\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Downtime Logs\",\"col\":4}},{\"id\":\"DQDM0JbuJM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Device Alerts\",\"col\":4}},{\"id\":\"YEPs7o_qxy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Telemetry\",\"col\":4}},{\"id\":\"w1MhLP4riV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"sqAhZs9Kau\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"w1-iV2Gkej\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Analytics</b></span>\",\"col\":12}},{\"id\":\"bn1O7oW-IE\",\"type\":\"card\",\"data\":{\"card_name\":\"Manufacturing Report\",\"col\":4}},{\"id\":\"fK2XY52Y-p\",\"type\":\"card\",\"data\":{\"card_name\":\"Downtime Reports\",\"col\":4}},{\"id\":\"YPTxUDeh4F\",\"type\":\"card\",\"data\":{\"card_name\":\"Performance Report\",\"col\":4}},{\"id\":\"T9DFV2fUJ2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"UrIows_3k4\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"rK4KRe5Ish\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data</b></span>\",\"col\":12}},{\"id\":\"8e350U1B66\",\"type\":\"card\",\"data\":{\"card_name\":\"Organization Masters\",\"col\":4}},{\"id\":\"3eg0GIEXW6\",\"type\":\"card\",\"data\":{\"card_name\":\"Material Masters\",\"col\":4}},{\"id\":\"1FRSj9ZFiW\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}}]",
+ "content": "[{\"id\":\"MvpFeCfxrU\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h3\\\"><b>Transactions</b></span>\",\"col\":12}},{\"id\":\"RwZGaRAe8U\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Manufacturing Orders\",\"col\":4}},{\"id\":\"ZVTsV3T_5p\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Downtime Logs\",\"col\":4}},{\"id\":\"9cUm1qlL5w\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Shift Logs\",\"col\":4}},{\"id\":\"DQDM0JbuJM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Device Alerts\",\"col\":4}},{\"id\":\"YEPs7o_qxy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Telemetry\",\"col\":4}},{\"id\":\"w1MhLP4riV\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"sqAhZs9Kau\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"w1-iV2Gkej\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Analytics</b></span>\",\"col\":12}},{\"id\":\"bn1O7oW-IE\",\"type\":\"card\",\"data\":{\"card_name\":\"Manufacturing Report\",\"col\":4}},{\"id\":\"fK2XY52Y-p\",\"type\":\"card\",\"data\":{\"card_name\":\"Downtime Reports\",\"col\":4}},{\"id\":\"YPTxUDeh4F\",\"type\":\"card\",\"data\":{\"card_name\":\"Performance Report\",\"col\":4}},{\"id\":\"T9DFV2fUJ2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"UrIows_3k4\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"rK4KRe5Ish\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data</b></span>\",\"col\":12}},{\"id\":\"8e350U1B66\",\"type\":\"card\",\"data\":{\"card_name\":\"Organization Masters\",\"col\":4}},{\"id\":\"3eg0GIEXW6\",\"type\":\"card\",\"data\":{\"card_name\":\"Material Masters\",\"col\":4}},{\"id\":\"1FRSj9ZFiW\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}}]",
  "creation": "2024-12-19 16:49:05.857989",
  "custom_blocks": [],
  "docstatus": 0,
@@ -48,35 +48,6 @@
    "label": "Items",
    "link_count": 0,
    "link_to": "Item",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Settings",
-   "link_count": 2,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Downtime Reasons",
-   "link_count": 0,
-   "link_to": "Downtime Reason",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Holiday Lists",
-   "link_count": 0,
-   "link_to": "Holiday List",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -226,9 +197,48 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Settings",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Downtime Reasons",
+   "link_count": 0,
+   "link_to": "Downtime Reason",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Holiday Lists",
+   "link_count": 0,
+   "link_to": "Holiday List",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Shift Types",
+   "link_count": 0,
+   "link_to": "Shift Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-01-25 16:26:38.457983",
+ "modified": "2025-02-04 17:12:52.088574",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Home",
@@ -243,8 +253,8 @@
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "Work Orders",
-   "link_to": "Work Order",
+   "label": "Shift Logs",
+   "link_to": "Shift Log",
    "stats_filter": "[]",
    "type": "DocType"
   },

@@ -59,6 +59,7 @@
    "fieldtype": "Duration",
    "hide_days": 1,
    "hide_seconds": 1,
+   "in_list_view": 1,
    "label": "Cycle Time",
    "reqd": 1
   },
@@ -108,7 +109,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-24 12:19:17.836945",
+ "modified": "2025-02-04 17:10:02.704458",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Operation",
