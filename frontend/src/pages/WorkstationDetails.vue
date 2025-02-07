@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between w-[100%]">
         <h2 class="font-black text-xl text-gray-600">
         {{ workstationId }} Dashboard
         </h2>
@@ -35,30 +35,42 @@
         </Button>
         </div>
     </div>
-    <div class="mt-8">
-        <h3 class="font-bold text-xl text-gray-600">
-        Open Manufacturing Orders
-        </h3>
-        <ListView
-            v-if="ManufacturingOrders.list.data"
-            class="mt-4"
-            :columns="[
-                { label: 'Date', key: 'posting_date', width:1 },
-                { label: 'Order Number', key: 'name', width:2 },
-                { label: 'Operation', key: 'operation', width:2 },
-                { label: 'Status', key: 'status', width:1 },
-            ]"
-            :rows="ManufacturingOrders.list.data"
-            :options="{
-                selectable: false,
-                resizeColumn: true,
-                emptyState: {
-                    title: 'No Manufacturing Orders Found',
-                },
-                getRowRoute: (row) => ({ name: 'OrderDetails', params: { orderid: row.name } })
-            }"
-            row-key="name"
-        />
+    <div class="flex w-full">
+        <div class="mt-8 w-[70%] ">
+            <h3 class="font-bold text-xl text-gray-600">
+            Open Manufacturing Orders
+            </h3>
+            <ListView
+                v-if="ManufacturingOrders.list.data"
+                class="mt-4"
+                :columns="[
+                    { label: 'Date', key: 'posting_date', width:1 },
+                    { label: 'Order Number', key: 'name', width:2 },
+                    { label: 'Operation', key: 'operation', width:2 },
+                    { label: 'Status', key: 'status', width:1 },
+                ]"
+                :rows="ManufacturingOrders.list.data"
+                :options="{
+                    selectable: false,
+                    resizeColumn: true,
+                    emptyState: {
+                        title: 'No Manufacturing Orders Found',
+                    },
+                    getRowRoute: (row) => ({ name: 'OrderDetails', params: { orderid: row.name } })
+                }"
+                row-key="name"
+            />
+            <OrderCard
+                v-for="order in ManufacturingOrders.list.data"
+                :key="order.name"
+                :date="order.posting_date"
+                :orderNo="order.name"
+                :status="order.status"
+            />
+        </div>
+        <div class="w-[30%] bg-slate-200 p-12">
+            <DowntimeCard :downtime-info="downtimeInfo" />
+        </div>
     </div>
 </template>
 
@@ -72,6 +84,17 @@ const route = useRoute();
 const router = useRouter();
 const workstationId = route.params.id;
 const defaultWorkstation = ref(localStorage.getItem('defaultWorkstation'));
+
+import OrderCard from '../components/OrderCard.vue'
+
+import DowntimeCard from '../components/DowntimeCard.vue'
+
+const downtimeInfo = {
+  id: 'DT-241220-02',
+  start: '20 December, 3:00 PM',
+  end: '20 December, 3:30 PM'
+}
+
 
 const setDefaultWorkstation = (workstationId) => {
     localStorage.setItem('defaultWorkstation', workstationId);
