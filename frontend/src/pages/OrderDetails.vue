@@ -24,6 +24,7 @@
             <h1 class="text-xl font-bold">Order Details</h1>
             <!-- Action Buttons -->
             <div class="pt-2 flex flex-row-reverse space-x-4 space-x-reverse">
+            <!-- <div>
                 <Button
                         :variant="'outline'"
                         :ref_for="true"
@@ -102,6 +103,17 @@
                     >
                         Batch/Serial
                     </Button>
+            </div> -->
+                   
+                    <ActionButton title=" Batch/Serial"/>
+                    <ActionButton title=" Log Output"/>
+                    <ActionButton title=" Log Scrap"/>
+                    <ActionButton title=" Complete Order"/>
+                    <ActionButton title=" Stop Order"/>
+                    <ActionButton title=" Start Order"/>
+            </div>
+            <div>
+                <ButtonsDynamic/>
             </div>
             
             <!-- Order Number & Status Section -->
@@ -150,9 +162,9 @@
     </div>
 
     <!-- Column 2: 30% width -->
-        <div class="w-[30%] bg-slate-200 p-4">
-        <h1 class="text-xl font-bold">Column 2 (30%)</h1>
-        <p>This column takes 30% of the screen width.</p>
+        
+        <div class="w-[30%] bg-slate-200 p-12">
+            <DowntimeCard :downtime-info="downtimeInfo" />
         </div>
     </div>
         
@@ -168,6 +180,15 @@ const route = useRoute();
 const router = useRouter();
 const workstationId = route.params.id;
 const orderId = route.params.orderid;
+import DowntimeCard from '../components/DowntimeCard.vue'
+import ActionButton from '../components/AcitonButton.vue'
+import ButtonsDynamic from '../components/ButtonsDynamic.vue';
+
+const downtimeInfo = {
+  id: 'DT-241220-02',
+  start: '20 December, 3:00 PM',
+  end: '20 December, 3:30 PM'
+}
 
 const goToWorkstationDetails = () => {
     router.push({ name: 'WorkstationDetails', params: { id: workstationId } }).catch(err => {
