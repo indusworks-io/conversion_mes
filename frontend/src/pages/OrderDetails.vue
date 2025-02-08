@@ -158,7 +158,9 @@
             </div>
 
             <!-- Output Material List Section -->
-            
+            <div class="">
+                <ManufacturingOrder :order="orderData"/>
+            </div>
     </div>
 
     <!-- Column 2: 30% width -->
@@ -183,7 +185,30 @@ const orderId = route.params.orderid;
 import DowntimeCard from '../components/DowntimeCard.vue'
 import ActionButton from '../components/AcitonButton.vue'
 import ButtonsDynamic from '../components/ButtonsDynamic.vue';
+import ManufacturingOrder from '../components/ManufacturingOrder.vue';
 
+const orderData = {
+  orderNumber: 'MO-241221-178',
+  instructions: 'Backprint',
+  inputMaterials: [
+    {
+      serialNo: 1,
+      itemCode: 'E10038 S-RACE@ Dynamic, Matt, 38g/m2 124cm x 20000mtr',
+      uom: 'Reel',
+      plan: 1,
+      actual: 0
+    }
+  ],
+  outputMaterials: [
+    {
+      serialNo: 1,
+      itemCode: 'E10038 S-RACE@ Dynamic, Matt, 38g/m2 122cm x 600mtr x 3"',
+      uom: 'Roll',
+      plan: 30,
+      actual: 0
+    }
+  ]
+};
 const downtimeInfo = {
   id: 'DT-241220-02',
   start: '20 December, 3:00 PM',
