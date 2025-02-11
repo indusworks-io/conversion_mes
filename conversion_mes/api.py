@@ -6,11 +6,14 @@ import requests
 ### WORKSTATION APPLICATION RELATED API ENDPOINTS ###
 @frappe.whitelist()
 def get_operators(workstation):
-    Workstation = frappe.get_doc("Workstation", workstation)
-    operators = []
-    for operator in Workstation.operators:
-        operators.append(operator.operator)
-    return operators
+    try:
+        Workstation = frappe.get_doc("Workstation", workstation)
+        operators = []
+        for operator in Workstation.operators:
+            operators.append(operator.operator)
+        return operators
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Get Operators Error")
 
 
 @frappe.whitelist()
@@ -59,6 +62,7 @@ def start_order(order_name, operator):
                 'data': order
             }
     except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Start Order Error")
         return str(e)
 
 @frappe.whitelist()
@@ -100,6 +104,7 @@ def stop_order(order_name):
                 'data': order
             }
     except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Stop Order Error")
         return str(e)
 
 @frappe.whitelist()
@@ -146,6 +151,7 @@ def complete_order(order_name):
                 'data': order
             }
     except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Stop Error")
         return str(e)
 
 @frappe.whitelist()
@@ -166,6 +172,7 @@ def log_batch_serial_number(order_name, operator, item_name, batch_serial_number
             'data': order
         }
     except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Log Serial & Batch Error")
         return str(e)
 
 @frappe.whitelist()
@@ -185,6 +192,7 @@ def log_cycles(order_name, operator, cycle_count):
             'data': order
         }
     except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Log Cycle Error")
         return str(e)
 
 @frappe.whitelist()
@@ -205,6 +213,7 @@ def log_scrap(order_name, operator, item, quantity):
             'data': order
         }
     except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Log Scrap Error")
         return str(e)
 
 @frappe.whitelist()
@@ -221,6 +230,7 @@ def get_downtime_reasons():
             'data': reasons
         }
     except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Get Downtime Reason Error")
         return str(e)
 
 @frappe.whitelist()
@@ -236,6 +246,7 @@ def update_downtime_reason(downtime_name, downtime_reason):
             'data': downtime
         }
     except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Update Downtime Reason Error")
         return str(e)
 
 
@@ -292,6 +303,7 @@ def get_configuration(device_name):
         }
         
     except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Get Configuration Error")
         return str(e)
 
 
@@ -426,6 +438,7 @@ def create_telemetry(device_id, current):
         frappe.db.commit()
         return telemetry
     except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Create Telemetry Error")
         return {
             "status": "error",
             "message": str(e)
@@ -434,22 +447,29 @@ def create_telemetry(device_id, current):
 
 @frappe.whitelist()
 def device_offline_event():
-    devices = frappe.get_all("Device", fields=["*"])
-    for device in devices:
-        device_id = device['name']
-        last_telemetry = frappe.get_all("Telemetry", filters={"device": device_id}, fields=["timestamp"], order_by="timestamp desc", limit=1)
-        if last_telemetry:
-            last_telemetry_timestamp = last_telemetry[0]['timestamp']
-            now_timestamp = datetime.strptime(now(), '%Y-%m-%d %H:%M:%S.%f')
-            if (now_timestamp - last_telemetry_timestamp).seconds > 60 * 60:
+    try:
+        devices = frappe.get_all("Device", fields=["*"])
+        for device in devices:
+            device_id = device['name']
+            last_telemetry = frappe.get_all("Telemetry", filters={"device": device_id}, fields=["timestamp"], order_by="timestamp desc", limit=1)
+            if last_telemetry:
+                last_telemetry_timestamp = last_telemetry[0]['timestamp']
+                now_timestamp = datetime.strptime(now(), '%Y-%m-%d %H:%M:%S.%f')
+                if (now_timestamp - last_telemetry_timestamp).seconds > 60 * 60:
+                    event = frappe.new_doc("Device Alert")
+                    event.device_id = device_id
+                    event.timestamp = now()
+                    event.assigned_to = device.supervisor
+                    event.insert(ignore_permissions=True)
+            else:
                 event = frappe.new_doc("Device Alert")
                 event.device_id = device_id
                 event.timestamp = now()
                 event.assigned_to = device.supervisor
                 event.insert(ignore_permissions=True)
-        else:
-            event = frappe.new_doc("Device Alert")
-            event.device_id = device_id
-            event.timestamp = now()
-            event.assigned_to = device.supervisor
-            event.insert(ignore_permissions=True)
+    except:
+        frappe.log_error(frappe.get_traceback(), "Device Offline Event Error")
+        return {
+            "status": "error",
+            "message": str(e)
+        }

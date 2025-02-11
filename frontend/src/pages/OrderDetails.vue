@@ -23,16 +23,104 @@
         <div class="w-[70%] pt-2 p-2 flex flex-col">
             <h1 class="text-xl font-bold">Order Details</h1>
             <!-- Action Buttons -->
+
             <!-- <div class="pt-2 flex flex-row-reverse space-x-4 space-x-reverse">
+            <div class="pt-2 flex flex-row-reverse space-x-4 space-x-reverse">
+            <!-- <div>
+                <Button
+                        :variant="'outline'"
+                        :ref_for="true"
+                        theme="gray"
+                        size="sm"
+                        label="Button"
+                        :loading="false"
+                        :loadingText="null"
+                        :disabled="false"
+                        :link="null"
+                    >
+                        Start Order
+                    </Button>
+                    <Button
+                        :variant="'outline'"
+                        :ref_for="true"
+                        theme="gray"
+                        size="sm"
+                        label="Button"
+                        :loading="false"
+                        :loadingText="null"
+                        :disabled="false"
+                        :link="null"
+                    >
+                        Stop Order
+                    </Button>
+                    <Button
+                        :variant="'outline'"
+                        :ref_for="true"
+                        theme="gray"
+                        size="sm"
+                        label="Button"
+                        :loading="false"
+                        :loadingText="null"
+                        :disabled="false"
+                        :link="null"
+                    >
+                        Complete Order
+                    </Button>
+                    <Button
+                        :variant="'outline'"
+                        :ref_for="true"
+                        theme="gray"
+                        size="sm"
+                        label="Button"
+                        :loading="false"
+                        :loadingText="null"
+                        :disabled="false"
+                        :link="null"
+                    >
+                        Log Scrap
+                    </Button>
+                    <Button
+                        :variant="'outline'"
+                        :ref_for="true"
+                        theme="gray"
+                        size="sm"
+                        label="Button"
+                        :loading="false"
+                        :loadingText="null"
+                        :disabled="false"
+                        :link="null"
+                    >
+                        Log Output
+                    </Button>
+                    <Button
+                        :variant="'outline'"
+                        :ref_for="true"
+                        theme="gray"
+                        size="sm"
+                        label="Button"
+                        :loading="false"
+                        :loadingText="null"
+                        :disabled="false"
+                        :link="null"
+                    >
+                        Batch/Serial
+                    </Button>
+            </div> -->
+                   
                     <ActionButton title=" Batch/Serial"/>
                     <ActionButton title=" Log Output"/>
                     <ActionButton title=" Log Scrap"/>
                     <ActionButton title=" Complete Order"/>
                     <ActionButton title=" Stop Order"/>
                     <ActionButton title=" Start Order"/>
+
             </div> -->
             <div class="p-6">
                 <ButtonsDynamic :orderId="orderId"/>
+            </div>
+            <div>
+                <ButtonsDynamic/>
+
             </div>
             
             <!-- Order Number & Status Section -->
@@ -122,15 +210,21 @@
                 </div>
             </div>
 
+
             <!-- Loading and Error States -->
             <div v-if="orderdetails.loading" class="text-center py-4">Loading...</div>
             <div v-if="errorMessage" class="text-red-500 text-center py-4">{{ errorMessage }}</div>
+            <!-- Output Material List Section -->
+            <div class="">
+                <ManufacturingOrder :order="orderData"/>
+            </div>
     </div>
 
     <!-- Column 2: 30% width -->
         
         <div class="w-[30%] bg-slate-200 p-12">
             <DowntimeCard />
+            <DowntimeCard :downtime-info="downtimeInfo" />
         </div>
     </div>
         
@@ -149,6 +243,37 @@ const orderId = route.params.orderid;
 import DowntimeCard from '../components/DowntimeCard.vue'
 import ActionButton from '../components/AcitonButton.vue'
 import ButtonsDynamic from '../components/ButtonsDynamic.vue';
+
+
+import ManufacturingOrder from '../components/ManufacturingOrder.vue';
+
+const orderData = {
+  orderNumber: 'MO-241221-178',
+  instructions: 'Backprint',
+  inputMaterials: [
+    {
+      serialNo: 1,
+      itemCode: 'E10038 S-RACE@ Dynamic, Matt, 38g/m2 124cm x 20000mtr',
+      uom: 'Reel',
+      plan: 1,
+      actual: 0
+    }
+  ],
+  outputMaterials: [
+    {
+      serialNo: 1,
+      itemCode: 'E10038 S-RACE@ Dynamic, Matt, 38g/m2 122cm x 600mtr x 3"',
+      uom: 'Roll',
+      plan: 30,
+      actual: 0
+    }
+  ]
+};
+const downtimeInfo = {
+  id: 'DT-241220-02',
+  start: '20 December, 3:00 PM',
+  end: '20 December, 3:30 PM'
+}
 
 const goToWorkstationDetails = () => {
     router.push({ name: 'WorkstationDetails', params: { id: workstationId } }).catch(err => {
