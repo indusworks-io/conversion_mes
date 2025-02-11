@@ -1,51 +1,118 @@
 <script setup lang="ts">
+import { ref, watchEffect } from 'vue';
+import { createListResource } from 'frappe-ui';
+import UpdateReasonModal from './UpdateReasonModal.vue';
+
+const showModal = ref(false);
+
+const selectedDowntimeId = ref<string | null>(null);
+
+const openModal = (id: string) => {
+  selectedDowntimeId.value = id;
+  showModal.value = true;
+};
+
+const closeModal = () => {
+  showModal.value = false;
+};
+
+
 interface DowntimeInfo {
   id: string;
   start: string;
   end: string;
+  reason?: string;
 }
 
-defineProps<{
-  downtimeInfo: DowntimeInfo;
-}>();
+// Fetch downtime logs from Frappe
+const DowntimeLogs = createListResource({
+  doctype: 'Downtime Log', // Ensure the doctype is correct
+  fields: ['name', 'start_date_time', 'end_date_time', 'reason'],
+  auto: true // Automatically fetch data
+});
+
+const downtimeLogs = ref<DowntimeInfo[]>([]);
+
+watchEffect(() => {
+  if (DowntimeLogs.data) {
+    downtimeLogs.value = DowntimeLogs.data.map(log => ({
+      id: log.name,
+      start: log.start_date_time,
+      end: log.end_date_time,
+      reason: log.reason
+    }));
+  }
+});
 </script>
 
 <template>
+   <div 
+        v-for="downtime in downtimeLogs" 
+        :key="downtime.id" 
+        
+      >
   <div class="w-full max-w-md bg-white rounded-lg shadow-md">
     <div class="p-6">
       <div class="mb-4 bg-gray-50 border border-gray-200 rounded-md p-3">
-        <label class="block mb-2 text-sm font-medium text-gray-700">Downtime ID:</label>
+        
+        <label class="block mb-2 text-sm font-medium text-gray-900">
+          Downtime ID:
+        </label>
         <input 
           type="text" 
-          :value="downtimeInfo.id" 
+          :value="downtime.id" 
           readonly 
-          class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm"
+          class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 text-sm"
         />
       </div>
 
       <div class="mb-4 bg-gray-50 border border-gray-200 rounded-md p-3">
-        <label class="block mb-2 text-sm font-medium text-gray-700">Start:</label>
+        <label class="block mb-2 text-sm font-medium text-gray-900">
+          Start:
+        </label>
         <input 
           type="text" 
-          :value="downtimeInfo.start" 
+          :value="downtime.start" 
           readonly 
-          class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm"
+          class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 text-sm"
         />
       </div>
 
       <div class="mb-4 bg-gray-50 border border-gray-200 rounded-md p-3">
-        <label class="block mb-2 text-sm font-medium text-gray-700">End:</label>
+        <label class="block mb-2 text-sm font-medium text-gray-900">
+          End:
+        </label>
         <input 
           type="text" 
-          :value="downtimeInfo.end" 
+          :value="downtime.end" 
           readonly 
-          class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm"
+          class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 text-sm"
         />
       </div>
 
-      <button class="w-full py-3 bg-[#000000] hover:pointer text-white font-bold rounded-md transition-colors">
+      <div class="mb-4 bg-gray-50 border border-gray-200 rounded-md p-3">
+        <label class="block mb-2 text-sm font-medium text-gray-900">
+          Reason:
+        </label>
+        <input 
+          type="text" 
+          :value="downtime.reason" 
+          readonly 
+          class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 text-sm"
+        />
+      </div>
+
+      <button @click="openModal(downtime.id)" class="w-full py-3 bg-black hover:bg-gray-800 text-white font-bold rounded-md transition-colors">
         Update Reason
       </button>
+
+      <UpdateReasonModal 
+      :show="showModal" 
+      :downtimeId="selectedDowntimeId" 
+      @close="closeModal" 
+      @updated="(newReason) => console.log('Updated reason:', newReason)"
+      />
     </div>
   </div>
+</div>
 </template>
