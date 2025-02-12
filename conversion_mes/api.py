@@ -119,7 +119,7 @@ def complete_order(order_name):
                 'data': order
             }
         elif order.status == 'In Progress':
-            order.status == 'Completed'
+            order.status = 'Completed'
             order.actual_end_date_time = now()
             time_log = order.time_logs[-1]
             time_log.end_time = now()
@@ -133,10 +133,11 @@ def complete_order(order_name):
                 'data': order
             }
         elif order.status == 'Stopped':
-            order.status == 'Completed'
+            order.status = 'Completed'
             order.actual_end_date_time = now()
             order.save(ignore_permissions=True)
             frappe.db.commit()
+            print("this code block executed")
             return {
                 'status': True,
                 'status_code': 200,

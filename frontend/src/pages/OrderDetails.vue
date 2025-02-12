@@ -116,7 +116,7 @@
 
             </div> -->
             <div class="p-6">
-                <ButtonsDynamic :orderId="orderId"/>
+                <ButtonsDynamic :workstationId="workstationId" :currentStatus="currentStatus" :orderId="orderId"/>
             </div>
             <div>
                 <ButtonsDynamic/>
@@ -231,7 +231,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref , computed} from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { createDocumentResource } from 'frappe-ui'
 import { ListView } from 'frappe-ui';
@@ -287,7 +287,11 @@ const orderdetails = createDocumentResource({
         auto: true,
 })
 
-console.log('Order Details:', orderdetails);
+const currentStatus = computed(() => orderdetails.doc?.status || '');
+// Function to update the status (for demonstration purposes)
+const updateStatus = (newStatus) => {
+  currentStatus.value = newStatus;
+};
 
 // const rawinstructions = orderdetails.doc.instructions;
 // const instructions = ref(rawinstructions.split('\n'));

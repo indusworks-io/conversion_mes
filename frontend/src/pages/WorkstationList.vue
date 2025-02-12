@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 class="font-black text-xl text-gray-600">
-        Workstation List
+        Workstation List 
         </h2>
     
         <!-- Create List Of Workstations -->
@@ -24,6 +24,7 @@
             row-key="name"
         />
         </div>
+        
     </div>
 </template>
 
