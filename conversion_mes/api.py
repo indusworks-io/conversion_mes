@@ -196,6 +196,27 @@ def log_cycles(order_name, operator, cycle_count):
         return str(e)
 
 @frappe.whitelist()
+def log_output(order_name, operator, item, quantity):
+    try:
+        order = frappe.get_doc("Manufacturing Order", order_name)
+        output_log = order.append('output_logs', {})
+        output_log.operator = operator
+        output_log.timestamp = now()
+        output_log.item = item
+        output_log.quantity = int(quantity)
+        order.save(ignore_permissions=True)
+        frappe.db.commit()
+        return {
+            'status': True,
+            'status_code': 200,
+            'message': 'Output Logged Sucessfully',
+            'data': order
+        }
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Log Output Error")
+        return str(e)
+
+@frappe.whitelist()
 def log_scrap(order_name, operator, item, quantity):
     try:
         order = frappe.get_doc("Manufacturing Order", order_name)

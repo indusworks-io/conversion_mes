@@ -8,38 +8,29 @@
  "field_order": [
   "plan",
   "section_break_kxzh",
-  "status",
   "posting_date",
   "workstation",
   "site",
-  "work_orders",
-  "section_break_laaq",
-  "operation",
-  "planned_cycles",
+  "column_break_avhv",
+  "status",
+  "section_break_chmq",
+  "planned_input_item",
+  "log_serial_batch_number",
+  "formula",
+  "planned_cycle_time",
   "instructions",
-  "planned_input",
+  "section_break_laaq",
   "planned_output",
-  "planned_metrics",
-  "total_planned_input_quantity_in_default_uom",
-  "total_planned_input_quantity_in_alternate_uom",
   "total_planned_output_quantity_in_default_uom",
   "total_planned_output_quantity_in_alternate_uom",
-  "column_break_izft",
-  "planned_setup_time",
-  "planned_cycle_time",
-  "planned_duration",
   "actual",
   "section_break_gqsq",
   "actual_start_date_time",
   "actual_end_date_time",
+  "column_break_tnhl",
   "actual_duration",
-  "actual_cycles",
-  "actual_cycle_time",
-  "section_break_rbef",
+  "batchserial_section",
   "batch_serial_number_summary",
-  "actual_input_summary",
-  "total_actual_input_quantity_in_default_uom",
-  "total_actual_input_quantity_in_alternate_uom",
   "output_section",
   "actual_output_summary",
   "total_actual_output_quantity_in_default_uom",
@@ -52,7 +43,7 @@
   "section_break_qzbi",
   "time_logs",
   "batch_serial_logs",
-  "cycle_logs",
+  "output_logs",
   "scrap_logs"
  ],
  "fields": [
@@ -97,8 +88,7 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "description": "Mention any additional instructions to be shared with the operator.",
-   "fetch_from": "operation.instructions",
+   "fetch_from": "formula.instructions",
    "fetch_if_empty": 1,
    "fieldname": "instructions",
    "fieldtype": "Small Text",
@@ -106,41 +96,10 @@
   },
   {
    "allow_bulk_edit": 1,
-   "columns": 3,
-   "fieldname": "planned_input",
-   "fieldtype": "Table",
-   "label": "Planned Input",
-   "options": "Planned Input Item",
-   "read_only": 1
-  },
-  {
-   "allow_bulk_edit": 1,
    "fieldname": "planned_output",
    "fieldtype": "Table",
    "label": "Planned Output",
-   "options": "MO Item Plan",
-   "read_only": 1
-  },
-  {
-   "fieldname": "planned_metrics",
-   "fieldtype": "Section Break",
-   "label": "Planned Metrics"
-  },
-  {
-   "fieldname": "planned_duration",
-   "fieldtype": "Duration",
-   "label": "Planned Duration",
-   "read_only": 1
-  },
-  {
-   "description": "Ideal Time Required To Setup This Workstation For A Manufacturing Order.",
-   "fetch_from": "operation.setup_time",
-   "fieldname": "planned_setup_time",
-   "fieldtype": "Duration",
-   "hide_days": 1,
-   "hide_seconds": 1,
-   "label": "Planned Setup Time",
-   "read_only": 1
+   "options": "MO Item Plan"
   },
   {
    "fieldname": "plan",
@@ -178,11 +137,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "section_break_rbef",
-   "fieldtype": "Section Break",
-   "label": "Input"
-  },
-  {
    "fieldname": "logs",
    "fieldtype": "Tab Break",
    "label": "Logs"
@@ -211,10 +165,6 @@
   {
    "fieldname": "section_break_laaq",
    "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_izft",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "total_actual_output_quantity_in_default_uom",
@@ -281,96 +231,15 @@
    "fieldtype": "Section Break"
   },
   {
-   "allow_in_quick_entry": 1,
-   "fieldname": "operation",
-   "fieldtype": "Link",
-   "label": "Operation",
-   "options": "Operation",
-   "reqd": 1
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "fieldname": "work_orders",
-   "fieldtype": "Table MultiSelect",
-   "hidden": 1,
-   "label": "Work Orders",
-   "options": "Work Order List"
-  },
-  {
-   "allow_in_quick_entry": 1,
-   "fieldname": "planned_cycles",
-   "fieldtype": "Int",
-   "label": "Planned Cycles",
-   "non_negative": 1,
-   "reqd": 1
-  },
-  {
    "description": "Time Needed To Complete One Cycle.",
-   "fetch_from": "operation.cycle_time",
+   "fetch_from": "formula.cycle_time",
    "fieldname": "planned_cycle_time",
    "fieldtype": "Duration",
    "hide_days": 1,
-   "hide_seconds": 1,
    "label": "Planned Cycle Time",
    "non_negative": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_planned_input_quantity_in_default_uom",
-   "fieldtype": "Float",
-   "label": "Total Planned Input Quantity in Default UOM",
-   "non_negative": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_planned_input_quantity_in_alternate_uom",
-   "fieldtype": "Float",
-   "label": "Total Planned Input Quantity in Alternate UOM",
-   "non_negative": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "actual_cycle_time",
-   "fieldtype": "Duration",
-   "hide_days": 1,
-   "hide_seconds": 1,
-   "label": "Actual Cycle Time",
-   "non_negative": 1
-  },
-  {
-   "fieldname": "cycle_logs",
-   "fieldtype": "Table",
-   "label": "Cycle Logs",
-   "options": "Cycle Completion Log"
-  },
-  {
-   "fieldname": "actual_cycles",
-   "fieldtype": "Int",
-   "label": "Actual Cycles",
-   "non_negative": 1
-  },
-  {
-   "allow_bulk_edit": 1,
-   "fieldname": "actual_input_summary",
-   "fieldtype": "Table",
-   "label": "Actual Input Summary",
-   "options": "MO Item Actual"
-  },
-  {
-   "fieldname": "total_actual_input_quantity_in_default_uom",
-   "fieldtype": "Int",
-   "label": "Total Actual Input Quantity In Default UOM",
-   "non_negative": 1,
-   "precision": "2",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_actual_input_quantity_in_alternate_uom",
-   "fieldtype": "Float",
-   "label": "Total Actual Input Quantity In Alternate UOM",
-   "non_negative": 1,
-   "precision": "2",
-   "read_only": 1
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "fieldname": "output_section",
@@ -388,12 +257,56 @@
    "fieldtype": "Table",
    "label": "Actual Scrap Summary",
    "options": "MO Item Actual"
+  },
+  {
+   "fieldname": "column_break_avhv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_chmq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "planned_input_item",
+   "fieldtype": "Link",
+   "label": "Planned Input Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "log_serial_batch_number",
+   "fieldtype": "Check",
+   "label": "Log Batch/Serial Number?"
+  },
+  {
+   "fieldname": "formula",
+   "fieldtype": "Link",
+   "label": "Formula",
+   "link_filters": "[[\"Formula\",\"is_active\",\"=\",1]]",
+   "options": "Formula",
+   "reqd": 1
+  },
+  {
+   "fieldname": "output_logs",
+   "fieldtype": "Table",
+   "label": "Output Logs",
+   "options": "MO Item Log"
+  },
+  {
+   "fieldname": "column_break_tnhl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "batchserial_section",
+   "fieldtype": "Section Break",
+   "label": "Batch/Serial"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-04 17:12:11.298652",
+ "modified": "2025-02-12 13:45:54.383505",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",
@@ -413,7 +326,6 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
  "search_fields": "workstation",
  "sort_field": "modified",
  "sort_order": "DESC",
