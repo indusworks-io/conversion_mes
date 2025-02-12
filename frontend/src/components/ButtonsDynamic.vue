@@ -1,17 +1,25 @@
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import StartButtonPopup from '../components/StartButtonPopup.vue';
 
-const props = defineProps<{ orderId: string }>();
+// Define props, including currentStatus
+const props = defineProps<{
+  orderId: string;
+  workstationId: string;
+  currentStatus: string; // Add currentStatus as a prop
+}>();
 
-// Local state
-const currentStatus = ref('Not Started');
+const emit = defineEmits(['update-status']); // Emit event to update status in the parent
+
+const showPopup = ref(false);
 const errorMessage = ref<string | null>(null);
 const loading = ref(false);
+const isStopped = computed(() => props.currentStatus === 'Stopped');
 
 // Start Order Function
-const startOrder = async () => {
-  console.log('Start Order:', props.orderId);
+const startOrder = async (operator: string) => {
+  console.log('Start Order:', props.orderId, 'Operator:', operator);
   loading.value = true;
   errorMessage.value = null;
 
@@ -20,8 +28,8 @@ const startOrder = async () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        order_name: props.orderId, // Pass the order ID
-        operator: 'Operator Name', // Replace with the actual operator name or fetch it dynamically
+        order_name: props.orderId,
+        operator: operator,
       }),
     });
 
@@ -29,11 +37,9 @@ const startOrder = async () => {
 
     if (data.message && data.message.status) {
       console.log('Order started successfully:', data.message.message);
-      // Update local state or emit events as needed
-      currentStatus.value = 'In Progress'; // Update the status in the UI
+      emit('update-status', 'In Progress'); // Update status in the parent
     } else {
       console.error('Failed to start order:', data.message.message);
-      // Handle error
       errorMessage.value = data.message.message || 'Failed to start order';
     }
   } catch (error) {
@@ -46,15 +52,15 @@ const startOrder = async () => {
 
 const stopOrder = async () => {
   console.log('Stop Order:', props.orderId);
-  loading.value = true; // Assuming you have a loading state
-  errorMessage.value = null; // Assuming you have an error message state
+  loading.value = true;
+  errorMessage.value = null;
 
   try {
     const response = await fetch('/api/method/conversion_mes.api.stop_order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        order_name: props.orderId, // Pass the order ID
+        order_name: props.orderId,
       }),
     });
 
@@ -62,7 +68,8 @@ const stopOrder = async () => {
 
     if (data.message && data.message.status) {
       console.log('Order stopped successfully:', data.message.message);
-      currentStatus.value = 'Stopped'; // Update the status in the UI
+      emit('update-status', 'Stopped'); // Update status in the parent
+      isStopped.value = true;
     } else {
       console.error('Failed to stop order:', data.message.message);
       errorMessage.value = data.message.message || 'Failed to stop order';
@@ -73,34 +80,65 @@ const stopOrder = async () => {
   } finally {
     loading.value = false;
   }
+
+  showPopup.value = false;
+};
+
+const resumeOrder = async () => {
+  console.log('Resume Order:', props.orderId);
+  loading.value = true;
+  errorMessage.value = null;
+
+  try {
+    const response = await fetch('/api/method/conversion_mes.api.resume_order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        order_name: props.orderId,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.message && data.message.status) {
+      console.log('Order resumed successfully:', data.message.message);
+      emit('update-status', 'In Progress'); // Update status in the parent
+      isStopped.value = false;
+    } else {
+      console.error('Failed to resume order:', data.message.message);
+      errorMessage.value = data.message.message || 'Failed to resume order';
+    }
+  } catch (error) {
+    console.error('Error resuming order:', error);
+    errorMessage.value = 'Server error';
+  } finally {
+    loading.value = false;
+  }
 };
 
 const logScrap = () => {
   console.log('Log Scrap:', props.orderId);
-  // Add logic to log scrap
 };
 
 const batchSerial = () => {
   console.log('Batch/Serial:', props.orderId);
-  // Add logic for batch/serial
 };
 
 const logOutput = () => {
   console.log('Log Output:', props.orderId);
-  // Add logic to log output
 };
 
 const completeOrder = async () => {
   console.log('Complete Order:', props.orderId);
-  loading.value = true; // Assuming you have a loading state
-  errorMessage.value = null; // Assuming you have an error message state
+  loading.value = true;
+  errorMessage.value = null;
 
   try {
     const response = await fetch('/api/method/conversion_mes.api.complete_order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        order_name: props.orderId, // Pass the order ID
+        order_name: props.orderId,
       }),
     });
 
@@ -108,7 +146,7 @@ const completeOrder = async () => {
 
     if (data.message && data.message.status) {
       console.log('Order completed successfully:', data.message.message);
-      currentStatus.value = 'Completed'; // Update the status in the UI
+      emit('update-status', 'Completed'); // Update status in the parent
     } else {
       console.error('Failed to complete order:', data.message.message);
       errorMessage.value = data.message.message || 'Failed to complete order';
@@ -126,22 +164,29 @@ const completeOrder = async () => {
   <div class="flex flex-row p-2 space-y-4">
     <!-- Start Button -->
     <button
-      @click="startOrder"
+      v-if="currentStatus === 'Not Started'"
+      @click="showPopup = true"
       class="px-6 py-2 bg-green-500 text-white text-sm font-medium rounded hover:bg-green-600 transition-colors uppercase"
     >
       Start
     </button>
 
-    <!-- Stop Button -->
+    <!-- Stop/Resume Button -->
     <button
-      @click="stopOrder"
-      class="px-6 py-2 bg-red-500 text-white text-sm font-medium rounded hover:bg-red-600 transition-colors uppercase"
+      v-if="currentStatus === 'In Progress' || currentStatus === 'Stopped'"
+      @click="isStopped ? resumeOrder() : stopOrder()"
+      :class="{
+        'bg-red-500 hover:bg-red-600': !isStopped,
+        'bg-blue-500 hover:bg-blue-600': isStopped,
+      }"
+      class="px-6 py-2 text-white text-sm font-medium rounded transition-colors uppercase"
     >
-      Stop
+      {{ isStopped ? 'Resume' : 'Stop' }}
     </button>
 
     <!-- Log Scrap Button -->
     <button
+      v-if="currentStatus !== 'Not Started'"
       @click="logScrap"
       class="px-6 py-2 bg-blue-500 text-white text-sm font-medium rounded hover:bg-blue-600 transition-colors uppercase"
     >
@@ -150,6 +195,7 @@ const completeOrder = async () => {
 
     <!-- Batch/Serial Button -->
     <button
+      v-if="currentStatus !== 'Not Started'"
       @click="batchSerial"
       class="px-6 py-2 bg-purple-500 text-white text-sm font-medium rounded hover:bg-purple-600 transition-colors uppercase"
     >
@@ -158,6 +204,7 @@ const completeOrder = async () => {
 
     <!-- Log Output Button -->
     <button
+      v-if="currentStatus !== 'Not Started'"
       @click="logOutput"
       class="px-6 py-2 bg-yellow-500 text-white text-sm font-medium rounded hover:bg-yellow-600 transition-colors uppercase"
     >
@@ -166,15 +213,25 @@ const completeOrder = async () => {
 
     <!-- Complete Button -->
     <button
+      v-if="currentStatus !== 'Not Started'"
       @click="completeOrder"
       class="px-6 py-2 bg-gray-500 text-white text-sm font-medium rounded hover:bg-gray-600 transition-colors uppercase"
     >
       Complete
     </button>
+
     <!-- Error Message -->
     <div v-if="errorMessage" class="text-red-500 text-sm mt-2">
       {{ errorMessage }}
     </div>
+
+    <!-- Popup -->
+    <StartButtonPopup
+      v-if="showPopup"
+      :workstationID="props.workstationId"
+      @close="showPopup = false"
+      @start-order="startOrder"
+    />
   </div>
 </template>
 =======
