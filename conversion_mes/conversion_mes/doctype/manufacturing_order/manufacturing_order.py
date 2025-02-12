@@ -31,18 +31,9 @@ class ManufacturingOrder(Document):
 		# Update Batch/Serial Number Summary
 		self.batch_serial_number_summary = []
 		for batch_serial_log in self.batch_serial_logs:
-			batch_serial_log.item
-			batch_serial_log.batch_serial_number
-			found = False
-			for summary in self.batch_serial_number_summary:
-				if (summary.item == batch_serial_log.item and summary.serial_batch_number == batch_serial_log.batch_serial_number):
-					found = True
-					break
-			if not found:
-				self.append('batch_serial_number_summary', {
-					'item': batch_serial_log.item,
-					'serial_batch_number': batch_serial_log.batch_serial_number
-				})
+			self.append('batch_serial_number_summary', {
+				'serial_batch_number': batch_serial_log.batch_serial_number
+			})
 		
 		# Update Alternate Quantity In Output Logs
 		for output_log in self.output_logs:

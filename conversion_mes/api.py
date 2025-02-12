@@ -156,13 +156,12 @@ def complete_order(order_name):
         return str(e)
 
 @frappe.whitelist()
-def log_batch_serial_number(order_name, operator, item_name, batch_serial_number):
+def log_batch_serial_number(order_name, operator, batch_serial_number):
     try:
         order = frappe.get_doc("Manufacturing Order", order_name)
         batch_serial_log = order.append('batch_serial_logs', {})
         batch_serial_log.operator = operator
         batch_serial_log.timestamp = now()
-        batch_serial_log.item = item_name
         batch_serial_log.batch_serial_number = batch_serial_number
         order.save(ignore_permissions=True)
         frappe.db.commit()

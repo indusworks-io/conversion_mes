@@ -17,8 +17,6 @@ const closeModal = () => {
   showModal.value = false;
 };
 
-
-
 interface DowntimeInfo {
   id: string;
   start: string;
@@ -49,15 +47,14 @@ watchEffect(() => {
 </script>
 
 <template>
-   <div 
-        v-for="downtime in downtimeLogs" 
-        :key="downtime.id" 
-        
-      >
+  <div 
+    v-for="downtime in downtimeLogs" 
+    :key="downtime.id"       
+  >
+
   <div class="w-full max-w-md bg-white rounded-lg shadow-md">
     <div class="p-6">
       <div class="mb-4 bg-gray-50 border border-gray-200 rounded-md p-3">
-        
         <label class="block mb-2 text-sm font-medium text-gray-900">
           Downtime ID:
         </label>
@@ -66,15 +63,9 @@ watchEffect(() => {
           :value="downtime.id" 
           readonly 
           class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 text-sm"
-=======
-}
-
-defineProps<{
-  downtimeInfo: DowntimeInfo;
-}>();
-</script>
-
-<template>
+        />
+      </div>
+    
   <div class="w-full max-w-md bg-white rounded-lg shadow-md">
     <div class="p-6">
       <div class="mb-4 bg-gray-50 border border-gray-200 rounded-md p-3">
@@ -88,7 +79,6 @@ defineProps<{
       </div>
 
       <div class="mb-4 bg-gray-50 border border-gray-200 rounded-md p-3">
-
         <label class="block mb-2 text-sm font-medium text-gray-900">
           Start:
         </label>
@@ -97,12 +87,6 @@ defineProps<{
           :value="downtime.start" 
           readonly 
           class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-900 text-sm"
-        <label class="block mb-2 text-sm font-medium text-gray-700">Start:</label>
-        <input 
-          type="text" 
-          :value="downtimeInfo.start" 
-          readonly 
-          class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm"
         />
       </div>
 
@@ -156,5 +140,4 @@ defineProps<{
         Update Reason
       </button>
     </div>
-  </div>
 </template>
