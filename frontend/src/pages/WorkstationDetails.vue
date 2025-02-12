@@ -116,7 +116,7 @@ const downtimeInfo = {
   id: 'DT-241220-02',
   start: '20 December, 3:00 PM',
   end: '20 December, 3:30 PM'
-
+}
 
 const setDefaultWorkstation = (workstationId) => {
     localStorage.setItem('defaultWorkstation', workstationId);
