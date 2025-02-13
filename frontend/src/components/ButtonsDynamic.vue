@@ -1,21 +1,21 @@
-
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import StartButtonPopup from '../components/StartButtonPopup.vue';
+import BatchSerialPopup from './BatchSerialPopup.vue';
 
-// Define props, including currentStatus
+// Define props
 const props = defineProps<{
   orderId: string;
   workstationId: string;
-  currentStatus: string; // Add currentStatus as a prop
+  currentStatus: string;
 }>();
 
 const emit = defineEmits(['update-status']); // Emit event to update status in the parent
 
+const showBatchSerialPopup = ref(false);
 const showPopup = ref(false);
 const errorMessage = ref<string | null>(null);
 const loading = ref(false);
-const isStopped = computed(() => props.currentStatus === 'Stopped');
 
 // Start Order Function
 const startOrder = async (operator: string) => {
@@ -37,7 +37,7 @@ const startOrder = async (operator: string) => {
 
     if (data.message && data.message.status) {
       console.log('Order started successfully:', data.message.message);
-      emit('update-status', 'In Progress'); // Update status in the parent
+      emit('update-status', 'In Progress'); // Change status to "In Progress"
     } else {
       console.error('Failed to start order:', data.message.message);
       errorMessage.value = data.message.message || 'Failed to start order';
@@ -50,6 +50,7 @@ const startOrder = async (operator: string) => {
   }
 };
 
+// Stop Order Function
 const stopOrder = async () => {
   console.log('Stop Order:', props.orderId);
   loading.value = true;
@@ -68,8 +69,7 @@ const stopOrder = async () => {
 
     if (data.message && data.message.status) {
       console.log('Order stopped successfully:', data.message.message);
-      emit('update-status', 'Stopped'); // Update status in the parent
-      isStopped.value = true;
+      emit('update-status', 'Not Started'); // Change status back to "Not Started"
     } else {
       console.error('Failed to stop order:', data.message.message);
       errorMessage.value = data.message.message || 'Failed to stop order';
@@ -84,38 +84,6 @@ const stopOrder = async () => {
   showPopup.value = false;
 };
 
-const resumeOrder = async () => {
-  console.log('Resume Order:', props.orderId);
-  loading.value = true;
-  errorMessage.value = null;
-
-  try {
-    const response = await fetch('/api/method/conversion_mes.api.resume_order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        order_name: props.orderId,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (data.message && data.message.status) {
-      console.log('Order resumed successfully:', data.message.message);
-      emit('update-status', 'In Progress'); // Update status in the parent
-      isStopped.value = false;
-    } else {
-      console.error('Failed to resume order:', data.message.message);
-      errorMessage.value = data.message.message || 'Failed to resume order';
-    }
-  } catch (error) {
-    console.error('Error resuming order:', error);
-    errorMessage.value = 'Server error';
-  } finally {
-    loading.value = false;
-  }
-};
-
 const logScrap = () => {
   console.log('Log Scrap:', props.orderId);
 };
@@ -123,6 +91,10 @@ const logScrap = () => {
 const batchSerial = () => {
   console.log('Batch/Serial:', props.orderId);
 };
+const handleBatchSerialLogged = (data: any) => {
+  console.log('Batch/Serial logged:', data);
+};
+
 
 const logOutput = () => {
   console.log('Log Output:', props.orderId);
@@ -162,26 +134,21 @@ const completeOrder = async () => {
 
 <template>
   <div class="flex flex-row p-2 space-y-4">
-    <!-- Start Button -->
+    <!-- Start/Stop Toggle Button -->
     <button
-      v-if="currentStatus === 'Not Started'"
+      v-if="currentStatus === 'Not Started' || currentStatus === 'Stopped'"
       @click="showPopup = true"
       class="px-6 py-2 bg-green-500 text-white text-sm font-medium rounded hover:bg-green-600 transition-colors uppercase"
     >
       Start
     </button>
 
-    <!-- Stop/Resume Button -->
     <button
-      v-if="currentStatus === 'In Progress' || currentStatus === 'Stopped'"
-      @click="isStopped ? resumeOrder() : stopOrder()"
-      :class="{
-        'bg-red-500 hover:bg-red-600': !isStopped,
-        'bg-blue-500 hover:bg-blue-600': isStopped,
-      }"
-      class="px-6 py-2 text-white text-sm font-medium rounded transition-colors uppercase"
+      v-if="currentStatus === 'In Progress'"
+      @click="stopOrder"
+      class="px-6 py-2 bg-red-500 text-white text-sm font-medium rounded hover:bg-red-600 transition-colors uppercase"
     >
-      {{ isStopped ? 'Resume' : 'Stop' }}
+      Stop
     </button>
 
     <!-- Log Scrap Button -->
@@ -196,7 +163,7 @@ const completeOrder = async () => {
     <!-- Batch/Serial Button -->
     <button
       v-if="currentStatus !== 'Not Started'"
-      @click="batchSerial"
+      @click="showBatchSerialPopup = true"
       class="px-6 py-2 bg-purple-500 text-white text-sm font-medium rounded hover:bg-purple-600 transition-colors uppercase"
     >
       Batch/Serial
@@ -213,7 +180,8 @@ const completeOrder = async () => {
 
     <!-- Complete Button -->
     <button
-      v-if="currentStatus !== 'Not Started'"
+      
+      v-if="currentStatus !== 'Not Started' && currentStatus !== 'Completed'"
       @click="completeOrder"
       class="px-6 py-2 bg-gray-500 text-white text-sm font-medium rounded hover:bg-gray-600 transition-colors uppercase"
     >
@@ -232,145 +200,15 @@ const completeOrder = async () => {
       @close="showPopup = false"
       @start-order="startOrder"
     />
+
+    <!-- Popup Component -->
+    <BatchSerialPopup
+      v-if="showBatchSerialPopup"
+      :orderId="orderId"
+      :workstationId="workstationId"
+      :show="showBatchSerialPopup"
+      @close="showBatchSerialPopup = false"
+      @logged="handleBatchSerialLogged"
+    />
   </div>
 </template>
-=======
-<template>
-  <div class="bg-gray-100 p-8">
-    <div class="max-w-4xl mx-auto">
-      <div class="grid grid-cols-4 gap-8">
-        <!-- Left side - State Display -->
-        <div class="col-span-1 bg-white p-6 rounded-lg shadow-md">
-          <h2 class="text-lg font-semibold mb-4">Current State</h2>
-          <div :class="{
-            'text-sm font-medium': true,
-            'text-orange-500': currentState === 'Not Started',
-            'text-blue-500': currentState === 'In Progress',
-            'text-green-500': currentState === 'Complete'
-          }">
-            {{ currentState }}
-          </div>
-        </div>
-
-        <!-- Right side - Buttons -->
-        <div class="col-span-3 space-y-4">
-          <template v-if="!isStarted">
-            <button
-              @click="handleStart"
-              class="flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600 transition-colors"
-            >
-              <Play class="w-5 h-5" />
-              START
-            </button>
-          </template>
-          <template v-else>
-            <div class="space-y-4">
-              <div class="flex gap-4">
-                <button
-                  @click="handleStepComplete('BATCH/SERIAL')"
-                  :class="{
-                    'flex items-center gap-2 px-6 py-3 rounded-md transition-colors': true,
-                    'bg-blue-500 text-white hover:bg-blue-600': true
-                  }"
-                >
-                  <FileSpreadsheet class="w-5 h-5" />
-                  BATCH/SERIAL
-                </button>
-
-                <button
-                  @click="handleStepComplete('LOG OUTPUT')"
-                  :class="{
-                    'flex items-center gap-2 px-6 py-3 rounded-md transition-colors': true,
-                    'bg-blue-500 text-white hover:bg-blue-600': true
-                  }"
-                >
-                  <FileOutput class="w-5 h-5" />
-                  LOG OUTPUT
-                </button>
-
-                <button
-                  @click="handleStepComplete('LOG SCRAP')"
-                  :class="{
-                    'flex items-center gap-2 px-6 py-3 rounded-md transition-colors': true,
-                    'bg-blue-500 text-white hover:bg-blue-600': true
-                  }"
-                >
-                  <FileWarning class="w-5 h-5" />
-                  LOG SCRAP
-                </button>
-              </div>
-
-              <div class="flex gap-4">
-                <button
-                  @click="handleComplete"
-                  :disabled="completedSteps.length < 3"
-                  :class="{
-                    'flex items-center gap-2 px-6 py-3 rounded-md transition-colors': true,
-                    'bg-gray-300 cursor-not-allowed': completedSteps.length < 3,
-                    'bg-green-500 text-white hover:bg-green-600': completedSteps.length === 3
-                  }"
-                >
-                  <CheckCircle class="w-5 h-5" />
-                  COMPLETE
-                </button>
-
-                <button
-                  @click="handleStopResume"
-                  :class="{
-                    'flex items-center gap-2 px-6 py-3 rounded-md transition-colors': true,
-                    'bg-red-500 text-white hover:bg-red-600': !isPaused,
-                    'bg-blue-500 text-white hover:bg-blue-600': isPaused
-                  }"
-                >
-                  <StopCircle v-if="!isPaused" class="w-5 h-5" />
-                  <Play v-else class="w-5 h-5" />
-                  {{ isPaused ? 'RESUME' : 'STOP' }}
-                </button>
-              </div>
-            </div>
-          </template>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-import { Play, FileSpreadsheet, FileOutput, FileWarning, CheckCircle, StopCircle } from 'lucide-vue-next';
-
-const isStarted = ref(false);
-const isPaused = ref(false);
-const currentState = ref('Not Started');
-const completedSteps = ref<string[]>([]);
-
-const handleStart = () => {
-  isStarted.value = true;
-  currentState.value = 'In Progress';
-};
-
-const handleStepComplete = (step: string) => {
-  if (!completedSteps.value.includes(step)) {
-    completedSteps.value.push(step);
-  }
-
-  if (completedSteps.value.length === 3) {
-    currentState.value = 'Complete';
-  }
-};
-
-const handleComplete = () => {
-  if (completedSteps.value.length === 3) {
-    currentState.value = 'Complete';
-  }
-};
-
-const handleStopResume = () => {
-  isPaused.value = !isPaused.value;
-  if (isPaused.value) {
-    currentState.value = 'Paused';
-  } else {
-    currentState.value = 'In Progress';
-  }
-};
-</script>

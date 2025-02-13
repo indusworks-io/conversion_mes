@@ -40,30 +40,6 @@
             <h3 class="font-bold text-xl text-gray-600">
             Open Manufacturing Orders
             </h3>
-
-            <!-- <ListView
-
-            <ListView
-
-                v-if="ManufacturingOrders.list.data"
-                class="mt-4"
-                :columns="[
-                    { label: 'Date', key: 'posting_date', width:1 },
-                    { label: 'Order Number', key: 'name', width:2 },
-                    { label: 'Operation', key: 'operation', width:2 },
-                    { label: 'Status', key: 'status', width:1 },
-                ]"
-                :rows="ManufacturingOrders.list.data"
-                :options="{
-                    selectable: false,
-                    resizeColumn: true,
-                    emptyState: {
-                        title: 'No Manufacturing Orders Found',
-                    },
-                    getRowRoute: (row) => ({ name: 'OrderDetails', params: { orderid: row.name } })
-                }"
-                row-key="name"
-            /> -->
             <div class="pt-6">
                 <OrderCard
                     v-for="order in ManufacturingOrders.list.data"
@@ -76,17 +52,6 @@
         </div>
         <div class="w-[30%] bg-slate-200 p-12">
             <DowntimeCard />
-            />
-            <OrderCard
-                v-for="order in ManufacturingOrders.list.data"
-                :key="order.name"
-                :date="order.posting_date"
-                :orderNo="order.name"
-                :status="order.status"
-            />
-        </div>
-        <div class="w-[30%] bg-slate-200 p-12">
-            <DowntimeCard :downtime-info="downtimeInfo" />
         </div>
     </div>
 </template>
@@ -107,17 +72,6 @@ import OrderCard from '../components/OrderCard.vue'
 import DowntimeCard from '../components/DowntimeCard.vue'
 
 
-// const downtimeInfo = {
-//   id: 'DT-241220-02',
-//   start: '20 December, 3:00 PM',
-//   end: '20 December, 3:30 PM'
-// }
-const downtimeInfo = {
-  id: 'DT-241220-02',
-  start: '20 December, 3:00 PM',
-  end: '20 December, 3:30 PM'
-}
-
 const setDefaultWorkstation = (workstationId) => {
     localStorage.setItem('defaultWorkstation', workstationId);
     defaultWorkstation.value = workstationId;
@@ -132,7 +86,7 @@ const goToWorkstationList = () => {
 
 let ManufacturingOrders = createListResource({
     doctype: 'Manufacturing Order',
-    fields: ['posting_date', 'name', 'operation', 'status'],
+    fields: ['posting_date', 'name', 'status'],
     filters: [
         ['workstation', '=', workstationId],
         ['status', 'not in', ['Draft', 'Cancelled', 'Closed', 'Completed']]
