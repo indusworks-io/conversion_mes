@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="w-[30%] bg-slate-200 p-12">
-            <DowntimeCard />
+            <DowntimeCard :workstationId="workstationId" />
         </div>
     </div>
 </template>

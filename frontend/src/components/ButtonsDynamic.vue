@@ -2,6 +2,9 @@
 import { ref } from 'vue';
 import StartButtonPopup from '../components/StartButtonPopup.vue';
 import BatchSerialPopup from './BatchSerialPopup.vue';
+import LogOutputPopup from './LogOutputPopup.vue';
+import LogScrapPopup from './LogScrapPopup.vue';
+import CompleteOrderPopup from './CompleteOrderPopup.vue'
 
 // Define props
 const props = defineProps<{
@@ -14,12 +17,18 @@ const emit = defineEmits(['update-status']); // Emit event to update status in t
 
 const showBatchSerialPopup = ref(false);
 const showPopup = ref(false);
+const showLogPopup = ref(false);
+const showScrapPopup = ref(false);
+const showCompleteOrderPopup = ref(false);
+
 const errorMessage = ref<string | null>(null);
 const loading = ref(false);
+const selectedOperator = ref<string | null>(null); 
 
 // Start Order Function
 const startOrder = async (operator: string) => {
   console.log('Start Order:', props.orderId, 'Operator:', operator);
+  selectedOperator.value = operator; // Save selected operator
   loading.value = true;
   errorMessage.value = null;
 
@@ -85,7 +94,9 @@ const stopOrder = async () => {
 };
 
 const logScrap = () => {
-  console.log('Log Scrap:', props.orderId);
+  if (selectedOperator.value) {
+    showScrapPopup.value = true;
+  }
 };
 
 const batchSerial = () => {
@@ -93,11 +104,15 @@ const batchSerial = () => {
 };
 const handleBatchSerialLogged = (data: any) => {
   console.log('Batch/Serial logged:', data);
+  emit('update-status');
 };
 
 
 const logOutput = () => {
-  console.log('Log Output:', props.orderId);
+  if (selectedOperator.value) {
+    showLogPopup.value = true;
+  }
+  
 };
 
 const completeOrder = async () => {
@@ -133,7 +148,7 @@ const completeOrder = async () => {
 </script>
 
 <template>
-  <div class="flex flex-row p-2 space-y-4">
+  <div class="flex flex-row p-2 gap-2">
     <!-- Start/Stop Toggle Button -->
     <button
       v-if="currentStatus === 'Not Started' || currentStatus === 'Stopped'"
@@ -180,11 +195,8 @@ const completeOrder = async () => {
 
     <!-- Complete Button -->
     <button
-      
-      v-if="currentStatus !== 'Not Started' && currentStatus !== 'Completed'"
-      @click="completeOrder"
-      class="px-6 py-2 bg-gray-500 text-white text-sm font-medium rounded hover:bg-gray-600 transition-colors uppercase"
-    >
+    v-if="currentStatus !== 'Not Started' && currentStatus !== 'Completed'" 
+    @click="showCompleteOrderPopup = true" class="px-6 py-2 bg-blue-500 font-medium text-white rounded hover:bg-blue-600">
       Complete
     </button>
 
@@ -206,9 +218,36 @@ const completeOrder = async () => {
       v-if="showBatchSerialPopup"
       :orderId="orderId"
       :workstationId="workstationId"
+      :operator="selectedOperator || ''"
       :show="showBatchSerialPopup"
       @close="showBatchSerialPopup = false"
       @logged="handleBatchSerialLogged"
     />
+
+    <LogOutputPopup 
+      v-if="showLogPopup" 
+      :orderId="props.orderId" 
+      :operator="selectedOperator || ''"
+      @close="showLogPopup = false"
+      @update-status="emit('update-status')"
+    />
+    
+    <!-- Scrap Popup Component -->
+    <LogScrapPopup
+      v-if="showScrapPopup"
+      :orderId="props.orderId"
+      :operator="selectedOperator || ''"
+      @close="showScrapPopup = false"
+      @update-status="emit('update-status')"
+    />
+
+    <!-- Complete Popup -->
+    <CompleteOrderPopup
+      v-if="showCompleteOrderPopup"
+      :orderId="orderId"
+      @close="showCompleteOrderPopup = false"
+      @update-status="emit('update-status')"
+    />
+
   </div>
 </template>
