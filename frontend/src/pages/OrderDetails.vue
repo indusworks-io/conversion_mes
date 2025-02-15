@@ -39,18 +39,6 @@
                 </div>
                 </div>
 
-                <!-- Instructions Section -->
-                <div class="mb-6">
-                <h3 class="text-xl font-semibold">Instructions</h3>
-                <p class="mt-2">{{ orderdetails.doc.instructions }}</p>
-                </div>
-
-                <!-- Operation Section -->
-                <div class="mb-6">
-                <h3 class="text-xl font-semibold">Formula</h3>
-                <p class="mt-2">{{ orderdetails.doc.output_logs }}</p>
-                </div>
-
                 <!-- Input Materials -->
                 <div class="mb-6">
                 <h3 class="text-xl font-semibold">Input Materials</h3>
@@ -59,34 +47,58 @@
                 </div>
                 </div>
 
+                 <!-- Batch Serial number -->
+                 <!-- Batch Serial Number Section -->
+                <div class="mb-6">
+                <h3 class="text-xl font-semibold">Batch/Serial Number</h3>
+                <div class="overflow-x-auto mt-2">
+                    <ul>
+                    <li v-for="(log, index) in orderdetails?.doc?.batch_serial_logs" :key="index">
+                        {{ log.batch_serial_number }}
+                    </li>
+                    </ul>
+                </div>
+                </div>
+
+
+                <!-- Operation Section -->
+                <div class="mb-6">
+                <h3 class="text-xl font-semibold">Formula</h3>
+                <p class="mt-2">{{ orderdetails.doc.formula }}</p>
+                </div>
+
+                <!-- Instructions Section -->
+                <div class="mb-6">
+                <h3 class="text-xl font-semibold">Instructions</h3>
+                <p class="mt-2">{{ orderdetails.doc.instructions }}</p>
+                </div>
+
                 <!-- Output Materials -->
                 <div>
                 <h3 class="text-xl font-semibold">Output Materials</h3>
                 <div class="overflow-x-auto mt-2">
                     <table class="min-w-full border border-black text-black">
-                    <thead class="bg-gray-100">
+                        <thead class="bg-gray-100">
                         <tr>
-                        <th class="px-4 py-2 border">S. No.</th>
-                        <th class="px-4 py-2 border">Item Code</th>
-                        <th class="px-4 py-2 border">UOM</th>
-                        <th class="px-4 py-2 border">Planed Qty</th>
-                        <th class="px-4 py-2 border">Conversion Factor</th>
-                        <th class="px-4 py-2 border">Alternate UMO</th>
-                        <th class="px-4 py-2 border">Alternate Quantity</th>
+                            <th class="px-4 py-2 border">S. No.</th>
+                            <th class="px-4 py-2 border">Item Code</th>
+                            <th class="px-4 py-2 border">UOM</th>
+                            <th class="px-4 py-2 border">Planed Qty</th>
+                            <th class="px-4 py-2 border">Completed Qty</th>
+                            <th class="px-4 py-2 border">Scraped Qty</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr v-for="(item, index) in orderdetails.doc.planned_output" :key="index">
-                        <td class="px-4 py-2 border text-center">{{ index + 1 }}</td>
-                        <td class="px-4 py-2 border">{{ item.item }}</td>
-                        <td class="px-4 py-2 border text-center">{{ item.uom }}</td>
-                        <td class="px-4 py-2 border text-center">{{ item.quantity }}</td>
-                        <td class="px-4 py-2 border text-center">{{ item.conversion_factor }}</td>
-                        <td class="px-4 py-2 border text-center">{{ item.alternate_uom }}</td>
-                        <td class="px-4 py-2 border text-center">{{ item.alternate_quantity }}</td>
+                            <td class="px-4 py-2 border text-center">{{ index + 1 }}</td>
+                            <td class="px-4 py-2 border">{{ item.item }}</td>
+                            <td class="px-4 py-2 border text-center">{{ item.uom }}</td>
+                            <td class="px-4 py-2 border text-center">{{ item.quantity }}</td>
+                            <td class="px-4 py-2 border text-center">{{ getCompletedQty(item.item) }}</td>
+                            <td class="px-4 py-2 border text-center">{{ getScrapedQty(item.item) }}</td>
                         </tr>
                     </tbody>
-                    </table>
+                </table>
                 </div>
                 </div>
             </div>
@@ -110,7 +122,7 @@
 </template>
 
 <script setup>
-import { ref , computed} from 'vue';
+import { ref , computed, watch} from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { createDocumentResource } from 'frappe-ui'
 import { ListView } from 'frappe-ui';
@@ -145,9 +157,44 @@ const currentStatus = computed(() => orderdetails.doc?.status || '');
 // Function to update the status (for demonstration purposes)
 const updateStatus = () => {
   orderdetails.reload();
+
+};
+// Reactive variables to store completed and scraped quantities
+let itemCompleted = 0;
+let itemsScraped = 0;
+
+// Function to calculate the sum of completed quantities for a specific item
+const getCompletedQty = (itemCode) => {
+  if (!orderdetails?.doc?.output_logs || !Array.isArray(orderdetails.doc.output_logs)) {
+    return 0;
+  }
+
+  return orderdetails.doc.output_logs
+    .filter(log => log.item === itemCode)
+    .reduce((sum, log) => sum + (log?.quantity || 0), 0);
 };
 
-// const rawinstructions = orderdetails.doc.instructions;
-// const instructions = ref(rawinstructions.split('\n'));
+// Function to calculate the sum of scraped quantities for a specific item
+const getScrapedQty = (itemCode) => {
+  if (!orderdetails?.doc?.scrap_logs || !Array.isArray(orderdetails.doc.scrap_logs)) {
+    return 0;
+  }
+
+  return orderdetails.doc.scrap_logs
+    .filter(log => log.item === itemCode)
+    .reduce((sum, log) => sum + (log?.quantity || 0), 0);
+};
+
+// // Watch for changes in orderdetails.doc and update quantities
+// watch(
+//   () => orderdetails.doc,
+//   (newDoc) => {
+//     if (newDoc) {
+//       itemCompleted = getCompletedQty();
+//       itemsScraped = getScrapedQty();
+//     }
+//   },
+//   { immediate: true } // Trigger the watcher immediately on component mount
+// );
 
 </script>

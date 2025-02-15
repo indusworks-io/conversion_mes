@@ -5,12 +5,14 @@ import { createDocumentResource } from 'frappe-ui'; // Assuming you're using Fra
 const props = defineProps<{
   orderId: string;
   workstationId: string;
+  operator: string | null;
   show: boolean;
 }>();
 
-const emit = defineEmits(['close', 'logged']);
+const emit = defineEmits(['close', 'logged','update-status']);
 
-const operator = ref<string>('');
+const operator = ref<string>(props.operator || '');
+console.log(props.operator)
 const itemName = ref<string>('');
 const batchSerialNumber = ref<string>('');
 const loading = ref(false);
@@ -47,7 +49,6 @@ watch(
   }
 );
 
-// Function to log batch/serial number
 const logBatchSerial = async () => {
   if (!operator.value || !itemName.value || !batchSerialNumber.value) {
     errorMessage.value = 'Please fill in all fields.';
@@ -64,15 +65,16 @@ const logBatchSerial = async () => {
       body: JSON.stringify({
         order_name: props.orderId,
         operator: operator.value,
-        item_name: itemName.value,
+        
         batch_serial_number: batchSerialNumber.value,
       }),
     });
 
     const data = await response.json();
 
-    if (data.status) {
-      console.log('Batch/Serial logged successfully:', data.message);
+    if (data) {
+      console.log('Batch/Serial logged successfully:');
+      emit('update-status');
       emit('logged', {
         operator: operator.value,
         itemName: itemName.value,
