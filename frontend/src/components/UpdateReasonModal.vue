@@ -17,6 +17,7 @@ const errorMessage = ref<string | null>(null);
 const downtimeReasons = createListResource({
   doctype: 'Downtime Reason', // Replace with the correct doctype
   fields: ['name'], // Fetch the fields you need
+  filters: [['show_to_operator', '=', true]],
   auto: true, // Automatically fetch data when the component is mounted
   transform(data: any[]) {
     // Transform the data into the desired format
