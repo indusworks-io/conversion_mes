@@ -29,6 +29,7 @@
   "actual_end_date_time",
   "column_break_tnhl",
   "actual_duration",
+  "current_operator",
   "batchserial_section",
   "batch_serial_number_summary",
   "output_section",
@@ -301,12 +302,19 @@
    "fieldname": "batchserial_section",
    "fieldtype": "Section Break",
    "label": "Batch/Serial"
+  },
+  {
+   "fieldname": "current_operator",
+   "fieldtype": "Link",
+   "label": "Current Operator",
+   "options": "Operator",
+   "read_only": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-12 13:45:54.383505",
+ "modified": "2025-02-15 11:20:14.074906",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",

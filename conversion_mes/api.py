@@ -22,6 +22,7 @@ def start_order(order_name, operator):
         order = frappe.get_doc("Manufacturing Order", order_name)
         if order.status == 'Not Started':
             order.status = 'In Progress'
+            order.current_operator = operator
             order.actual_start_date_time = now()
             time_log = order.append('time_logs', {})
             time_log.operator = operator
@@ -50,6 +51,7 @@ def start_order(order_name, operator):
             }
         elif order.status == 'Stopped':
             order.status = 'In Progress'
+            order.current_operator = operator
             time_log = order.append('time_logs', {})
             time_log.operator = operator
             time_log.start_time = now()
