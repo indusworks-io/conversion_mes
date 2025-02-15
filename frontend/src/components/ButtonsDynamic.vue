@@ -166,39 +166,45 @@ const completeOrder = async () => {
       Stop
     </button>
 
-    <!-- Log Scrap Button -->
+    <!-- Complete Button -->
     <button
-      v-if="currentStatus !== 'Not Started'"
-      @click="logScrap"
-      class="px-6 py-2 bg-blue-500 text-white text-sm font-medium rounded hover:bg-blue-600 transition-colors uppercase"
-    >
-      Log Scrap
+    v-if="currentStatus !== 'Not Started' && currentStatus !== 'Completed' && currentStatus !== 'In Progress'"
+    @click="showCompleteOrderPopup = true" class="px-6 py-2 bg-blue-500 text-sm font-medium text-white rounded hover:bg-blue-600 uppercase">
+      Complete
     </button>
 
     <!-- Batch/Serial Button -->
     <button
-      v-if="currentStatus !== 'Not Started'"
+      v-if="currentStatus !== 'Not Started' && currentStatus !== 'Completed' && currentStatus !== 'Stopped'"
       @click="showBatchSerialPopup = true"
-      class="px-6 py-2 bg-purple-500 text-white text-sm font-medium rounded hover:bg-purple-600 transition-colors uppercase"
+      class="px-6 py-2 bg-yellow-500 text-white text-sm font-medium rounded hover:bg-yellow-600 transition-colors uppercase"
     >
-      Batch/Serial
+      Log Serial
     </button>
 
     <!-- Log Output Button -->
     <button
-      v-if="currentStatus !== 'Not Started'"
+      v-if="currentStatus !== 'Not Started' && currentStatus !== 'Completed' && currentStatus !== 'Stopped'"
       @click="logOutput"
-      class="px-6 py-2 bg-yellow-500 text-white text-sm font-medium rounded hover:bg-yellow-600 transition-colors uppercase"
+      class="px-6 py-2 bg-green-500 text-white text-sm font-medium rounded hover:bg-green-600 transition-colors uppercase"
     >
       Log Output
     </button>
 
-    <!-- Complete Button -->
+    <!-- Log Scrap Button -->
     <button
-    v-if="currentStatus !== 'Not Started' && currentStatus !== 'Completed'" 
-    @click="showCompleteOrderPopup = true" class="px-6 py-2 bg-blue-500 font-medium text-white rounded hover:bg-blue-600">
-      Complete
+      v-if="currentStatus !== 'Not Started' && currentStatus !== 'Completed' && currentStatus !== 'Stopped'"
+      @click="logScrap"
+      class="px-6 py-2 bg-gray-500 text-white text-sm font-medium rounded hover:bg-red-600 transition-colors uppercase"
+    >
+      Log Scrap
     </button>
+
+    
+
+    
+
+    
 
     <!-- Error Message -->
     <div v-if="errorMessage" class="text-red-500 text-sm mt-2">

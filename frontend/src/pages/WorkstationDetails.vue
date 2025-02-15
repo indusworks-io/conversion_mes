@@ -36,11 +36,11 @@
         </div>
     </div>
     <div class="flex w-full">
-        <div class="mt-8 w-[70%] ">
+        <div class="mt-2 w-[70%] ">
             <h3 class="font-bold text-xl text-gray-600">
             Open Manufacturing Orders
             </h3>
-            <div class="pt-6">
+            <div class="pt-2">
                 <OrderCard
                     v-for="order in ManufacturingOrders.list.data"
                     :key="order.name"
@@ -50,7 +50,7 @@
                 />
             </div>
         </div>
-        <div class="w-[30%] bg-slate-200 p-12">
+        <div class="w-[30%] bg-slate-200 p-2">
             <DowntimeCard :workstationId="workstationId" />
         </div>
     </div>

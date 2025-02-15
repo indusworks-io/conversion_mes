@@ -59,9 +59,9 @@ watchEffect(() => {
   
   <div v-for="downtime in downtimeLogs" :key="downtime.id">
     <div class="w-full max-w-md bg-white rounded-lg shadow-md">
-      <div class="p-6">
+      <div class="p-2">
         <!-- Downtime ID -->
-        <div class="mb-4 bg-gray-50 border border-gray-200 rounded-md p-3">
+        <div class="mb-2 bg-gray-50 border border-gray-200 rounded-md p-3">
           <label class="block mb-2 text-sm font-medium text-gray-700">Downtime ID:</label>
           <input
             type="text"
@@ -72,7 +72,7 @@ watchEffect(() => {
         </div>
 
         <!-- Start Time -->
-        <div class="mb-4 bg-gray-50 border border-gray-200 rounded-md p-3">
+        <div class="mb-2 bg-gray-50 border border-gray-200 rounded-md p-3">
           <label class="block mb-2 text-sm font-medium text-gray-700">Start:</label>
           <input
             type="text"
@@ -83,7 +83,7 @@ watchEffect(() => {
         </div>
 
         <!-- End Time -->
-        <div class="mb-4 bg-gray-50 border border-gray-200 rounded-md p-3">
+        <div class="mb-2 bg-gray-50 border border-gray-200 rounded-md p-3">
           <label class="block mb-2 text-sm font-medium text-gray-700">End:</label>
           <input
             type="text"
@@ -94,7 +94,7 @@ watchEffect(() => {
         </div>
 
         <!-- Reason -->
-        <div class="mb-4 bg-gray-50 border border-gray-200 rounded-md p-3">
+        <div class="mb-2 bg-gray-50 border border-gray-200 rounded-md p-3">
           <label class="block mb-2 text-sm font-medium text-gray-700">Reason:</label>
           <input
             type="text"

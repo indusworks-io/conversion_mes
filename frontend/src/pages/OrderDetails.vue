@@ -21,27 +21,25 @@
     <!-- Main Section -->
     <div class="flex w-full">
         <!-- Order Details Section -->
-        <div class="w-[70%] pt-2 p-2 flex flex-col">
-            <h1 class="text-xl font-bold">Order Details</h1>
+        <div class="w-[70%] bg-slate-200 p-2 flex flex-col">
             <!-- Action Buttons -->
-            <div class="p-6">
+            <div class="">
                 <ButtonsDynamic :workstationId="workstationId" @update-status="updateStatus" :currentStatus="currentStatus" :orderId="orderId"/>
             </div>            
             <!-- Order Number & Status Section -->
 
-            <div v-if="orderdetails.doc" class="w-full mx-auto p-6 bg-white text-black shadow-xl rounded-lg">
+            <div v-if="orderdetails.doc" class="w-full mx-auto p-2 bg-white text-black shadow-xl rounded-lg">
                 <!-- Order Header -->
                 <div class="mb-6">
-                <h2 class="text-2xl font-bold">Manufacturing Order</h2>
-                <div class="mt-4">
-                    <p><span class="font-semibold">Order Number:</span> {{ orderdetails.doc.name }}</p>
-                    <p><span class="font-semibold">Status:</span> {{ orderdetails.doc.status }}</p>
+                <div class="pr-2 flex flex-row justify-between">
+                    <p><span class="text-sm font-semibold text-gray-600">Order Number:</span> {{ orderdetails.doc.name }}</p>
+                    <p><span class="text-sm font-semibold text-gray-600">Status:</span> {{ orderdetails.doc.status }}</p>
                 </div>
                 </div>
 
                 <!-- Input Materials -->
                 <div class="mb-6">
-                <h3 class="text-xl font-semibold">Input Materials</h3>
+                <h3 class="text-sm font-semibold text-gray-600">Input:</h3>
                 <div class="overflow-x-auto mt-2">
                     {{ orderdetails.doc.planned_input_item }}
                 </div>
@@ -50,7 +48,7 @@
                  <!-- Batch Serial number -->
                  <!-- Batch Serial Number Section -->
                 <div class="mb-6">
-                <h3 class="text-xl font-semibold">Batch/Serial Number</h3>
+                <h3 class="text-sm font-semibold text-gray-600">Batch/Serial Numbers:</h3>
                 <div class="overflow-x-auto mt-2">
                     <ul>
                     <li v-for="(log, index) in orderdetails?.doc?.batch_serial_logs" :key="index">
@@ -63,29 +61,31 @@
 
                 <!-- Operation Section -->
                 <div class="mb-6">
-                <h3 class="text-xl font-semibold">Formula</h3>
+                <h3 class="text-sm font-semibold text-gray-600">Formula:</h3>
                 <p class="mt-2">{{ orderdetails.doc.formula }}</p>
                 </div>
 
                 <!-- Instructions Section -->
                 <div class="mb-6">
-                <h3 class="text-xl font-semibold">Instructions</h3>
-                <p class="mt-2">{{ orderdetails.doc.instructions }}</p>
+                <h3 class="text-sm font-semibold text-gray-600">Instructions:</h3>
+                <div class="mt-2" v-html="orderdetails.doc.instructions" style="white-space: pre-wrap;"></div>
+                <!-- <pre class="mt-2" v-html="orderdetails.doc.instructions"></pre> -->
+                <!-- <p class="mt-2">{{ orderdetails.doc.instructions }}</p> -->
                 </div>
 
                 <!-- Output Materials -->
                 <div>
-                <h3 class="text-xl font-semibold">Output Materials</h3>
+                <h3 class="text-sm font-semibold text-gray-600">Output:</h3>
                 <div class="overflow-x-auto mt-2">
                     <table class="min-w-full border border-black text-black">
                         <thead class="bg-gray-100">
                         <tr>
-                            <th class="px-4 py-2 border">S. No.</th>
-                            <th class="px-4 py-2 border">Item Code</th>
-                            <th class="px-4 py-2 border">UOM</th>
-                            <th class="px-4 py-2 border">Planed Qty</th>
-                            <th class="px-4 py-2 border">Completed Qty</th>
-                            <th class="px-4 py-2 border">Scraped Qty</th>
+                            <th class="px-4 py-2 border text-gray-600">#</th>
+                            <th class="px-4 py-2 border text-gray-600">Item Code</th>
+                            <th class="px-4 py-2 border text-gray-600">UOM</th>
+                            <th class="px-4 py-2 border text-gray-600">Planned</th>
+                            <th class="px-4 py-2 border text-gray-600">Completed</th>
+                            <th class="px-4 py-2 border text-gray-600">Scrapped</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -113,9 +113,8 @@
 
     <!-- Column 2: 30% width -->
         
-        <div class="w-[30%] bg-slate-200 p-12">
+        <div class="w-[30%] bg-slate-200 p-2">
             <DowntimeCard  :workstationId="workstationId" />
-            
         </div>
     </div>
         
