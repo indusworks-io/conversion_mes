@@ -13,6 +13,8 @@ import {
   resourcesPlugin,
 } from 'frappe-ui'
 
+import './registerServiceWorker'
+
 let app = createApp(App)
 
 setConfig('resourceFetcher', frappeRequest)
