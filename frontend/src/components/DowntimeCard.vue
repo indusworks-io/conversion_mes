@@ -57,7 +57,7 @@ watchEffect(() => {
     No Downtime Logs
   </div>
   
-  <div v-for="downtime in downtimeLogs" :key="downtime.id">
+  <div v-for="downtime in downtimeLogs" :key="downtime.id" class="p-2">
     <div class="w-full max-w-md bg-white rounded-lg shadow-md">
       <div class="p-2">
         <!-- Downtime ID -->
@@ -94,7 +94,7 @@ watchEffect(() => {
         </div>
 
         <!-- Reason -->
-        <div class="mb-2 bg-gray-50 border border-gray-200 rounded-md p-3">
+        <!-- <div class="mb-2 bg-gray-50 border border-gray-200 rounded-md p-3">
           <label class="block mb-2 text-sm font-medium text-gray-700">Reason:</label>
           <input
             type="text"
@@ -102,7 +102,7 @@ watchEffect(() => {
             readonly
             class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm"
           />
-        </div>
+        </div> -->
 
         <!-- Update Reason Button -->
         <button

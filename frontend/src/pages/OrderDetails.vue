@@ -24,7 +24,7 @@
         <div class="w-[70%] bg-slate-200 p-2 flex flex-col">
             <!-- Action Buttons -->
             <div class="">
-                <ButtonsDynamic :workstationId="workstationId" @update-status="updateStatus" :currentStatus="currentStatus" :orderId="orderId"/>
+                <ButtonsDynamic :workstationId="workstationId" @update-status="updateStatus" :currentStatus="currentStatus" :currentOperator="currentOperator" :orderId="orderId"/>
             </div>            
             <!-- Order Number & Status Section -->
 
@@ -34,6 +34,14 @@
                 <div class="pr-2 flex flex-row justify-between">
                     <p><span class="text-sm font-semibold text-gray-600">Order Number:</span> {{ orderdetails.doc.name }}</p>
                     <p><span class="text-sm font-semibold text-gray-600">Status:</span> {{ orderdetails.doc.status }}</p>
+                </div>
+                </div>
+
+                <!-- Input Materials -->
+                <div class="mb-6">
+                <h3 class="text-sm font-semibold text-gray-600">Operator:</h3>
+                <div class="overflow-x-auto mt-2">
+                    {{ orderdetails.doc.current_operator }}
                 </div>
                 </div>
 
@@ -113,7 +121,7 @@
 
     <!-- Column 2: 30% width -->
         
-        <div class="w-[30%] bg-slate-200 p-2">
+        <div class="w-[30%] p-4 h-screen bg-slate-200 overflow-y-auto">
             <DowntimeCard  :workstationId="workstationId" />
         </div>
     </div>
@@ -131,11 +139,7 @@ const router = useRouter();
 const workstationId = route.params.id;
 const orderId = route.params.orderid;
 import DowntimeCard from '../components/DowntimeCard.vue'
-import ActionButton from '../components/AcitonButton.vue'
 import ButtonsDynamic from '../components/ButtonsDynamic.vue';
-
-
-import ManufacturingOrder from '../components/ManufacturingOrder.vue';
 
 
 const goToWorkstationDetails = () => {
@@ -150,17 +154,14 @@ const orderdetails = createDocumentResource({
         auto: true,
 })
 
-console.log(orderdetails);
+
 
 const currentStatus = computed(() => orderdetails.doc?.status || '');
+const currentOperator = computed(()=> orderdetails.doc?.current_operator || '');
 // Function to update the status (for demonstration purposes)
 const updateStatus = () => {
   orderdetails.reload();
-
 };
-// Reactive variables to store completed and scraped quantities
-let itemCompleted = 0;
-let itemsScraped = 0;
 
 // Function to calculate the sum of completed quantities for a specific item
 const getCompletedQty = (itemCode) => {

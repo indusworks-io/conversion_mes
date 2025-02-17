@@ -50,8 +50,10 @@
                 />
             </div>
         </div>
-        <div class="w-[30%] bg-slate-200 p-2">
-            <DowntimeCard :workstationId="workstationId" />
+        <div class="w-[30%] p-4 h-screen bg-slate-200 overflow-y-auto">
+            
+                <DowntimeCard :workstationId="workstationId" />
+            
         </div>
     </div>
 </template>

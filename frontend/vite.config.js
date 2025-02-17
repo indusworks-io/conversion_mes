@@ -11,26 +11,40 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "IndusWrok MES",
-        short_name: "VuePWA",
-        description: "A Vue.js Progressive Web App",
-        theme_color: "#42b883",
-        background_color: "#ffffff",
-        display: "standalone",
-        scope: "/",
-        start_url: "/",
-        icons: [
-          {
-            src: "/icons/icon-192x192.png",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "/icons/icon-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-          },
-        ],
+        
+          "name": "IndusWorksMES",
+          "short_name": "IndusWorksPWA",
+          "icons": [
+            {
+              "src": "/img/icons/pwa-192x192.png",
+              "sizes": "192x192",
+              "type": "image/png",
+              "purpose": "any"
+            },
+            {
+              "src": "/img/icons/pwa-512x512.png",
+              "sizes": "512x512",
+              "type": "image/png",
+              "purpose": "any"
+            },
+            {
+              "src": "/img/icons/pwa-maskable-192x192.png",
+              "sizes": "192x192",
+              "type": "image/png",
+              "purpose": "maskable"
+            },
+            {
+              "src": "/img/icons/pwa-maskable-512x512.png",
+              "sizes": "512x512",
+              "type": "image/png",
+              "purpose": "maskable"
+            }
+          ],
+          "start_url": "/",
+          "display": "standalone",
+          "background_color": "#FFFFFF",
+          "theme_color": "#FFFFFF"
+        
       },
       workbox: {
         runtimeCaching: [
