@@ -13,6 +13,9 @@ import {
   resourcesPlugin,
 } from 'frappe-ui'
 
+// import './registerServiceWorker'
+import "./serviceWorkerRegister"; // Import the PWA registration
+
 let app = createApp(App)
 
 setConfig('resourceFetcher', frappeRequest)
@@ -24,4 +27,4 @@ app.component('Button', Button)
 app.component('Card', Card)
 app.component('Input', Input)
 
-app.mount('#app')
+app.mount("#app")

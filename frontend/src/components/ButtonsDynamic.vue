@@ -11,6 +11,7 @@ const props = defineProps<{
   orderId: string;
   workstationId: string;
   currentStatus: string;
+  currentOperator: string;
 }>();
 
 const emit = defineEmits(['update-status']); // Emit event to update status in the parent
@@ -24,6 +25,8 @@ const showCompleteOrderPopup = ref(false);
 const errorMessage = ref<string | null>(null);
 const loading = ref(false);
 const selectedOperator = ref<string | null>(null); 
+
+selectedOperator.value = props.currentOperator;
 
 // Start Order Function
 const startOrder = async (operator: string) => {

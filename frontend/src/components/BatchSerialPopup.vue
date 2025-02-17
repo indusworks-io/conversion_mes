@@ -25,10 +25,7 @@ const orderDetails = createDocumentResource({
   fields: ['operator', 'planned_output'], // Fetch operator and planned_output
   auto: true, // Automatically fetch data when the component is mounted
   onSuccess() {
-        //operator.value = data.operator; // Pre-fill operator
-        itemName.value = orderDetails.doc.planned_output.item; // Pre-fill item name from planned_output
       
-    
   },
   onError(error: any) {
     console.error('Error fetching manufacturing order:', error);
@@ -36,9 +33,7 @@ const orderDetails = createDocumentResource({
   },
 });
 
-console.log(orderDetails.doc.planned_output);
-itemName.value = orderDetails.doc.planned_output[0].item;
-console.log(itemName)
+
 // Watch for changes in `show` to reload data when the popup is opened
 watch(
   () => props.show,
@@ -50,7 +45,7 @@ watch(
 );
 
 const logBatchSerial = async () => {
-  if (!operator.value || !itemName.value || !batchSerialNumber.value) {
+  if (!operator.value || !batchSerialNumber.value) {
     errorMessage.value = 'Please fill in all fields.';
     return;
   }
@@ -77,7 +72,7 @@ const logBatchSerial = async () => {
       emit('update-status');
       emit('logged', {
         operator: operator.value,
-        itemName: itemName.value,
+        
         batchSerialNumber: batchSerialNumber.value,
       });
       emit('close');
@@ -111,16 +106,6 @@ const logBatchSerial = async () => {
         type="text"
         class="w-full border border-black rounded-md px-3 py-2 text-black bg-white"
         placeholder="Enter operator name"
-        readonly
-      />
-
-      <!-- Item Name Input -->
-      <label class="block mb-2 text-sm font-medium text-black mt-3">Item Name:</label>
-      <input
-        v-model="itemName"
-        type="text"
-        class="w-full border border-black rounded-md px-3 py-2 text-black bg-white"
-        placeholder="Enter item name"
         readonly
       />
 

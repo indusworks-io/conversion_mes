@@ -49,8 +49,20 @@ const getScrapedQty = (itemCode) => {
 // Log Scrap Function
 const logScrap = async () => {
   try {
-    // Iterate over each item in planned_output and send a request
-    for (const item of orderdetails.doc.planned_output) {
+    // Filter items with addedQuantities > 0
+    const itemsToUpdate = orderdetails.doc.planned_output.filter(
+      item => addedScrapQuantities[item.item] > 0
+    );
+
+    // If no items need to be updated, close the popup
+    if (itemsToUpdate.length === 0) {
+      console.log('No items to update.');
+      emit('close');
+      return;
+    }
+
+    // Iterate over filtered items and send requests
+    for (const item of itemsToUpdate) {
       const response = await fetch('/api/method/conversion_mes.api.log_scrap', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

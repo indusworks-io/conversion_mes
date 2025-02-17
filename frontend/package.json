@@ -1,29 +1,32 @@
 {
   "name": "frappe-ui-frontend",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "dev": "vite",
     "build": "vite build --base=/assets/conversion_mes/frontend/ && yarn copy-html-entry",
-    "preview": "vite preview",
-    "copy-html-entry": "cp ../conversion_mes/public/frontend/index.html ../conversion_mes/www/frontend.html"
+    "copy-html-entry": "cp ../conversion_mes/public/frontend/index.html ../conversion_mes/www/frontend.html",
+    "dev": "vite",
+    "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^1.7.9",
     "feather-icons": "^4.29.2",
     "frappe-ui": "^0.1.98",
     "lucide-vue-next": "^0.475.0",
+    "register-service-worker": "^1.7.2",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@types/axios": "^0.14.4",
     "@vitejs/plugin-vue": "^5.1.4",
+    "@vue/cli-plugin-pwa": "~5.0.0",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.5",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.7.2",
-    "vite": "^5.4.10"
+    "vite": "^5.4.10",
+    "vite-plugin-pwa": "^0.21.1"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
