@@ -14,7 +14,7 @@ import {
 } from 'frappe-ui'
 
 // import './registerServiceWorker'
-import "./serviceWorkerRegister"; // Import the PWA registration
+import "./serviceWorkerRegister";
 
 let app = createApp(App)
 
