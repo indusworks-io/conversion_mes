@@ -12,7 +12,7 @@ export default defineConfig({
       registerType: "autoUpdate",
       manifest: {
           "name": "IndusWorksMES",
-          "short_name": "IndusWorksPWA",
+          "short_name": "Indus MES",
           "icons": [
             {
               "src": "img/icons/pwa-192x192.png",
@@ -45,7 +45,7 @@ export default defineConfig({
               "purpose": "maskable"
             }
           ],
-          "start_url": "/",
+          "start_url": "/frontend",
           "display": "standalone",
           "background_color": "#FFFFFF",
           "theme_color": "#FFFFFF"
