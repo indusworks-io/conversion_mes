@@ -42,14 +42,18 @@ router.beforeEach(async (to, from, next) => {
   } catch (error) {
     isLoggedIn = false
   }
-
-  if (to.name === 'Login' && isLoggedIn) {
-    next({ name: 'Home' })
-  } else if (to.name !== 'Login' && !isLoggedIn) {
-    next({ name: 'Login' })
-  } else {
-    next()
+  if (!isLoggedIn) {
+    window.location.href = '/login?redirect-to=/frontend'
   }
+  next()
+
+  // if (to.name === 'Login' && isLoggedIn) {
+  //   next({ name: 'Home' })
+  // } else if (to.name !== 'Login' && !isLoggedIn) {
+  //   next({ name: 'Login' })
+  // } else {
+  //   next()
+  // }
 })
 
 export default router
