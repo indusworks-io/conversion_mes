@@ -42,10 +42,10 @@ def get_columns():
 			"width": 150
 		},
 		{
-			'fieldname': 'program',
-			'label': ('Program'),
+			'fieldname': 'formula',
+			'label': ('Formula'),
 			'fieldtype': 'Link',
-			'options': 'Program',
+			'options': 'Formula',
 			"width": 150
 		},
 		{
@@ -79,15 +79,15 @@ def get_columns():
 			"width": 150
 		},
 		{
-			'fieldname': 'total_planned_output_quantity_in_default_uom',
+			'fieldname': 'total_planned_output_quantity_in_alternate_uom',
 			'label': ('Planned Output Quantity'),
-			'fieldtype': 'Int',
+			'fieldtype': 'Float',
 			"width": 150
 		},
 		{
-			'fieldname': 'total_actual_output_quantity_in_default_uom',
+			'fieldname': 'total_actual_output_quantity_in_alternate_uom',
 			'label': ('Actual Output Quantity'),
-			'fieldtype': 'Int',
+			'fieldtype': 'Float',
 			"width": 150
 		},
 
@@ -108,12 +108,12 @@ def get_data(from_date, to_date):
 			"name": manufacturing_order.name,
 			"site": manufacturing_order.site,
 			"workstation": manufacturing_order.workstation,
-			"program": manufacturing_order.program,
+			"formula": manufacturing_order.formula,
 			"status": manufacturing_order.status,
 			"planned_duration": manufacturing_order.planned_duration,
 			"actual_duration": manufacturing_order.actual_duration,
-			"total_planned_output_quantity_in_default_uom": manufacturing_order.total_planned_output_quantity_in_default_uom,
-			"total_actual_output_quantity_in_default_uom": manufacturing_order.total_actual_output_quantity_in_default_uom,
+			"total_planned_output_quantity_in_alternate_uom": manufacturing_order.total_planned_output_quantity_in_alternate_uom,
+			"total_actual_output_quantity_in_alternate_uom": manufacturing_order.total_actual_output_quantity_in_alternate_uom,
 			"planned_cycle_time": manufacturing_order.planned_cycle_time,
 			"actual_cycle_time": manufacturing_order.actual_cycle_time
 		}

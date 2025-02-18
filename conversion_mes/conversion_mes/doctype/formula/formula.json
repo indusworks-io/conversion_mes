@@ -34,7 +34,7 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "description": "Ideal Cycle Time Required To Complete 1 cycle.",
+   "description": "Ideal Cycle Time Required To Make 1 Unit.",
    "fieldname": "cycle_time",
    "fieldtype": "Duration",
    "hide_days": 1,
@@ -53,7 +53,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-12 13:16:57.175064",
+ "modified": "2025-02-18 15:32:54.808356",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Formula",

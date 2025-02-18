@@ -42,10 +42,10 @@ def get_columns():
 			"width": 150
 		},
 		{
-			'fieldname': 'operation',
-			'label': ('Operation'),
+			'fieldname': 'formula',
+			'label': ('Formula'),
 			'fieldtype': 'Link',
-			'options': 'Operation',
+			'options': 'Formula',
 			"width": 200
 		},
 		{
@@ -86,9 +86,9 @@ def get_data(from_date, to_date):
 				"name": manufacturing_order.name,
 				"site": manufacturing_order.site,
 				"workstation": manufacturing_order.workstation,
-				"operation": manufacturing_order.operation,
+				"formula": manufacturing_order.formula,
 				"status": manufacturing_order.status,
-				"item": row.item,
+				"item": manufacturing_order.planned_input_item,
 				"batch_serial_number": row.serial_batch_number
 			})
 	return data

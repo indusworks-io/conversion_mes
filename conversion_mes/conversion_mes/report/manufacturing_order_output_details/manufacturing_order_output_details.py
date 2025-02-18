@@ -41,10 +41,10 @@ def get_columns():
 			"width": 150
 		},
 		{
-			'fieldname': 'operation',
-			'label': ('Operation'),
+			'fieldname': 'formula',
+			'label': ('Formula'),
 			'fieldtype': 'Link',
-			'options': 'Operation',
+			'options': 'Formula',
 			"width": 150
 		},
 		{
@@ -106,7 +106,7 @@ def get_data(from_date, to_date):
 				"name": manufacturing_order.name,
 				"site": manufacturing_order.site,
 				"workstation": manufacturing_order.workstation,
-				"program": manufacturing_order.operation,
+				"formula": manufacturing_order.formula,
 				"status": manufacturing_order.status,
 				"item": row.item,
 				"quantity": row.quantity,
@@ -114,17 +114,17 @@ def get_data(from_date, to_date):
 				"alternate_quantity": row.alternate_quantity,
 				"alternate_uom": row.alternate_uom
 			})
-		data.append({
-			"posting_date": manufacturing_order.posting_date,
-			"name": manufacturing_order.name,
-			"site": manufacturing_order.site,
-			"workstation": manufacturing_order.workstation,
-			"operation": manufacturing_order.operation,
-			"status": manufacturing_order.status,
-			"item": manufacturing_order.scrap_item_code,
-			"quantity": manufacturing_order.total_actual_scrap_quantity_in_default_uom,
-			"uom": manufacturing_order.scrap_uom,
-			"alternate_quantity": manufacturing_order.total_actual_scrap_quantity_in_alternate_uom,
-			"alternate_uom": manufacturing_order.scrap_alternate_uom
-		})
+		# data.append({
+		# 	"posting_date": manufacturing_order.posting_date,
+		# 	"name": manufacturing_order.name,
+		# 	"site": manufacturing_order.site,
+		# 	"workstation": manufacturing_order.workstation,
+		# 	"formula": manufacturing_order.formula,
+		# 	"status": manufacturing_order.status,
+		# 	"item": manufacturing_order.scrap_item_code,
+		# 	"quantity": manufacturing_order.total_actual_scrap_quantity_in_default_uom,
+		# 	"uom": manufacturing_order.scrap_uom,
+		# 	"alternate_quantity": manufacturing_order.total_actual_scrap_quantity_in_alternate_uom,
+		# 	"alternate_uom": manufacturing_order.scrap_alternate_uom
+		# })
 	return data

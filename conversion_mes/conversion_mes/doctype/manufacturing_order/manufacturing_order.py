@@ -15,6 +15,9 @@ class ManufacturingOrder(Document):
 		self.total_planned_output_quantity_in_default_uom = sum([item.quantity for item in self.planned_output])
 		self.total_planned_output_quantity_in_alternate_uom = sum([item.alternate_quantity for item in self.planned_output])
 
+		# Update Planned Duration By Multiplying Planned Cycle Time With Planned Output Quantity in alternate uom
+		self.planned_duration = self.planned_cycle_time * self.total_planned_output_quantity_in_alternate_uom
+
 		# Update Duration Feild In Time Logs Table && Actual Duration
 		self.actual_duration = 0
 		if self.time_logs:
@@ -27,6 +30,10 @@ class ManufacturingOrder(Document):
 				else:
 					time_log.duration = time_diff_in_seconds(end, start)
 					self.actual_duration += time_log.duration
+		
+		
+		
+		
 		
 		# Update Batch/Serial Number Summary
 		self.batch_serial_number_summary = []
@@ -104,3 +111,7 @@ class ManufacturingOrder(Document):
 		if self.actual_scrap_summary:
 			self.total_actual_scrap_quantity_in_default_uom = sum([item.quantity for item in self.actual_scrap_summary])
 			self.total_actual_scrap_quantity_in_alternate_uom = sum([item.alternate_quantity for item in self.actual_scrap_summary])
+		
+		# Update Actual Cycle Time by dividing actual duration with total actual output quantity in alternate uom
+		if self.total_actual_output_quantity_in_alternate_uom > 0 and self.actual_duration > 0:
+			self.actual_cycle_time = self.actual_duration / self.total_actual_output_quantity_in_alternate_uom

@@ -18,6 +18,7 @@
   "log_serial_batch_number",
   "formula",
   "planned_cycle_time",
+  "planned_duration",
   "instructions",
   "section_break_laaq",
   "planned_output",
@@ -29,6 +30,7 @@
   "actual_end_date_time",
   "column_break_tnhl",
   "actual_duration",
+  "actual_cycle_time",
   "current_operator",
   "batchserial_section",
   "batch_serial_number_summary",
@@ -232,7 +234,7 @@
    "fieldtype": "Section Break"
   },
   {
-   "description": "Time Needed To Complete One Cycle.",
+   "description": "Time Needed To Make 1 Unit.",
    "fetch_from": "formula.cycle_time",
    "fieldname": "planned_cycle_time",
    "fieldtype": "Duration",
@@ -306,15 +308,30 @@
   {
    "fieldname": "current_operator",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Current Operator",
    "options": "Operator",
    "read_only": 1
+  },
+  {
+   "fieldname": "planned_duration",
+   "fieldtype": "Duration",
+   "hide_days": 1,
+   "hide_seconds": 1,
+   "label": "Planned Duration",
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_cycle_time",
+   "fieldtype": "Duration",
+   "hide_days": 1,
+   "label": "Actual Cycle Time"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-15 11:20:14.074906",
+ "modified": "2025-02-18 15:40:12.416982",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Manufacturing Order",

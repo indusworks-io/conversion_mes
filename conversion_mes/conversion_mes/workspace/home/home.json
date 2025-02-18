@@ -84,65 +84,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Organization Masters",
-   "link_count": 5,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Sites",
-   "link_count": 0,
-   "link_to": "Site",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Operators",
-   "link_count": 0,
-   "link_to": "Operator",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Workstations",
-   "link_count": 0,
-   "link_to": "Workstation",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Operations",
-   "link_count": 0,
-   "link_to": "Operation",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Devices",
-   "link_count": 0,
-   "link_to": "Device",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Manufacturing Report",
    "link_count": 3,
    "link_type": "DocType",
@@ -236,9 +177,68 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Organization Masters",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sites",
+   "link_count": 0,
+   "link_to": "Site",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Operators",
+   "link_count": 0,
+   "link_to": "Operator",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Workstations",
+   "link_count": 0,
+   "link_to": "Workstation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Formulas",
+   "link_count": 0,
+   "link_to": "Formula",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Devices",
+   "link_count": 0,
+   "link_to": "Device",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-02-04 17:12:52.088574",
+ "modified": "2025-02-18 15:05:54.352904",
  "modified_by": "Administrator",
  "module": "Conversion Mes",
  "name": "Home",
