@@ -24,7 +24,7 @@
         <div class="w-[70%] bg-slate-200 p-2 flex flex-col">
             <!-- Action Buttons -->
             <div class="">
-                <ButtonsDynamic :workstationId="workstationId" @update-status="updateStatus" :currentStatus="currentStatus" :currentOperator="currentOperator" :orderId="orderId"/>
+                <ButtonsDynamic v-if="orderdetails.doc" :workstationId="workstationId" @update-status="updateStatus" :currentStatus="currentStatus" :currentOperator="currentOperator" :orderId="orderId"/>
             </div>            
             <!-- Order Number & Status Section -->
 
