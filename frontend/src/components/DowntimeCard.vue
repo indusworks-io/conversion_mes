@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { onMounted, onUnmounted, ref, watchEffect } from 'vue';
 import { createListResource } from 'frappe-ui';
 import UpdateReasonModal from './UpdateReasonModal.vue';
 
@@ -39,6 +39,28 @@ const DowntimeLogs = createListResource({
 });
 
 const downtimeLogs = ref<DowntimeInfo[]>([]);
+
+// Function to reload downtime logs
+const reloadDowntimeLogs = () => {
+  DowntimeLogs.reload();
+};
+
+// Set up periodic fetching
+
+onMounted(() => {
+  // Fetch immediately when the component is mounted
+  reloadDowntimeLogs();
+
+  // Set up an interval to fetch every 2 minutes (120,000 milliseconds)
+  setInterval(() => {
+    DowntimeLogs.reload();
+    console.log('Reloading downtime logs...');
+  }, 120000); // 2 minutes
+});
+
+onUnmounted(() => {
+  
+});
 
 watchEffect(() => {
   if (DowntimeLogs.data) {
