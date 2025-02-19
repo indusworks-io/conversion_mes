@@ -100,14 +100,14 @@ const logBatchSerial = async () => {
       </div>
 
       <!-- Operator Input -->
-      <label class="block mb-2 text-sm font-medium text-black">Operator:</label>
+      <!-- <label class="block mb-2 text-sm font-medium text-black">Operator:</label>
       <input
         v-model="operator"
         type="text"
         class="w-full border border-black rounded-md px-3 py-2 text-black bg-white"
         placeholder="Enter operator name"
         readonly
-      />
+      /> -->
 
       <!-- Batch/Serial Number Input -->
       <label class="block mb-2 text-sm font-medium text-black mt-3">Batch/Serial Number:</label>
