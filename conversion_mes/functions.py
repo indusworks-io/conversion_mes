@@ -1,5 +1,5 @@
 import frappe
-from frappe.utils import nowdate, time_diff_in_seconds
+from frappe.utils import nowdate, time_diff_in_seconds, get_weekday
 from datetime import datetime, timedelta
 
 
@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 def site_automation():
     try:
         today_date = nowdate()
-        today_day = datetime.now().strftime("%A")
+        today_day = get_weekday()
         sites = frappe.get_all("Site", filters={"is_active": "1", "enable_site_automation": "1"})
         for site in sites:
             site = frappe.get_doc("Site", site.name)
