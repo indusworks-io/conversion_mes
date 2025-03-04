@@ -93,7 +93,7 @@ const logScrap = async () => {
 
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-auto">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-auto max-h-[80vh] overflow-y-auto">
       <h2 class="text-lg font-semibold mb-4">Log Scrap</h2>
 
       <div>
